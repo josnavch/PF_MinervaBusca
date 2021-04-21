@@ -4,23 +4,28 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
 import { Registro } from "../pages/registro";
 import { HomeUsuario } from "../pages/homeUsuario";
+import { Link } from "react-router-dom";
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container">
-			<div className="text-center mt-5">
-				<h1>Hello Rigo!</h1>
-				<p>
-					<img src={rigoImageUrl} />
-				</p>
-				<div className="alert alert-info">{store.message || "Loading message from the backend..."}</div>
-				<p>
-					This boilerplate comes with lots of documentation:{" "}
-					<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-						Read documentation
-					</a>
-				</p>
+		<div className="mt-2 container ">
+			<div className="middle-info contenedor">
+				<img
+					className="img"
+					src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-orange-web-solid-color-background.jpg"
+				/>
+				<div className="col-4 texto-encima">
+					<h3>
+						<strong>Bienvenido </strong> a &nbsp;&nbsp;&nbsp;MinervaBusca.com
+					</h3>
+				</div>
+				<div className="col-2 centrado">
+					<Link to="/registro">
+						<button className="btn btnIngresarPrincipal btn-lg">Ingresar&#62;</button>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
