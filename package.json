@@ -1,5 +1,5 @@
 {
-	"name": "react-hello-webapp",
+	"name": "MinervaBusca",
 	"engines": {
 		"node": "10.x"
 	},
@@ -58,7 +58,8 @@
 		"webpack": "^4.42.0",
 		"webpack-cli": "^3.3.12",
 		"webpack-dev-server": "^3.11.0",
-		"webpack-merge": "^4.2.1"
+		"webpack-merge": "^4.2.1",
+		"react-bootstrap": "1.5.2"
 	},
 	"babel": {
 		"presets": [
