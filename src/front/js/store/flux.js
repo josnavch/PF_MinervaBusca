@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			user: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -41,6 +42,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			//metodo post para crear un usuario nuevo
+			postUser: () => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify({
+					correo: "mi correo",
+					contra: "miContra2",
+					nombre: "mi Nombre2",
+					cedula: "mi cedula2",
+					telefono: "mi telefono2"
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-tan-antlion-f8ognp7p.ws-us03.gitpod.io/registro", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("error", error));
 			}
 		}
 	};

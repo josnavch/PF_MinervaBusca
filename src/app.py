@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 #from models import Person
@@ -56,6 +56,24 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
+
+@app.route('/registro', methods=['GET'])
+def getUser():
+    query= User.query.all()
+    all_user= list(map(lambda x: x.serialize(), query))
+    return jsonify(all_user),200
+
+@app.route('/registro', methods=['POST'])
+def create_user():
+    req = request.get_json()
+    user = User(email = req["correo"], password=req["contra"], name=req["nombre"], id_number=req["cedula"], phone=req["telefono"], is_active= True)
+    getemail= User.query.filter_by(email = user.email).first()
+    if getemail is None:
+        db.session.add(user)
+        db.session.commit()
+        return("Todo correcto")
+    else:
+        return("Este usuario ya está registrado")
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

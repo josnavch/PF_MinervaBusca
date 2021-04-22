@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/stylesRegistroHomeusuario.scss";
+import { Context } from "../store/appContext";
 
 export const Registro = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -16,7 +18,7 @@ export const Registro = () => {
 										<input
 											type="email"
 											className="form-control input"
-											id="exampleInputEmail1"
+											id="email"
 											aria-describedby="emailHelp"
 											placeholder="Correo electrónico"
 										/>
@@ -26,7 +28,7 @@ export const Registro = () => {
 										<input
 											type="password"
 											className="form-control input"
-											id="exampleInputPassword1"
+											id="password"
 											placeholder="Contraseña"
 										/>
 									</div>
@@ -34,34 +36,34 @@ export const Registro = () => {
 										<input
 											type="password"
 											className="form-control input"
-											id="exampleInputPassword1"
+											id="passwordConfirmation"
 											placeholder="Ingrese nuevamente su contraseña"
 										/>
 									</div>
 									<div className="form-group">
 										<input
-											type="email"
+											type="text"
 											className="form-control input"
-											id="exampleInputEmail1"
-											aria-describedby="emailHelp"
+											id="nombre"
+											aria-describedby="nameHelp"
 											placeholder="Nombre completo"
 										/>
 									</div>
 									<div className="form-group">
 										<input
-											type="email"
+											type="text"
 											className="form-control input"
-											id="exampleInputEmail1"
-											aria-describedby="emailHelp"
+											id="cedula"
+											aria-describedby="cedHelp"
 											placeholder="Cédula"
 										/>
 									</div>
 									<div className="form-group">
 										<input
-											type="email"
+											type="text"
 											className="form-control input"
-											id="exampleInputEmail1"
-											aria-describedby="emailHelp"
+											id="telefono"
+											aria-describedby="telHelp"
 											placeholder="Teléfono"
 										/>
 									</div>
