@@ -11,6 +11,8 @@ import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
 import { Footer } from "./component/footer";
 import { Registro } from "./pages/registro";
+import { RestablecerContrasena } from "./pages/restablecerContrasena";
+import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 
 //create your first component
 const Layout = () => {
@@ -26,7 +28,7 @@ const Layout = () => {
 					{esLogueado ? <NavBar /> : <NavBarPublic />}
 					<Switch>
 						<Route exact path="/">
-							<Home />
+							<RestablecerContrasena />
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
@@ -36,6 +38,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/registro">
 							<Registro />
+						</Route>
+						<Route exact path="/restablecer/:token">
+							<NuevaContrasena />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
