@@ -17,10 +17,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: {
 				email: "",
 				expires: "",
-				token: "",
+				token: null,
 				name: "",
 				id_number: "",
-				phone: ""
+				phone: "",
+				status: "",
+				msg: ""
 			}
 		},
 		actions: {
@@ -28,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getToken: () => {
 				const tokenLocal = localStorage.getItem("token");
 				const userLocal = JSON.parse(localStorage.getItem("user"));
+
 				setStore({
 					user: {
 						token: tokenLocal,
@@ -54,20 +57,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						console.log("--data--", data);
-						setStore({ user: data });
-
-						if (typeof Storage !== "undefined") {
+						if (data.token) {
+							localStorage.clear();
+							setStore({ user: data });
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
+							const FE_URL = process.env.GITPOD_WORKSPACE_URL;
+							const FRONTEND_URL = FE_URL.substr(8);
+							window.location.replace("https://3000-" + FRONTEND_URL + "/demo");
 						} else {
+							localStorage.clear();
+						}
+
+						if (typeof Storage == "undefined") {
 							console.log("LocalStorage no Soportado en este navegador");
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			setLogout: user => {
+				localStorage.removeItem(user);
 			},
 
 			getMessage: () => {
@@ -76,20 +86,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
 			}
 		}
 	};

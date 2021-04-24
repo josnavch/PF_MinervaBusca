@@ -5,10 +5,12 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
 import datetime
 
 api = Blueprint('api', __name__)
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -22,15 +24,17 @@ def handle_hello():
 
 @api.route('/hash', methods=['POST', 'GET'])
 def handle_hash():
-    expiration = datetime.timedelta(days=3)
+    expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity='josnavch@gmail.com',expires_delta=expiration)
     response_token = {
         "users": "josnavch",
-        "token": access_token
+        "token": access_token,
     }
+
     return jsonify(response_token), 200
 
 @api.route('/login', methods=['POST'])
+
 def handle_login():
 
     email = request.json.get("email", None)
@@ -55,7 +59,7 @@ def handle_login():
         "status": 401
         }), 400
 
-    expiration = datetime.timedelta(days = 3)
+    expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
 
     data = {
@@ -63,8 +67,8 @@ def handle_login():
         "token": access_token,
         "expires": expiration.total_seconds(),
         "userId": user.id,
-      #  "pass": generate_password_hash(password),
-        "email": user.email
-    }
+    #    "pass": generate_password_hash(password),
+        "email": user.email   
+        }
 
     return jsonify(data), 200
