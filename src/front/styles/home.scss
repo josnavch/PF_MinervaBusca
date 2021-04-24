@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700;800&display=swap');
+
+body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 1.6em;
+    color: #704b43;
+}
 
 .menuLinks{
     font-size: 1.2rem;
@@ -92,6 +98,11 @@
     background-color: #f5f5ef;
 }
 
+// borde para forms
+.borde-crema {
+    border: 1px solid #efedd7;
+}
+
 // fondo de carruseles
 .crema-amarillo{
     background-color:#f5f5e1;
@@ -139,3 +150,4 @@
 .cafe-bg{
     background-color:#704b43;
 }
+
