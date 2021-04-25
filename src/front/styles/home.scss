@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700;800&display=swap');
+
+body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 1.6em;
+    color: #704b43;
+}
+
 .menuLinks{
     font-size: 1.2rem;
     font-family: sans-serif;
@@ -75,41 +83,71 @@
 
 // colores
 
-.crema { 
-    color: #ffffee;
+// fondo del header
+.crema-bg { 
+    background-color: #ffffee;
 }
 
-.crema-b {
-    color: #efedd7;
+// líneas top y bottom de header y footer
+.crema-l-bg {
+    background-color: #efedd7;
 }
 
-.crema-c {
-    color: #f5f5ef;
+// fondo de forms
+.crema-f-bg {
+    background-color: #f5f5ef;
 }
 
-.yellow-cream{
-    color:#f5f5e1;
+// borde para forms
+.borde-crema {
+    border: 1px solid #efedd7;
+}
+
+// fondo de carruseles
+.crema-amarillo{
+    background-color:#f5f5e1;
 }
 
 .uva {
     color: #563356;
 }
 
+.uva-bg {
+    background-color: #563356;
+}
+
 .naranja {
     color: #ed8f21;
 }
 
-.m-pink {
-    color: #d986b0;
-}
-.m-crimson{
-    color: #9f3154;
+.naranja-bg {
+    color: #ed8f21;
 }
 
-.m-bronze {
+.rosa {
+    color: #d986b0;
+}
+
+.carmesi{
+    color: #9f3154;
+}
+.carmesi-bg {
+    background-color: #9f3154;
+}
+
+.bronce {
     color:#857462;
 }
 
-.m-brown{
+.bronce-bg {
+    background-color:#857462;
+}
+
+.cafe{
     color:#704b43;
 }
+
+.cafe-bg{
+    background-color:#704b43;
+}
+
