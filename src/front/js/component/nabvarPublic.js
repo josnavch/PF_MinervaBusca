@@ -12,7 +12,7 @@ export const NavBarPublic = () => {
 				<div className="container-fluid">
 					<div className="d-flex offset-md-1">
 						<div className="mr-auto p-2 ml-5">
-							<a className="" href="#">
+							<a className="" href="/">
 								<img
 									// src="https://cdn.iconscout.com/icon/premium/png-512-thumb/webpage-not-found-1-484846.png"
 									src={logo}
@@ -23,7 +23,7 @@ export const NavBarPublic = () => {
 								/>
 							</a>
 						</div>
-						<div className="">
+						<div className="my-auto">
 							<div className="d-flex flex-column">
 								<div className="p-2">
 									<Link to="/ingreso">
