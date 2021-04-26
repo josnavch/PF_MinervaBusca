@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import logo from "../../img/logo.png";
 import "../../styles/home.scss";
 import { Registro } from "../pages/registro";
 import { HomeUsuario } from "../pages/homeUsuario";

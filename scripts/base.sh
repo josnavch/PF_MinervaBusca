@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pass='pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268'
+
 echo "Se borra la carpeta migrations"
 rm -rf /workspace/PF_MinervaBusca/migrations
 echo "Se borra la Base de Datos minerva"
@@ -14,10 +16,10 @@ pipenv run migrate
 pipenv run upgrade
 
 echo "*********** Insert data fake to init **************"
-psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('angie', 'pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268', 'Angie Lopez', '111111', '11111', True);"
-psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('melissa', 'pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268', 'Melissa Araya', '222222', '22222', True);"
-psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('yancarlos', 'pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268', 'Yancarlos Retana', '333333', '333333', True);"
-psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('jose', 'pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268', 'Jose Navarrete', '444444', '444444', True);"
+psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('angie', '$pass', 'Angie Lopez', '111111', '11111', True);"
+psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('melissa', '$pass', 'Melissa Araya', '222222', '22222', True);"
+psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('yancarlos','$pass', 'Yancarlos Retana', '333333', '333333', True);"
+psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('jose', '$pass', 'Jose Navarrete', '444444', '444444', True);"
 
 
 echo "Se realizaron los cambios de manera satisfactoria"

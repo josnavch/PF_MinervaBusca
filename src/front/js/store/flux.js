@@ -62,9 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							setStore({ user: data });
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							const FE_URL = process.env.GITPOD_WORKSPACE_URL;
-							const FRONTEND_URL = FE_URL.substr(8);
-							window.location.replace("https://3000-" + FRONTEND_URL + "/demo");
+							window.location.replace(process.env.FRONTEND_URL + "/demo");
 						} else {
 							localStorage.clear();
 						}
