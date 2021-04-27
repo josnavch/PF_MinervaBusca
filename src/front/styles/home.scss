@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;800&display=swap');
 
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-size: 1.6em;
+    font-size: 1.2em;
     color: #704b43;
 }
 
 .menuLinks{
     font-size: 1.2rem;
-    font-family: sans-serif;
+    // font-family: sans-serif;
     color: white!important;
 }
 
@@ -20,7 +20,8 @@ body {
 }
 
 .btnIngresar{
-    background-color: rgb(79, 25, 93);
+    // background-color: rgb(79, 25, 93);
+    background-color: #563356;
     color: white;
     width: 135px;
     height: 45px;
@@ -28,6 +29,7 @@ body {
     font-stretch: expanded;
     font-weight: 480;
     font-size: 1.2rem;
+    text-transform: uppercase;
 }
 
 .btnIngresarPrincipal{
@@ -40,7 +42,8 @@ body {
 
 
 .ahrefRegistrar{
-    color: orange;
+    // color: orange;
+    color: #ed8f21;
     font-size: 1.2rem;
     font-stretch: extra-expanded;
     font-weight: normal;
@@ -149,5 +152,15 @@ body {
 
 .cafe-bg{
     background-color:#704b43;
+}
+
+.navbar {
+    border-top:6px solid #efedd6;
+}
+.footer {
+    background-color: #9f3154;
+    color:#fffffd;
+    border-top:6px solid #efedd6;
+    font-size: 0.8em;
 }
 
