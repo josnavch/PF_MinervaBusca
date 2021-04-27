@@ -3,28 +3,30 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "../../styles/home.scss";
+import logo from "../../img/logo.png";
 
 export const NavBarPublic = () => {
 	return (
 		<>
-			<div className="fila-Superio" style={{ backgroundColor: "#fdf5eb" }}>
+			<div className="fila-Superio crema-bg">
 				<div className="container-fluid">
-					<div className="d-flex offset-md-2">
+					<div className="d-flex offset-md-1">
 						<div className="mr-auto p-2 ml-5">
-							<a className="" href="#">
+							<a className="" href="/">
 								<img
-									src="https://cdn.iconscout.com/icon/premium/png-512-thumb/webpage-not-found-1-484846.png"
-									width="100"
-									height="100"
+									// src="https://cdn.iconscout.com/icon/premium/png-512-thumb/webpage-not-found-1-484846.png"
+									src={logo}
+									width="129px"
+									// height="100"
 									className="d-inline-block align-top"
 									alt=""
 								/>
 							</a>
 						</div>
-						<div className="">
+						<div className="my-auto">
 							<div className="d-flex flex-column">
 								<div className="p-2">
-									<Link to="/ingreso">
+									<Link to="/login">
 										<button className="btn btnIngresar">Ingresar</button>
 									</Link>
 								</div>
@@ -39,7 +41,7 @@ export const NavBarPublic = () => {
 					</div>
 				</div>
 			</div>
-			<Navbar style={{ backgroundColor: "#4f195d" }} expand="lg">
+			<Navbar className="uva-bg" expand="lg">
 				<div className="container">
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
