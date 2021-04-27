@@ -1,18 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;800&display=swap');
+
+body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #704b43;
+}
+
 .menuLinks{
     font-size: 1.2rem;
-    font-family: sans-serif;
+    // font-family: sans-serif;
     color: white!important;
 }
 
 .btnIngresar:hover{
      color: white;
      color: rgba(255, 255, 255, 1) !important;
-     box-shadow: 0 4px 16px rgba(138, 75, 154, 1);
+     box-shadow: 0 4px 16px rgb(39, 26, 43);
      transition: all 0.2s ease;
 }
 
 .btnIngresar{
-    background-color: rgb(79, 25, 93);
+    // background-color: rgb(79, 25, 93);
+    background-color: #563356;
     color: white;
     width: 135px;
     height: 45px;
@@ -20,6 +29,7 @@
     font-stretch: expanded;
     font-weight: 480;
     font-size: 1.2rem;
+    text-transform: uppercase;
 }
 
 .btnIngresarPrincipal{
@@ -32,13 +42,13 @@
 
 
 .ahrefRegistrar{
-    color: orange;
+    // color: orange;
+    color: #ed8f21;
     font-size: 1.2rem;
     font-stretch: extra-expanded;
     font-weight: normal;
 
 }
-
 
 .contenedor{
     position: relative;
@@ -72,3 +82,84 @@
     height:calc(100vh - 390px);
     width: 100%;
 }
+
+// colores
+
+// fondo del header
+.crema-bg { 
+    background-color: #ffffee;
+}
+
+// líneas top y bottom de header y footer
+.crema-l-bg {
+    background-color: #efedd7;
+}
+
+// fondo de forms
+.crema-f-bg {
+    background-color: #f5f5ef;
+}
+
+// borde para forms
+.borde-crema {
+    border: 1px solid #efedd7;
+}
+
+// fondo de carruseles
+.crema-amarillo{
+    background-color:#f5f5e1;
+}
+
+.uva {
+    color: #563356;
+}
+
+.uva-bg {
+    background-color: #563356;
+}
+
+.naranja {
+    color: #ed8f21;
+}
+
+.naranja-bg {
+    color: #ed8f21;
+}
+
+.rosa {
+    color: #d986b0;
+}
+
+.carmesi{
+    color: #9f3154;
+}
+.carmesi-bg {
+    background-color: #9f3154;
+}
+
+.bronce {
+    color:#857462;
+}
+
+.bronce-bg {
+    background-color:#857462;
+}
+
+.cafe{
+    color:#704b43;
+}
+
+.cafe-bg{
+    background-color:#704b43;
+}
+
+.navbar {
+    border-top:6px solid #efedd6;
+}
+.footer {
+    background-color: #9f3154;
+    color:#fffffd;
+    border-top:6px solid #efedd6;
+    font-size: 0.8em;
+}
+

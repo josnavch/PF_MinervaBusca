@@ -25,11 +25,12 @@ export const RestablecerContrasena = () => {
 									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
-							<Link to="/restablecer">
-								<button type="submit" className="btn btn-primary btn-block">
-									Enviar enlace
-								</button>
-							</Link>
+							<button
+								type="submit"
+								className="btn btn-primary btn-block"
+								onClick={event => EnviarCorreo(event)}>
+								Enviar enlace
+							</button>
 						</form>
 					</div>
 				</div>
@@ -37,3 +38,26 @@ export const RestablecerContrasena = () => {
 		</div>
 	);
 };
+
+export async function EnviarCorreo() {
+	event.preventDefault();
+	alert("Enviar correo");
+
+	let result = await fetch(url, {
+		method: "POST",
+		body: "[]",
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+		.then(resp => resp.json())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(function(error) {
+			//manejo de errores
+			console.log("error", error.message);
+			console.log("Error");
+		});
+}
+

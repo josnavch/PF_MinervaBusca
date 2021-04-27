@@ -31,11 +31,13 @@ export const NuevaContrasena = props => {
 									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
-							<Link to="/">
-								<button type="submit" className="btn btn-primary btn-block">
-									Establecer nueva contrase&ntilde;a
-								</button>
-							</Link>
+
+							<button
+								type="submit"
+								className="btn btn-primary btn-block"
+								onClick={event => EnviarCorreo(event)}>
+								Establecer nueva contrase&ntilde;a
+							</button>
 						</form>
 					</div>
 				</div>
@@ -43,5 +45,10 @@ export const NuevaContrasena = props => {
 		</div>
 	);
 };
+
+export function EnviarCorreo() {
+	event.preventDefault();
+	alert("Enviar correo");
+}
 
 NuevaContrasena.propTypes = {};
