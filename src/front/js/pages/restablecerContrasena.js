@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/demo.scss";
 
 export const RestablecerContrasena = () => {
+	const { store, actions } = useContext(Context);
+	const [email, setEmail] = useState("");
+
+	const EnviarCorreo = async () => {
+		event.preventDefault();
+
+		let datosEnviar = {
+			email: email
+		};
+		actions.sendRestoreEmail();
+
+		// let result = await fetch(url, {
+		//     method: "POST",
+		//     body: JSON.stringify(datosEnviar),
+		//     headers: {
+		//         "Content-Type": "application/json"
+		//     }
+		// })
+		//     .then(resp => resp.json())
+		//     .then(data => {
+		//         console.log(data);
+		//     })
+		//     .catch(function (error) {
+		//         //manejo de errores
+		//         console.log("error", error.message);
+		//         console.log("Error");
+		//     });
+	};
+
 	return (
 		<div className="container m-auto col-4">
 			<div className="card login-form">
@@ -22,6 +52,7 @@ export const RestablecerContrasena = () => {
 									type="email"
 									className="form-control form-control-sm font-weight-bolder"
 									placeholder="Ingrese su dirección de correo"
+									onChange={e => setEmail(e.target.value)}
 									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
@@ -38,26 +69,3 @@ export const RestablecerContrasena = () => {
 		</div>
 	);
 };
-
-export async function EnviarCorreo() {
-	event.preventDefault();
-	alert("Enviar correo");
-
-	let result = await fetch(url, {
-		method: "POST",
-		body: "[]",
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-		.then(resp => resp.json())
-		.then(data => {
-			console.log(data);
-		})
-		.catch(function(error) {
-			//manejo de errores
-			console.log("error", error.message);
-			console.log("Error");
-		});
-}
-
