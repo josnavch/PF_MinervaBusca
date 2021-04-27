@@ -13,17 +13,18 @@ export const Home = () => {
 	return (
 		<div className="mt-2 container">
 			<div className="row crema-f-bg">
-				<div className="col-sm">
-					<div className="d-flex flex-column align-items-center">
-						<div className="">
-							<p>Bienvenido a MinervaBusca.com</p>
-						</div>
-						<div className="">
-							<p>Tu librería Virtual</p>
-						</div>
-						<div className="">
+				<div className="col-sm text-center">
+					<div className="d-flex flex-column align-items-center h-100">
+						<div className="m-auto">
+							<p className="bronce fs-7 extrabold">Bienvenido a MinervaBusca.com</p>
+							<p className="rosa fs-8 extrabold">
+								Tu librería {"\n"}
+								Virtual
+							</p>
 							<Link to="/registro">
-								<button className="btn btnIngresarPrincipal btn-lg">Ingresar&#62;</button>
+								<button className="btn btnIngresarPrincipal btn-lg uva-bg bold btn-padding">
+									Ingresar &#62;
+								</button>
 							</Link>
 						</div>
 					</div>
