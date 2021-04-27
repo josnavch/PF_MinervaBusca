@@ -26,7 +26,7 @@ export const NavBarPublic = () => {
 						<div className="my-auto">
 							<div className="d-flex flex-column">
 								<div className="p-2">
-									<Link to="/ingreso">
+									<Link to="/login">
 										<button className="btn btnIngresar">Ingresar</button>
 									</Link>
 								</div>

@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { Component, useState } from "react";
+import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
@@ -12,6 +12,8 @@ import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
 import { Footer } from "./component/footer";
 import { Registro } from "./pages/registro";
+import { Login } from "./pages/login";
+import { homeUsuario } from "./pages/homeUsuario";
 
 //create your first component
 const Layout = () => {
@@ -38,9 +40,15 @@ const Layout = () => {
 						<Route exact path="/registro">
 							<Registro />
 						</Route>
-						<Route exact path="/nosotros">
-							<Nosotros />
+						<Route exact path="/login">
+							<Login />
 						</Route>
+						<Route exact path="/homeUsuario">
+							<homeUsuario />
+            </Route>
+            <Route exact path="/nosotros">
+							<Nosotros />
+            </Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
