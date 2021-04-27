@@ -25,7 +25,7 @@ export const Footer = () => {
 								<i className="fab fa-facebook fa-2x mr-3" />
 								<i className="fab fa-instagram fa-2x mr-3" />
 								<i className="fab fa-twitter fa-2x mr-3" />
-								<i className="far fa-envelope fa-2x" />
+								<i className="fab fa-youtube fa-2x" /
 							</div>
 						</div>
 						<div className="col-3">

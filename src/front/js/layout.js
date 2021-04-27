@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+import Nosotros from "./pages/nosotros";
 
 import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
@@ -44,7 +45,10 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/homeUsuario">
 							<homeUsuario />
-						</Route>
+            </Route>
+            <Route exact path="/nosotros">
+							<Nosotros />
+            </Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

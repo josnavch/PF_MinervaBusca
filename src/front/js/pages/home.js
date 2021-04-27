@@ -10,8 +10,8 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="mt-2 container ">
-			<div className="middle-info contenedor">
+		<div className="mt-2 container">
+			<div className="middle-info contenedor crema-f-bg">
 				<img
 					className="img"
 					src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-orange-web-solid-color-background.jpg"
