@@ -45,10 +45,10 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/homeUsuario">
 							<homeUsuario />
-            </Route>
-            <Route exact path="/nosotros">
+						</Route>
+						<Route exact path="/nosotros">
 							<Nosotros />
-            </Route>
+						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
