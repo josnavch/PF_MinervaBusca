@@ -31,7 +31,7 @@ const Layout = () => {
 					{esLogueado ? <NavBar /> : <NavBarPublic />}
 					<Switch>
 						<Route exact path="/">
-							<RestablecerContrasena />
+							<Home />
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
@@ -41,6 +41,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/registro">
 							<Registro />
+						</Route>
+                        <Route exact path="/restablecer">
+							<RestablecerContrasena />
 						</Route>
 						<Route exact path="/restablecer/:token">
 							<NuevaContrasena />
@@ -54,6 +57,7 @@ const Layout = () => {
 						<Route exact path="/nosotros">
 							<Nosotros />
 						</Route>
+                        
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
