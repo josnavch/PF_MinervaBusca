@@ -67,10 +67,16 @@ export const Login = () => {
 						<button type="submit" onClick={e => handlerClick(e)} className="btn button_summit">
 							Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
 						</button>
-						{console.log("Valida: ", JSON.stringify(store.user.msg))}
-						{store.user !== "" ? (
-							<div className="alert alert-info overflow-auto">{JSON.stringify(store.user.token)}</div>
-						) : null}
+						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
+						{console.log("Status: ", JSON.stringify(store.user.status))}
+						{console.log("Token: ", JSON.stringify(store.user.token))}
+						{store.user.token ? (
+							alert("Login Succesfully!!")
+						) : (
+							<div className="alert label-form" role="alert">
+								{JSON.stringify(store.user.msg)}
+							</div>
+						)}
 						<div>
 							<label className="label-form">¿No tiene cuenta?</label>{" "}
 							<Link to="/registro">

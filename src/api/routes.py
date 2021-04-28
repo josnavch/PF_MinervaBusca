@@ -26,9 +26,11 @@ def handle_hello():
 def handle_hash():
     expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity='josnavch@gmail.com',expires_delta=expiration)
+    refresh_token = create_refresh_token(identity='josnavch@gmail.com',expires_delta=expiration)
     response_token = {
         "users": "josnavch",
         "token": access_token,
+        "refresh_token": refresh_token,
     }
 
     return jsonify(response_token), 200
@@ -61,14 +63,18 @@ def handle_login():
 
     expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
+    refresh_token = create_refresh_token(identity=user.email, expires_delta=expiration)
 
     data = {
         "user": user.serialize(),
         "token": access_token,
+        "refresh_token": refresh_token,
         "expires": expiration.total_seconds(),
         "userId": user.id,
     #    "pass": generate_password_hash(password),
-        "email": user.email   
+        "email": user.email,
+        "status": 200,
+        "msg": "Login successfully"   
         }
 
     return jsonify(data), 200

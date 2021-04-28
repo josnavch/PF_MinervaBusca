@@ -14,7 +14,7 @@ export const Footer = () => {
 	}
 	return (
 		<div>
-			<footer className="footer mt-auto py-3 navbar-light bg-light">
+			<footer className="footer mt-auto py-3">
 				<div className="container">
 					<div className="row">
 						<div className="col-6 d-flex align-items-center">
@@ -25,7 +25,7 @@ export const Footer = () => {
 								<i className="fab fa-facebook fa-2x mr-3" />
 								<i className="fab fa-instagram fa-2x mr-3" />
 								<i className="fab fa-twitter fa-2x mr-3" />
-								<i className="fab fa-youtube fa-2x" /
+								<i className="fab fa-youtube fa-2x" />
 							</div>
 						</div>
 						<div className="col-3">

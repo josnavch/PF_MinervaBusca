@@ -57,7 +57,6 @@ const Layout = () => {
 						<Route exact path="/nosotros">
 							<Nosotros />
 						</Route>
-                        
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
