@@ -24,6 +24,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				phone: "",
 				status: "",
 				msg: ""
+			},
+			userRestore: {
+				email: "",
+				expires: "",
+				token: null,
+				name: "",
+				urlRestore: "",
+				flag: false
 			}
 		},
 		actions: {
@@ -94,6 +102,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(process.env.BACKEND_URL + "/api/hello")
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			sendRestoreEmail: () => {
+				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail")
+					.then(resp => resp.json())
+					.then(data => setStore({ userRestore: true }))
 					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}
