@@ -23,3 +23,5 @@ psql -d minerva -c "INSERT into public.user(email, password, name, id_number, ph
 
 
 echo "Se realizaron los cambios de manera satisfactoria"
+
+pipenv run start

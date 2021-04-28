@@ -26,9 +26,11 @@ def handle_hello():
 def handle_hash():
     expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity='josnavch@gmail.com',expires_delta=expiration)
+    refresh_token = create_refresh_token(identity='josnavch@gmail.com',expires_delta=expiration)
     response_token = {
         "users": "josnavch",
         "token": access_token,
+        "refresh_token": refresh_token,
     }
 
     return jsonify(response_token), 200
@@ -61,6 +63,50 @@ def handle_login():
 
     expiration = datetime.timedelta(minutes = 45)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
+    refresh_token = create_refresh_token(identity=user.email, expires_delta=expiration)
+
+    data = {
+        "user": user.serialize(),
+        "token": access_token,
+        "refresh_token": refresh_token,
+        "expires": expiration.total_seconds(),
+        "userId": user.id,
+    #    "pass": generate_password_hash(password),
+        "email": user.email,
+        "status": 200,
+        "msg": "Login successfully"   
+        }
+
+    return jsonify(data), 200
+
+
+
+@api.route('/sendRestoreEmail', methods=['POST'])
+
+def handle_sendRestoreEmail():
+
+    email = request.json.get("email", None)
+
+    if not email:
+        return jsonify ({"msg":"Email required"}), 400
+
+    user = User.query.filter_by(email=email).first()    
+    print (user)
+
+    if not user:
+        return jsonify({"msg": "The email is not correct", 
+        "status": 401
+        }), 401
+
+
+    expiration = datetime.timedelta(minutes = 10)
+    access_token = create_access_token(identity=user.email, expires_delta=expiration)
+    user = User.query.filter_by(email=email).first()    
+
+    user.email = email
+    user.is_active = False
+    user.password = generate_password_hash(randompassword)
+    db.session.commit()
 
     data = {
         "user": user.serialize(),
@@ -72,3 +118,8 @@ def handle_login():
         }
 
     return jsonify(data), 200
+
+def randompassword():
+  chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
+  size = random.randint(8, 12)
+  return ''.join(random.choice(chars) for x in range(size))

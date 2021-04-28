@@ -12,6 +12,8 @@ import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
 import { Footer } from "./component/footer";
 import { Registro } from "./pages/registro";
+import { RestablecerContrasena } from "./pages/restablecerContrasena";
+import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
 import { homeUsuario } from "./pages/homeUsuario";
 
@@ -39,6 +41,12 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/registro">
 							<Registro />
+						</Route>
+                        <Route exact path="/restablecer">
+							<RestablecerContrasena />
+						</Route>
+						<Route exact path="/restablecer/:token">
+							<NuevaContrasena />
 						</Route>
 						<Route exact path="/login">
 							<Login />
