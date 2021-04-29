@@ -6,6 +6,29 @@ body {
     color: #704b43;
 }
 
+.fs-7 {
+    font-size: 1em;
+}
+
+.fs-8 {
+    font-size: 2em;
+}
+
+.light {
+    font-weight: 100;
+}
+
+.bold {
+    font-weight: 700;
+}
+.extrabold {
+    font-weight: 800;
+}
+
+.btn-padding {
+    padding: 15px 40px;
+}
+
 .menuLinks{
     font-size: 1.2rem;
     // font-family: sans-serif;
@@ -33,21 +56,29 @@ body {
 }
 
 .btnIngresarPrincipal{
-    background: white;
-    color: #5f2669;
-    font-size: 2rem;
-    padding: 5px 35px;
-    font-weight: 500;
+    // background: white;
+    color: white;
+    // font-size: 2rem;
+    // padding: 5px 35px;
+    // font-weight: 500;
+}
+
+.btnIngresarPrincipal:hover{
+    background-color:#ed8f21;
+    color: white;
 }
 
 
 .ahrefRegistrar{
-    // color: orange;
     color: #ed8f21;
     font-size: 1.2rem;
     font-stretch: extra-expanded;
     font-weight: normal;
+}
 
+.ahrefRegistrar:hover{
+    color: #886392;
+    text-decoration: none!important;
 }
 
 .contenedor{
@@ -160,6 +191,5 @@ body {
     background-color: #9f3154;
     color:#fffffd;
     border-top:6px solid #efedd6;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
-
