@@ -14,23 +14,22 @@ export const NavBarPublic = () => {
 						<div className="mr-auto p-2 ml-5">
 							<a className="" href="/">
 								<img
-									// src="https://cdn.iconscout.com/icon/premium/png-512-thumb/webpage-not-found-1-484846.png"
 									src={logo}
-									width="129px"
+									width="75%"
 									// height="100"
 									className="d-inline-block align-top"
-									alt=""
+									alt="MinervaBusca.com"
 								/>
 							</a>
 						</div>
 						<div className="my-auto">
 							<div className="d-flex flex-column">
-								<div className="p-2">
+								<div className="p-0">
 									<Link to="/login">
 										<button className="btn btnIngresar">Ingresar</button>
 									</Link>
 								</div>
-								<div className="p-2">
+								<div className="p-0">
 									<Link to="/registro">
 										<a className="ahrefRegistrar">o Registrarse</a>
 									</Link>
