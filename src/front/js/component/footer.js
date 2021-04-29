@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 import "../../styles/footer.scss";
 
@@ -17,7 +18,7 @@ export const Footer = () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-6 d-flex align-items-center">
-							<div className="">MinervaBusca.com, &copy; todos los derechos reservados</div>
+							<div>MinervaBusca.com, &copy; todos los derechos reservados</div>
 						</div>
 						<div className="col-3">
 							<div className="float-right">
@@ -29,13 +30,12 @@ export const Footer = () => {
 						</div>
 						<div className="col-3">
 							<button className="btn btn-outline-info button_logout" onClick={() => logout()}>
-								Loguot
+								Salir
 							</button>
 						</div>
-
 					</div>
 				</div>
-			</div>
+			</footer>
 		</div>
-	</footer>
-);
+	);
+};
