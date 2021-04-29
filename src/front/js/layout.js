@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import Nosotros from "./pages/nosotros";
+import Contacto from "./pages/contacto";
 
 import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
@@ -42,7 +43,7 @@ const Layout = () => {
 						<Route exact path="/registro">
 							<Registro />
 						</Route>
-                        <Route exact path="/restablecer">
+						<Route exact path="/restablecer">
 							<RestablecerContrasena />
 						</Route>
 						<Route exact path="/restablecer/:token">
@@ -56,6 +57,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/nosotros">
 							<Nosotros />
+						</Route>
+						<Route exact path="/contacto">
+							<Contacto />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
