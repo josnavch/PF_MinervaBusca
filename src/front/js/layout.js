@@ -42,7 +42,7 @@ const Layout = () => {
 						<Route exact path="/registro">
 							<Registro />
 						</Route>
-                        <Route exact path="/restablecer">
+						<Route exact path="/restablecer">
 							<RestablecerContrasena />
 						</Route>
 						<Route exact path="/restablecer/:token">

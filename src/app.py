@@ -65,23 +65,7 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0 # avoid cache memory
     return response
 
-@app.route('/registro', methods=['GET'])
-def getUser():
-    query= User.query.all()
-    all_user= list(map(lambda x: x.serialize(), query))
-    return jsonify(all_user),200
 
-@app.route('/registro', methods=['POST'])
-def create_user():
-    req = request.get_json()
-    user = User(email = req["correo"], password=req["contra"], name=req["nombre"], id_number=req["cedula"], phone=req["telefono"], is_active= True)
-    getemail= User.query.filter_by(email = user.email).first()
-    if getemail is None:
-        db.session.add(user)
-        db.session.commit()
-        return("Todo correcto")
-    else:
-        return("Este usuario ya está registrado")
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

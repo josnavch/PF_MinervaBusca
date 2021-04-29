@@ -4,8 +4,20 @@
     justify-content: center;
 }
 .formCard{
-    background-color: lightblue;
+    background-color: #f5f5ef;
+    border: 1px solid #efedd7;
 }
+.naranja {
+    color: #ed8f21;
+}
+/*form{
+    background:none !important;
+    border:none !important;
+    margin:0 !important;
+    width:100% !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}*/
 .input{
     border-radius: 7px;
 }
@@ -15,11 +27,32 @@
 // p, p a{
 //     color:black;
 // }
+.p, .p a{
+    font-size: medium;
+    color: #563356;
+}
 .form-group{
     margin:3px;
 }
 .form-control{
     height: 50px;
+    border: 1px solid #efedd7; 
+}
+.form-control::placeholder{
+    color: #704b43;
+}
+.btn-warning{
+    background-color: #ed8f21;
+    border: none;
+    color:white;
+    font-weight: bold;
+}
+.btn-warning:hover{
+    background-color: #ed8f21;
+     color: white;
+     color: rgba(255, 255, 255, 1) !important;
+     box-shadow: 0 4px 16px rgb(237, 143, 33);
+     transition: all 0.2s ease;
 }
  //estilos para pantalla home del usuario
  .uno{
