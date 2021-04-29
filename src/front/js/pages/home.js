@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import logo from "../../img/logo.png";
 import "../../styles/home.scss";
 import { Registro } from "../pages/registro";
-import { HomeUsuario } from "../pages/homeUsuario";
+import { HomeUsuario } from "./homeUsuario";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
