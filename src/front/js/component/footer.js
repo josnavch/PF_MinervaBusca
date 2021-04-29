@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 import "../../styles/footer.scss";
 
@@ -32,10 +33,9 @@ export const Footer = () => {
 								Loguot
 							</button>
 						</div>
-
 					</div>
 				</div>
-			</div>
+			</footer>
 		</div>
-	</footer>
-);
+	);
+};

@@ -110,6 +110,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ userRestore: true }))
 					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			crearUser: user => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify(user),
+					redirect: "follow"
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("error", error));
 			}
 		}
 	};

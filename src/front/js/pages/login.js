@@ -36,8 +36,8 @@ export const Login = () => {
 			<div className="col-5">
 				{console.log(store.user.token)}
 
-				<div className="text-center mt-5">
-					<form>
+				<div className="text-center mt-5 mb-5">
+					<form className="form">
 						<h1 className="titulo"> INGRESAR </h1>
 						<div className="MB-3">
 							<div className="input-container">

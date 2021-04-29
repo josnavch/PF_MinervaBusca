@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, json
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -123,3 +123,16 @@ def randompassword():
   chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
   size = random.randint(8, 12)
   return ''.join(random.choice(chars) for x in range(size))
+
+@api.route('/registro', methods=['POST'])
+def create_user():
+    req = request.get_json()
+    contrasena= generate_password_hash(req["password"])
+    user = User(email = req["email"], password=contrasena, name=req["name"], id_number=req["id_number"], phone=req["phone"], is_active= True)
+    getemail= User.query.filter_by(email = user.email).first()
+    if getemail is None:
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({"msg:":"Registro realizado correctmente"}),200
+    else:
+        return jsonify({"msg:":"Este usurio ya esta registrado"}),400
