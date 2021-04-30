@@ -6,6 +6,15 @@ body {
     color: #704b43;
 }
 
+a {
+    color: #ed8f21 !important;
+}
+
+a:hover {
+    background-color: #563356!important;
+    text-decoration: none!important;
+}
+
 .fs-7 {
     font-size: 1.6em;
 }
@@ -141,6 +150,12 @@ body {
 // fondo de forms
 .crema-f-bg {
     background-color: #f5f5ef;
+}
+
+// fondo cards home user logged
+
+.gris-bg{
+    background-color: #ebebeb;
 }
 
 // borde para forms

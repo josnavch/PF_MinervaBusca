@@ -4,7 +4,9 @@ import "../../styles/home.scss";
 import { Registro } from "../pages/registro";
 import { HomeUsuario } from "../pages/homeUsuario";
 import { Link } from "react-router-dom";
-import homebooks from "../../img/homebooks.jpg";
+import homebooks3 from "../../img/homebooks3.jpg";
+import homebooks2 from "../../img/homebooks2.jpg";
+import lupa from "../../img/lupa.png";
 
 export const Casa = () => {
 	const { store, actions } = useContext(Context);
@@ -12,27 +14,30 @@ export const Casa = () => {
 	return (
 		<div className="mb-3 mt-1 container">
 			<div className="row">
-				<div className="d-flex align-items-center col-sm p-0 crema-f-bg mt-2 mr-sm-0 mr-md-3">
+				<div className="d-flex align-items-center col-sm p-0 gris-bg mt-2 mr-sm-0 mr-md-3">
 					<div className="col-md-5">
-						<Link to="/login">
+						<Link to="/buscar">
+							<p className="naranja fs-7 text-center extrabold p-0 m-0">
+								<img src={lupa} className="img-fluid" />
+							</p>
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">Buscar</p>
 						</Link>
 					</div>
 					<div className="col-md-7 p-0">
-						<img src={homebooks} className="img-fluid" />
+						<img src={homebooks3} className="img-fluid" />
 					</div>
 				</div>
 
 				{/* empieza card Mis Libros */}
 
-				<div className="d-flex align-items-center col-sm p-0 mt-2 crema-f-bg">
+				<div className="d-flex align-items-center col-sm p-0 mt-2 gris-bg">
 					<div className="col-md-5">
 						<Link to="/login">
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">Mis Libros</p>
 						</Link>
 					</div>
 					<div className="col-md-7 p-0">
-						<img src={homebooks} className="img-fluid" />
+						<img src={homebooks2} className="img-fluid" />
 					</div>
 				</div>
 			</div>
