@@ -1,17 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;800&display=swap');
 
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2em!important;
     color: #704b43;
 }
 
 .fs-7 {
-    font-size: 1em;
+    font-size: 1.6em;
 }
 
 .fs-8 {
     font-size: 2em;
+}
+
+.fs-9 {
+    font-size:2.5em;
 }
 
 .light {
@@ -27,6 +31,14 @@ body {
 
 .btn-padding {
     padding: 15px 40px;
+}
+
+.lh-1em {
+    line-height: 1em;
+}
+
+.flip-hor {
+    transform: rotate(90deg);
 }
 
 .menuLinks{
@@ -136,6 +148,10 @@ body {
     border: 1px solid #efedd7;
 }
 
+.rounded15 {
+    border-radius: 15px;
+}
+
 // fondo de carruseles
 .crema-amarillo{
     background-color:#f5f5e1;
@@ -154,7 +170,7 @@ body {
 }
 
 .naranja-bg {
-    color: #ed8f21;
+    background-color: #ed8f21;
 }
 
 .rosa {
