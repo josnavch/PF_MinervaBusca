@@ -83,7 +83,7 @@ export const Login = () => {
 								<a className="label-form">Abra una aquí</a>
 							</Link>
 							<label className="label-form">¿Olvidó su contraseña? </label>{" "}
-							<Link to="/single">
+							<Link to="/restablecer">
 								<a className="label-form">Click aquí</a>
 							</Link>
 						</div>

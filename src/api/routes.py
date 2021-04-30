@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
 import datetime
+import smtplib
 
 api = Blueprint('api', __name__)
 
@@ -86,6 +87,7 @@ def handle_login():
 def handle_sendRestoreEmail():
 
     email = request.json.get("email", None)
+    url = request.json.get("url", None)
 
     if not email:
         return jsonify ({"msg":"Email required"}), 400
@@ -108,14 +110,17 @@ def handle_sendRestoreEmail():
     user.password = generate_password_hash(randompassword)
     db.session.commit()
 
+    #rule = request.url_root
+    message = "You have been restore your password, click in the link: " + url+"/"+access_token
+    server = smtplib.SMTP("smtp.gmail.com",587)
+    server.starttls()
+    server.login("minervabuscamail@gmail.com","4geeks2021")
+    server.sendmail("minervabuscamail@gmail.com",email,message)
+
     data = {
         "user": user.serialize(),
-        "token": access_token,
-        "expires": expiration.total_seconds(),
-        "userId": user.id,
-    #    "pass": generate_password_hash(password),
-        "email": user.email   
-        }
+        "message": message, 
+    }
 
     return jsonify(data), 200
 
