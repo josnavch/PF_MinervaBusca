@@ -10,7 +10,7 @@ export const NavBarPublic = () => {
 		<>
 			<div className="fila-Superio crema-bg">
 				<div className="container-fluid">
-					<div className="d-flex offset-md-1">
+					<div className="d-flex offset-lg-1">
 						<div className="mr-auto p-2 ml-5">
 							<a className="" href="/">
 								<img

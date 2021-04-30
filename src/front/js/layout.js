@@ -17,6 +17,7 @@ import { RestablecerContrasena } from "./pages/restablecerContrasena";
 import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
 import { homeUsuario } from "./pages/homeUsuario";
+import { Casa } from "./pages/casa";
 
 //create your first component
 const Layout = () => {
@@ -60,6 +61,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/contacto">
 							<Contacto />
+						</Route>
+						<Route exact path="/casa">
+							<Casa />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
