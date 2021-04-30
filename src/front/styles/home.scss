@@ -10,10 +10,6 @@ a {
     color: #ed8f21 !important;
 }
 
-a:hover {
-    background-color: #563356!important;
-    text-decoration: none!important;
-}
 
 .fs-7 {
     font-size: 1.6em;
@@ -223,6 +219,10 @@ a:hover {
     color:#fffffd;
     border-top:6px solid #efedd6;
     font-size: 0.7em;
+}
+
+.navbar-light .navbar-toggler {
+    background-color: lightgray;
 }
 
 .my-personal-info{

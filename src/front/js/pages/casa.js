@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import homebooks3 from "../../img/homebooks3.jpg";
 import homebooks2 from "../../img/homebooks2.jpg";
 import lupa from "../../img/lupa.png";
+import libro from "../../img/libro.png";
 
 export const Casa = () => {
 	const { store, actions } = useContext(Context);
@@ -32,7 +33,10 @@ export const Casa = () => {
 
 				<div className="d-flex align-items-center col-sm p-0 mt-2 gris-bg">
 					<div className="col-md-5">
-						<Link to="/login">
+						<Link to="/libreriapersonal">
+							<p className="naranja fs-7 text-center extrabold p-0 m-0">
+								<img src={libro} className="img-fluid" />
+							</p>
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">Mis Libros</p>
 						</Link>
 					</div>

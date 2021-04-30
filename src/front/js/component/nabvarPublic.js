@@ -10,8 +10,8 @@ export const NavBarPublic = () => {
 		<>
 			<div className="fila-Superio crema-bg">
 				<div className="container-fluid">
-					<div className="d-flex offset-lg-1">
-						<div className="mr-auto p-2 ml-5">
+					<div className="d-flex offset-xs-0 offset-lg-1">
+						<div className="mr-auto p-2">
 							<a className="" href="/">
 								<img
 									src={logo}
@@ -22,7 +22,7 @@ export const NavBarPublic = () => {
 								/>
 							</a>
 						</div>
-						<div className="my-auto">
+						<div className="my-auto p-2">
 							<div className="d-flex flex-column">
 								<div className="p-0">
 									<Link to="/login">
