@@ -6,6 +6,11 @@ body {
     color: #704b43;
 }
 
+a {
+    color: #ed8f21 !important;
+}
+
+
 .fs-7 {
     font-size: 1.6em;
 }
@@ -143,6 +148,12 @@ body {
     background-color: #f5f5ef;
 }
 
+// fondo cards home user logged
+
+.gris-bg{
+    background-color: #ebebeb;
+}
+
 // borde para forms
 .borde-crema {
     border: 1px solid #efedd7;
@@ -208,6 +219,10 @@ body {
     color:#fffffd;
     border-top:6px solid #efedd6;
     font-size: 0.7em;
+}
+
+.navbar-light .navbar-toggler {
+    background-color: lightgray;
 }
 
 .my-personal-info{
