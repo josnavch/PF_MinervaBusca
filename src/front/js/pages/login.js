@@ -41,7 +41,7 @@ export const Login = () => {
 						<h1 className="titulo"> INGRESAR </h1>
 						<div className="MB-3">
 							<div className="input-container">
-								<i className="fa fa-user icon" />
+								<i className="fa fa-user faa-lg icon" />
 								<input
 									type="email"
 									className="form-control input input-field"
@@ -54,13 +54,13 @@ export const Login = () => {
 
 						<div className="MB-3">
 							<div className="input-container">
-								<i className="fa fa-key icon" />
+								<i className="fa fa-key fa-lg icon" />
 								<input
 									value={password}
 									onChange={e => setPassword(e.target.value)}
 									type="password"
 									className="form-control input input-field"
-									placeholder="Password"
+									placeholder="Username"
 								/>
 							</div>
 						</div>
@@ -71,7 +71,7 @@ export const Login = () => {
 						{console.log("Status: ", JSON.stringify(store.user.status))}
 						{console.log("Token: ", JSON.stringify(store.user.token))}
 						{store.user.token ? (
-							alert("Login Succesfully!!")
+							alert("Login Successfully!")
 						) : (
 							<div className="alert label-form" role="alert">
 								{JSON.stringify(store.user.msg)}
