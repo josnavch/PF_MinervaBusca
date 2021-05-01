@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 
 				if (tokenLocal) {
-					window.location.replace(process.env.FRONTEND_URL + "/demo");
+					window.location.replace(process.env.FRONTEND_URL + "/casa");
 				}
 			},
 
@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("refresh_token", data.refresh_token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							window.location.replace(process.env.FRONTEND_URL + "/demo");
+							window.location.replace(process.env.FRONTEND_URL + "/casa");
 						} else {
 							console.log("Error Login", data);
 							setStore({ user: data });

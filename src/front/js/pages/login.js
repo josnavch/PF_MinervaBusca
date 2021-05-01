@@ -82,6 +82,7 @@ export const Login = () => {
 							<Link to="/registro">
 								<a className="label-form">Abra una aquí</a>
 							</Link>
+							<br />
 							<label className="label-form">¿Olvidó su contraseña? </label>{" "}
 							<Link to="/restablecer">
 								<a className="label-form">Click aquí</a>
