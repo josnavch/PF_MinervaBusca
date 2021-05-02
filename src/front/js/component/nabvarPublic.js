@@ -26,10 +26,10 @@ export const NavBarPublic = () => {
 							<div className="d-flex flex-column">
 								<div className="p-0">
 									<Link to="/login">
-										<button className="btn btnIngresar">Ingresar</button>
+										<button className="btn boton-uva text-uppercase">Ingresar</button>
 									</Link>
 								</div>
-								<div className="p-0">
+								<div className="pt-1 text-center">
 									<Link to="/registro">
 										<a className="ahrefRegistrar">o Registrarse</a>
 									</Link>

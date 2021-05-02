@@ -5,7 +5,7 @@ const Contacto = () => {
 		<div className="my-3 container">
 			<div className="row justify-content-center">
 				<div className="col-sm-12 col-lg-7 crema-f-bg borde-crema rounded15 p-4">
-					<h3 className="text-center naranja text-uppercase">Contáctenos</h3>
+					<p className="titulo-formulario text-center">Contáctenos</p>
 					<div className="row d-flex align-items-center text-break">
 						<div className="flex-column col-xs-12 col-sm-2 p-0 text-center">
 							<i className="fas fa-envelope fs-9 naranja p-3" />

@@ -1,4 +1,11 @@
 /*estilos de pantalla de registro de usuarios*/
+$uva:#563356;
+$naranja:#ed8f21;
+$rosa:#d986b0;
+$carmesi:#9f3154;
+$bronce:#857462;
+$cafe:#704b43;
+
 .centrar{
     display: flex;
     justify-content: center;
@@ -8,7 +15,7 @@
     border: 1px solid #efedd7;
 }
 .naranja {
-    color: #ed8f21;
+    color: $naranja;
 }
 /*form{
     background:none !important;
@@ -21,15 +28,15 @@
 .input{
     border-radius: 7px;
 }
-.a{
-    text-decoration: underline;
-}
+// .a{
+//     text-decoration: underline;
+// }
 // p, p a{
 //     color:black;
 // }
 .p, .p a{
     font-size: medium;
-    color: #563356;
+    color: $uva;
 }
 .form-group{
     margin:3px;

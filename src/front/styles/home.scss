@@ -1,15 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap');
+
+$uva:#563356;
+$naranja:#ed8f21;
+$rosa:#d986b0;
+$carmesi:#9f3154;
+$bronce:#857462;
+$cafe:#704b43;
+$crema-bg: #ffffee; // fondo del header
+$crema-l-bg: #efedd6; // líneas top y bottom de header y footer
+$crema-f-bg: #f5f5ef; // fondo de forms
+$gris-bg:#ebebeb; // fondo cards home user logged (casa)
+$crema-amarillo:#f5f5e1; // fondo de carruseles
+$borde-crema:#efedd7; // borde para forms
+
+$light:100;
+$medium:500;
+$bold:700;
+$semi-bold: 600;
+$extra-bold: 800;
 
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     font-size: 1.2em!important;
-    color: #704b43;
+    color: $cafe;
 }
 
 a {
-    color: #ed8f21 !important;
+    color: $naranja;
 }
-
+a:hover {
+    color: $cafe;
+}
 
 .fs-7 {
     font-size: 1.6em;
@@ -24,14 +45,21 @@ a {
 }
 
 .light {
-    font-weight: 100;
+    font-weight: $light;
+}
+
+.medium {
+    font-weight: $medium;
 }
 
 .bold {
-    font-weight: 700;
+    font-weight: $bold;
 }
-.extrabold {
-    font-weight: 800;
+.semi-bold {
+    font-weight: $semi-bold;
+}
+.extra-bold {
+    font-weight: $extra-bold;
 }
 
 .btn-padding {
@@ -46,6 +74,118 @@ a {
     transform: rotate(90deg);
 }
 
+.titulo-formulario {
+    font-weight: $medium;
+    font-size: 1.4em;
+    color: $naranja;
+    text-transform: uppercase;
+}
+
+.boton-uva{
+    background-color: $uva;
+    color: white;
+    font-size: 1.1em;
+    font-weight: $bold;
+    padding: 15px 35px;
+    border-radius: 15px;
+}
+
+.boton-uva:hover{
+    background-color: $naranja;
+    color:white;
+    text-decoration: none;
+}
+
+.boton-naranja {
+    background-color: $naranja;
+    color: white;
+    font-size: 1.1em;
+    font-weight: $semi-bold;
+    padding: 15px 40px;
+    border-radius: 10px;
+    margin: 15px 0px;
+}
+
+.boton-naranja:hover {
+    background-color: $uva;
+    color: white;
+}
+
+// colores
+
+.crema-bg { 
+    background-color: $crema-bg;
+}
+
+.crema-l-bg {
+    background-color: $crema-l-bg;
+}
+
+.crema-f-bg {
+    background-color: $crema-f-bg;
+}
+
+.gris-bg{
+    background-color: $gris-bg;
+}
+
+.borde-crema {
+    border: 1px solid #efedd7;
+}
+
+.rounded15 {
+    border-radius: 15px;
+}
+
+.crema-amarillo {
+    background-color: $crema-amarillo;
+}
+
+.uva {
+    color: $uva;
+}
+
+.uva-bg {
+    background-color: $uva;
+}
+
+.naranja {
+    color: $naranja;
+}
+
+.naranja-bg {
+    background-color: $naranja;
+}
+
+.rosa {
+    color: $rosa;
+}
+
+.carmesi{
+    color: $carmesi;
+}
+.carmesi-bg {
+    background-color: $carmesi;
+}
+
+.bronce {
+    color:$bronce;
+}
+
+.bronce-bg {
+    background-color:$bronce;
+}
+
+.cafe{
+    color: $cafe;
+}
+
+.cafe-bg{
+    background-color: $cafe;
+}
+
+// -- termina colores -- //
+
 .menuLinks{
     font-size: 1.2rem;
     // font-family: sans-serif;
@@ -54,20 +194,21 @@ a {
 
 .btnIngresar:hover{
      color: white;
-     color: rgba(255, 255, 255, 1) !important;
-     box-shadow: 0 4px 16px rgb(39, 26, 43);
-     transition: all 0.2s ease;
+     background-color: #ed8f21;
+    //  color: rgba(255, 255, 255, 1) !important;
+    //  box-shadow: 0 4px 16px rgb(39, 26, 43);
+    //  transition: all 0.2s ease;
 }
 
 .btnIngresar{
     // background-color: rgb(79, 25, 93);
-    background-color: #563356;
+    // background-color: #563356;
     color: white;
-    width: 135px;
-    height: 45px;
-    border-radius: 10px;
-    font-stretch: expanded;
-    font-weight: 480;
+    // width: 135px;
+    // height: 45px;
+    border-radius: 15px;
+    // font-stretch: expanded;
+    // font-weight: 480;
     font-size: 1.2rem;
     text-transform: uppercase;
 }
@@ -87,14 +228,14 @@ a {
 
 
 .ahrefRegistrar{
-    color: #ed8f21;
+    // color: #ed8f21;
+    color: $naranja;
     font-size: 1.2rem;
-    font-stretch: extra-expanded;
-    font-weight: normal;
+    // font-stretch: extra-expanded;
+    // font-weight: normal;
 }
-
 .ahrefRegistrar:hover{
-    color: #886392;
+    color: $cafe;
     text-decoration: none!important;
 }
 
@@ -126,99 +267,19 @@ a {
     transform: translate(-50%, -50%);
 }
 
-.img{
-    height:calc(100vh - 390px);
-    width: 100%;
-}
-
-// colores
-
-// fondo del header
-.crema-bg { 
-    background-color: #ffffee;
-}
-
-// líneas top y bottom de header y footer
-.crema-l-bg {
-    background-color: #efedd7;
-}
-
-// fondo de forms
-.crema-f-bg {
-    background-color: #f5f5ef;
-}
-
-// fondo cards home user logged
-
-.gris-bg{
-    background-color: #ebebeb;
-}
-
-// borde para forms
-.borde-crema {
-    border: 1px solid #efedd7;
-}
-
-.rounded15 {
-    border-radius: 15px;
-}
-
-// fondo de carruseles
-.crema-amarillo{
-    background-color:#f5f5e1;
-}
-
-.uva {
-    color: #563356;
-}
-
-.uva-bg {
-    background-color: #563356;
-}
-
-.naranja {
-    color: #ed8f21;
-}
-
-.naranja-bg {
-    background-color: #ed8f21;
-}
-
-.rosa {
-    color: #d986b0;
-}
-
-.carmesi{
-    color: #9f3154;
-}
-.carmesi-bg {
-    background-color: #9f3154;
-}
-
-.bronce {
-    color:#857462;
-}
-
-.bronce-bg {
-    background-color:#857462;
-}
-
-.cafe{
-    color:#704b43;
-}
-
-.cafe-bg{
-    background-color:#704b43;
-}
+// .img{
+//     height:calc(100vh - 390px);
+//     width: 100%;
+// }
 
 .navbar {
-    border-top:6px solid #efedd6;
+    border-top:6px solid $crema-l-bg;
 }
 .footer {
-    background-color: #9f3154;
-    color:#fffffd;
-    border-top:6px solid #efedd6;
-    font-size: 0.7em;
+    background-color: $carmesi;
+    color:white;
+    border-top:6px solid $crema-l-bg;
+    font-size: 0.9em;
 }
 
 .navbar-light .navbar-toggler {
@@ -226,7 +287,7 @@ a {
 }
 
 .my-personal-info{
-    background-color:#9f3154;
+    background-color: $carmesi;
     color:#fffffd;
     border:6px solid #efedd6;
     font-size: 0.7em;

@@ -17,8 +17,8 @@ export const Footer = () => {
 			<footer className="footer mt-auto py-3">
 				<div className="container">
 					<div className="row">
-						<div className="col-6 d-flex align-items-center">
-							<div>MinervaBusca.com, &copy; todos los derechos reservados</div>
+						<div className="col-9 d-flex align-items-center">
+							<div>MinervaBusca.com &copy; Todos los Derechos Reservados</div>
 						</div>
 						<div className="col-3">
 							<div className="float-right">
@@ -28,11 +28,11 @@ export const Footer = () => {
 								<i className="fab fa-youtube fa-2x" />
 							</div>
 						</div>
-						<div className="col-3">
+						{/* <div className="col-3">
 							<button className="btn btn-outline-info button_logout" onClick={() => logout()}>
 								Salir
 							</button>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</footer>

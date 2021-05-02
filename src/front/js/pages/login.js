@@ -5,6 +5,7 @@ import { Redirect, Route } from "react-router";
 import { Link } from "react-router-dom";
 
 import "../../styles/login.scss";
+import "../../styles/home.scss";
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />;
 
 export const Login = () => {
@@ -38,7 +39,7 @@ export const Login = () => {
 
 				<div className="text-center mt-5 mb-5">
 					<form className="form">
-						<h1 className="titulo"> INGRESAR </h1>
+						<h1 className="titulo-formulario xtitulo"> INGRESAR </h1>
 						<div className="MB-3">
 							<div className="input-container">
 								<i className="fa fa-user icon" />
@@ -64,7 +65,11 @@ export const Login = () => {
 								/>
 							</div>
 						</div>
-						<button type="submit" onClick={e => handlerClick(e)} className="btn button_summit">
+
+						<button
+							type="submit"
+							onClick={e => handlerClick(e)}
+							className="btn boton-naranja xbutton_summit">
 							Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
 						</button>
 						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
