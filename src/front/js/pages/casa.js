@@ -17,7 +17,7 @@ export const Casa = () => {
 			<div className="row">
 				<div className="d-flex align-items-center col-sm p-0 gris-bg mt-2 mr-sm-0 mr-md-3">
 					<div className="col-md-5">
-						<Link to="/buscar">
+						<Link to="/casa">
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">
 								<img src={lupa} className="img-fluid" />
 							</p>
@@ -33,7 +33,7 @@ export const Casa = () => {
 
 				<div className="d-flex align-items-center col-sm p-0 mt-2 gris-bg">
 					<div className="col-md-5">
-						<Link to="/libreriapersonal">
+						<Link to="/casa">
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">
 								<img src={libro} className="img-fluid" />
 							</p>

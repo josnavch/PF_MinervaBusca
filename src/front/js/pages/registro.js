@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import "../../styles/stylesRegistroHomeusuario.scss";
 
 export const Registro = () => {
@@ -30,6 +31,7 @@ export const Registro = () => {
 					phone: tel
 				});
 				alert("Registro exitoso!!");
+				window.location.replace(process.env.FRONTEND_URL + "/");
 			} else {
 				alert("Algunos campos están en blanco, por favor complete todos los espacios");
 			}
@@ -113,9 +115,11 @@ export const Registro = () => {
 								</form>
 								<p className="text-center p">
 									¿Ya tienes una cuenta?{" "}
-									<a href="#" className="a">
-										Ingresa aquí
-									</a>
+									<Link to="/login">
+										<a href="#" className="a">
+											Ingresa aquí
+										</a>
+									</Link>
 								</p>
 							</div>
 						</div>

@@ -30,9 +30,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				expires: "",
 				token: null,
 				name: "",
-				urlRestore: "",
+				url: "",
 				flag: false
-			}
+			},
+			estadoEnviado: false
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -53,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 
 				if (tokenLocal) {
-					window.location.replace(process.env.FRONTEND_URL + "/demo");
+					window.location.replace(process.env.FRONTEND_URL + "/casa");
 				}
 			},
 
@@ -79,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("refresh_token", data.refresh_token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							window.location.replace(process.env.FRONTEND_URL + "/demo");
+							window.location.replace(process.env.FRONTEND_URL + "/casa");
 						} else {
 							console.log("Error Login", data);
 							setStore({ user: data });
@@ -105,10 +106,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			sendRestoreEmail: () => {
-				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail")
+			sendRestoreEmail: email => {
+				let userData = {
+					email: email,
+					url: process.env.FRONTEND_URL
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", {
+					method: "POST",
+					body: JSON.stringify(userData),
+					headers: { "Content-type": "application/json; charset=UTF-8" }
+				})
 					.then(resp => resp.json())
-					.then(data => setStore({ userRestore: true }))
+					.then(data => setStore({ estadoEnviado: true }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 

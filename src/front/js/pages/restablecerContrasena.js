@@ -10,27 +10,8 @@ export const RestablecerContrasena = () => {
 	const EnviarCorreo = async () => {
 		event.preventDefault();
 
-		let datosEnviar = {
-			email: email
-		};
-		actions.sendRestoreEmail();
-
-		// let result = await fetch(url, {
-		//     method: "POST",
-		//     body: JSON.stringify(datosEnviar),
-		//     headers: {
-		//         "Content-Type": "application/json"
-		//     }
-		// })
-		//     .then(resp => resp.json())
-		//     .then(data => {
-		//         console.log(data);
-		//     })
-		//     .catch(function (error) {
-		//         //manejo de errores
-		//         console.log("error", error.message);
-		//         console.log("Error");
-		//     });
+		let result = await actions.sendRestoreEmail(email);
+		alert(result);
 	};
 
 	return (
@@ -40,9 +21,9 @@ export const RestablecerContrasena = () => {
 					<h3 className="card-title text-center">&#191;Olvid&oacute; su contrase&ntilde;a?</h3>
 
 					<div className="card-text">
-						<form>
-							<div className="form-group text-center m-auto col-10">
-								<label htmlFor="exampleInputEmail1">
+						<form className="p-0 col-12">
+							<div className="form-group text-center mt-2 mx-auto col-12">
+								<label htmlFor="exampleInputEmail1" className="h6">
 									Por favor ingresar su correo, le estaremos enviando un enlace para recuperar el
 									acceso a su cuenta.
 								</label>

@@ -1,10 +1,4 @@
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700;800&display=swap');
-
-// body {
-//     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-//     font-size: 1.6em;
-//     color: #704b43;
-// }
+@import "home.scss";
 
 .contenedor{
     position: relative;
@@ -40,11 +34,27 @@
     }
 
 .icon {
-  padding: 10px;
-  background: #f5f5ef;
-  color: #704b43;
-  min-width: 50px;
+//   padding: 10px;
+//   background: #f5f5ef;
+  color: $cafe;
+  font-size: 2em;
+//   min-width: 50px;
   text-align: center;
+}
+
+.icon-form-control {
+    // border:1px solid $borde-crema;
+    border:0px;
+    padding: 15px 0!important;
+    // border-start-start-radius: 0;
+    // border-bottom-left-radius: 0;
+    background-color: transparent;
+}
+
+.icon-input-group {
+    border-radius: 25px;
+    background-color: white;
+    border: 1px solid $borde-crema!important;
 }
 
 .input-field {
@@ -54,7 +64,7 @@
 }
 
 .input-field:focus {
-  border: 2px solid #ed8f21;
+  border: 2px solid $naranja;
 }
 
 .titulo{
@@ -66,5 +76,11 @@
 
 .label-form{
     font-size: 16px;
-    color: #563356;
+    color: $uva;
 }
+
+.input-group-text {
+    background-color: transparent!important;
+    border: none!important;
+}
+

@@ -33,35 +33,36 @@ export const Login = () => {
 	}, []);
 
 	return (
-		<div className="row w-100 d-flex justify-content-center contenedor">
-			<div className="col-5">
+		<div className="container">
+			<div className="x">
 				{console.log(store.user.token)}
 
 				<div className="text-center mt-5 mb-5">
 					<form className="form">
-						<h1 className="titulo-formulario xtitulo"> INGRESAR </h1>
-						<div className="MB-3">
-							<div className="input-container">
-								<i className="fa fa-user icon" />
+						<p className="titulo-formulario xtitulo">Ingresar</p>
+						<div className="row p-5 xMB-3">
+							<div className="col border uva-bg input-group icon-input-group  flex-nowrap xinput-container">
+								<span className="input-group-text">
+									<i className="fa fa-user faa-lg icon" />
+								</span>
 								<input
 									type="email"
-									className="form-control input input-field"
+									className="icon-form-control input input-field"
 									value={email}
-									placeholder="Email address / username"
+									placeholder="Correo Electrónico / Usuario"
 									onChange={e => setEmail(e.target.value)}
 								/>
 							</div>
 						</div>
-
-						<div className="MB-3">
-							<div className="input-container">
-								<i className="fa fa-key icon" />
+						<div className="row xMB-3">
+							<div className="col border input-group xinput-container">
+								<i className="fa fa-key fa-lg icon" />
 								<input
 									value={password}
 									onChange={e => setPassword(e.target.value)}
 									type="password"
-									className="form-control input input-field"
-									placeholder="Password"
+									className="icon-form-control input input-field"
+									placeholder="Contraseña"
 								/>
 							</div>
 						</div>
@@ -76,7 +77,7 @@ export const Login = () => {
 						{console.log("Status: ", JSON.stringify(store.user.status))}
 						{console.log("Token: ", JSON.stringify(store.user.token))}
 						{store.user.token ? (
-							alert("Login Succesfully!!")
+							alert("Login Successfully!")
 						) : (
 							<div className="alert label-form" role="alert">
 								{JSON.stringify(store.user.msg)}
@@ -87,8 +88,9 @@ export const Login = () => {
 							<Link to="/registro">
 								<a className="label-form">Abra una aquí</a>
 							</Link>
+							<br />
 							<label className="label-form">¿Olvidó su contraseña? </label>{" "}
-							<Link to="/single">
+							<Link to="/restablecer">
 								<a className="label-form">Click aquí</a>
 							</Link>
 						</div>
