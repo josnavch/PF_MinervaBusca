@@ -14,6 +14,7 @@ $crema-amarillo:#f5f5e1; // fondo de carruseles
 $borde-crema:#efedd7; // borde para forms
 
 $light:100;
+$regular:400;
 $medium:500;
 $bold:700;
 $semi-bold: 600;
@@ -48,6 +49,10 @@ a:hover {
     font-weight: $light;
 }
 
+.regular {
+    font-weight: $regular;
+}
+
 .medium {
     font-weight: $medium;
 }
@@ -78,6 +83,7 @@ a:hover {
     font-weight: $medium;
     font-size: 1.4em;
     color: $naranja;
+    text-align:center;
     text-transform: uppercase;
 }
 
@@ -186,6 +192,10 @@ a:hover {
 
 // -- termina colores -- //
 
+.contenido {
+    margin:25px 0;
+}
+
 .menuLinks{
     font-size: 1.2rem;
     // font-family: sans-serif;
@@ -225,7 +235,6 @@ a:hover {
     background-color:#ed8f21;
     color: white;
 }
-
 
 .ahrefRegistrar{
     // color: #ed8f21;
@@ -284,6 +293,16 @@ a:hover {
 
 .navbar-light .navbar-toggler {
     background-color: lightgray;
+}
+
+.tarjeta {
+  border: 1px solid $borde-crema;
+  border-radius: 15px;
+  background-color: $crema-f-bg;
+  padding: 35px 45px;
+  font-weight: $regular;
+  color: $cafe!important;
+  margin: 10px 5px;
 }
 
 .my-personal-info{

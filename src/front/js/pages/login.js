@@ -33,15 +33,15 @@ export const Login = () => {
 	}, []);
 
 	return (
-		<div className="container">
-			<div className="x">
-				{console.log(store.user.token)}
+		<div className="container m-auto text-center">
+			{console.log(store.user.token)}
 
-				<div className="text-center mt-5 mb-5">
-					<form className="form">
+			<div className="row justify-content-center xborder">
+				<div className="col-lg-6">
+					<form className="tarjeta">
 						<p className="titulo-formulario xtitulo">Ingresar</p>
-						<div className="row p-5 xMB-3">
-							<div className="col border uva-bg input-group icon-input-group  flex-nowrap xinput-container">
+						<div className="row xMB-3">
+							<div className="col border input-group icon-input-group flex-nowrap xinput-container">
 								<span className="input-group-text">
 									<i className="fa fa-user faa-lg icon" />
 								</span>
@@ -55,8 +55,10 @@ export const Login = () => {
 							</div>
 						</div>
 						<div className="row xMB-3">
-							<div className="col border input-group xinput-container">
-								<i className="fa fa-key fa-lg icon" />
+							<div className="col border input-group icon-input-group flex-nowrap xinput-container">
+								<span className="input-group-text">
+									<i className="fa fa-key fa-lg icon" />
+								</span>
 								<input
 									value={password}
 									onChange={e => setPassword(e.target.value)}
@@ -66,13 +68,15 @@ export const Login = () => {
 								/>
 							</div>
 						</div>
+						<div className="row justify-content-center">
+							<button
+								type="submit"
+								onClick={e => handlerClick(e)}
+								className="btn boton-naranja xbutton_summit">
+								Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
+							</button>
+						</div>
 
-						<button
-							type="submit"
-							onClick={e => handlerClick(e)}
-							className="btn boton-naranja xbutton_summit">
-							Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
-						</button>
 						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
 						{console.log("Status: ", JSON.stringify(store.user.status))}
 						{console.log("Token: ", JSON.stringify(store.user.token))}
@@ -84,14 +88,14 @@ export const Login = () => {
 							</div>
 						)}
 						<div>
-							<label className="label-form">¿No tiene cuenta?</label>{" "}
+							<label className="xlabel-form uva">¿No tiene cuenta?</label>{" "}
 							<Link to="/registro">
-								<a className="label-form">Abra una aquí</a>
+								<a className="xlabel-form uva">Abra una aquí</a>
 							</Link>
 							<br />
-							<label className="label-form">¿Olvidó su contraseña? </label>{" "}
+							<label className="xlabel-form carmesi">¿Olvidó su contraseña? </label>{" "}
 							<Link to="/restablecer">
-								<a className="label-form">Click aquí</a>
+								<a className="xlabel-form carmesi">Click aquí</a>
 							</Link>
 						</div>
 					</form>

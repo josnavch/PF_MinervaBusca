@@ -11,7 +11,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="my-3 container">
+		<div className="m-auto container">
 			<div className="row crema-f-bg">
 				<div className="col-sm text-center">
 					<div className="d-flex flex-column align-items-center h-100">

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import "../../styles/demo.scss";
+import "../../styles/stylesRegistroHomeusuario.scss";
 
 export const RestablecerContrasena = () => {
 	const { store, actions } = useContext(Context);
@@ -15,15 +15,16 @@ export const RestablecerContrasena = () => {
 	};
 
 	return (
-		<div className="container m-auto col-4">
-			<div className="card login-form">
-				<div className="card-body">
-					<h3 className="card-title text-center">&#191;Olvid&oacute; su contrase&ntilde;a?</h3>
-
-					<div className="card-text">
-						<form className="p-0 col-12">
-							<div className="form-group text-center mt-2 mx-auto col-12">
-								<label htmlFor="exampleInputEmail1" className="h6">
+		<div className="container m-auto">
+			<div className="row justify-content-center">
+				<div className="tarjeta col-lg-6">
+					<div className="xcard-text">
+						<p className="titulo-formulario xcard-title xtext-center">
+							&#191;Olvid&oacute; su contrase&ntilde;a?
+						</p>
+						<form>
+							<div className="form-group text-center mt-2">
+								<label htmlFor="exampleInputEmail1">
 									Por favor ingresar su correo, le estaremos enviando un enlace para recuperar el
 									acceso a su cuenta.
 								</label>
@@ -31,18 +32,19 @@ export const RestablecerContrasena = () => {
 							<div className="form-group">
 								<input
 									type="email"
-									className="form-control form-control-sm font-weight-bolder"
-									placeholder="Ingrese su dirección de correo"
+									className="form-control input text-center"
+									placeholder="Correo Electrónico"
 									onChange={e => setEmail(e.target.value)}
-									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
-							<button
-								type="submit"
-								className="btn btn-primary btn-block"
-								onClick={event => EnviarCorreo(event)}>
-								Enviar enlace
-							</button>
+							<div className="row justify-content-center">
+								<button
+									type="submit"
+									className="btn boton-naranja xbtn-primary xbtn-block"
+									onClick={event => EnviarCorreo(event)}>
+									Enviar &#62;
+								</button>
+							</div>
 						</form>
 					</div>
 				</div>
