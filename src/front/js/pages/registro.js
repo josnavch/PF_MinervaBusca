@@ -43,7 +43,7 @@ export const Registro = () => {
 			<div className="row">
 				<div className="col-lg-3 col-md-1" />
 				<div className="col-lg-6 col-md-10">
-					<div className="tarjeta xcard m-3 p-3 xformCard">
+					<div className="tarjeta xcard mx-0 m-md-3 xformCard">
 						<h4 className="mb-3 text-center naranja">FORMULARIO DE REGISTRO</h4>
 						<div className="row">
 							<div className="col-12">

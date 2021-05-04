@@ -18,25 +18,29 @@ export const NavBar = () => {
 		<div>
 			<div className="fila-Superio crema-bg">
 				<div className="container-fluid">
-					<div className="d-flex offset-md-1">
-						<div className="mr-auto p-2 ml-5">
+					<div className="d-flex offset-xs-0 offset-lg-1">
+						<div className="mr-auto p-2">
 							<a className="" href="/">
 								<img
 									src={logo}
 									width="75%"
-									// height="100"
-									className="d-inline-block align-top"
+									className="d-inline-block align-top logo"
 									alt="MinervaBusca.com"
 								/>
 							</a>
 						</div>
-						<div className="my-personal-info mr-sm-2">
+						<div className="my-personal-info my-auto mr-sm-2">
 							<div className="d-flex flex-column">
 								<div>
-									<p>Bienvenido:</p>
+									<p>
+										Bienvenido:
+										<span className="bold"> {usuario.name}</span>
+									</p>
 								</div>
 								<div>
-									<p className="fa fa-user menuLinks mr-3"> {usuario.name}</p>
+									<Nav.Link className="menuLinks mr-3" href="#">
+										Mis libros
+									</Nav.Link>
 								</div>
 								<div>
 									<Nav.Link className="menuLinks mr-3" href="#" onClick={() => logout()}>
@@ -55,7 +59,7 @@ export const NavBar = () => {
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="mr-auto">
 							<Nav.Link className="menuLinks mr-3" href="#">
-								Home
+								Inicio
 							</Nav.Link>
 							<Nav.Link className="menuLinks mr-3" href="#">
 								Buscar y comprar

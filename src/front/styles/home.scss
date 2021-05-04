@@ -34,7 +34,7 @@ a:hover {
 }
 
 .fs-7 {
-    font-size: 1.6em;
+    font-size: 1.9em;
 }
 
 .fs-8 {
@@ -101,7 +101,6 @@ a:hover {
     color:white;
     text-decoration: none;
 }
-
 .boton-naranja {
     background-color: $naranja;
     color: white;
@@ -192,6 +191,10 @@ a:hover {
 
 // -- termina colores -- //
 
+.logo {
+    min-width: 90px;
+}
+
 .contenido {
     margin:25px 0;
 }
@@ -200,11 +203,17 @@ a:hover {
     font-size: 1.2rem;
     // font-family: sans-serif;
     color: white!important;
+    border-bottom: 1px solid $uva;
+}
+
+.menuLinks:hover{
+    color: $rosa!important;
+    border-bottom: 1px solid $crema-bg;
 }
 
 .btnIngresar:hover{
      color: white;
-     background-color: #ed8f21;
+     background-color: $naranja;
     //  color: rgba(255, 255, 255, 1) !important;
     //  box-shadow: 0 4px 16px rgb(39, 26, 43);
     //  transition: all 0.2s ease;
@@ -292,7 +301,7 @@ a:hover {
 }
 
 .navbar-light .navbar-toggler {
-    background-color: lightgray;
+    background-color: $crema-bg;
 }
 
 .tarjeta {
@@ -307,20 +316,88 @@ a:hover {
 
 .my-personal-info{
     background-color: $carmesi;
-    color:#fffffd;
-    border:6px solid #efedd6;
-    font-size: 0.7em;
-    width: 12%;
-    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    margin-left: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-right: 12px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-top-width: 4px;
-    border-bottom-width: 4px;
-     border-radius: 15px;
+    color: white;
+    font-size: 0.92em;
+    font-weight: $regular;
+    padding: 10px 20px;
+    border-radius: 15px;
+    line-height: 1.7em;
+    // border:6px solid #efedd6;
+    // font-size: 0.7em;
+    // width: 12%;
+    // font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    // margin-left: 8px;
+    // padding-left: 8px;
+    // padding-right: 8px;
+    // padding-bottom: 10px;
+    // padding-top: 10px;
+    // margin-right: 12px;
+    // margin-top: 20px;
+    // margin-bottom: 20px;
+    // border-top-width: 4px;
+    // border-bottom-width: 4px;
+    // border-radius: 15px;
+}
+.my-personal-info a{
+    font-size: 0.9em;
+    border: none!important;
+    padding: 0px;
+    border-bottom: 1px solid $carmesi!important;
+}
+
+.my-personal-info a:hover{
+    color: $borde-crema!important;
+    border-bottom: 1px solid $borde-crema!important;
+}
+
+.my-personal-info p{
+    margin-bottom:3px!important;
+}
+
+@media only screen and(max-width: 575.98px) {
+  .boton-uva {
+    font-size: 0.9em;
+    font-weight: $bold;
+    padding: 10px 20px;
+    border-radius: 15px;
+  }
+  .ahrefRegistrar {
+      font-size: 0.9em;
+  }
+  .fs-7 {
+    font-size: 1.3em;
+  }
+  .crema-f-bg {
+      background-color: #edefed;
+  }
+  .tarjeta{
+      padding: 10px;
+      font-size: medium;
+  }
+  .row{
+      margin-right: 3px;
+      margin-left: 3px;
+  }
+  .input-field {
+      font-size: 0.9em!important;
+  }
+  .icon {
+      padding:0 5px 0 0;
+  }
+  .input-group-text {
+      padding: 5px;
+  }
+  .form-control {
+      font-size:0.9em!important;
+      padding: 25px 10px;
+  }
+  .col-12{
+      padding-right: 0px;
+      padding-left: 0px;
+  }
+  .my-personal-info {
+    font-size: medium;
+    padding: 10px;
+    line-height: 1.25em;
+    }
 }
