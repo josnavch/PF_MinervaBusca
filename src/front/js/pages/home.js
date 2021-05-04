@@ -12,11 +12,11 @@ export const Home = () => {
 
 	return (
 		<div className="m-auto container">
-			<div className="row crema-f-bg">
+			<div className="row crema-f-bg my-2">
 				<div className="col-sm text-center">
 					<div className="d-flex flex-column align-items-center h-100">
 						<div className="m-auto">
-							<p className="bronce fs-7 extra-bold">Bienvenido a MinervaBusca.com</p>
+							<p className="bronce fs-6 extra-bold">Bienvenido a MinervaBusca.com</p>
 							<p className="rosa fs-8 extra-bold lh-1em">
 								Tu librería <br />
 								Virtual

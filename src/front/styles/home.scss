@@ -22,7 +22,7 @@ $extra-bold: 800;
 
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-size: 1.2em!important;
+    font-size: 1.2em;
     color: $cafe;
 }
 
@@ -33,12 +33,16 @@ a:hover {
     color: $cafe;
 }
 
+.fs-6 {
+    font-size: 1.4em;
+}
+
 .fs-7 {
     font-size: 1.9em;
 }
 
 .fs-8 {
-    font-size: 2em;
+    font-size: 2.4em;
 }
 
 .fs-9 {
@@ -72,7 +76,7 @@ a:hover {
 }
 
 .lh-1em {
-    line-height: 1em;
+    line-height: 1.25em;
 }
 
 .flip-hor {
@@ -367,9 +371,6 @@ a:hover {
   .fs-7 {
     font-size: 1.3em;
   }
-  .crema-f-bg {
-      background-color: #edefed;
-  }
   .tarjeta{
       padding: 10px;
       font-size: medium;
@@ -400,4 +401,7 @@ a:hover {
     padding: 10px;
     line-height: 1.25em;
     }
+    .fs-6 {
+    font-size: 1.3em;
+}
 }
