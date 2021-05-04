@@ -39,11 +39,11 @@ export const Registro = () => {
 	};
 
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid m-auto">
 			<div className="row">
-				<div className="col-lg-4 col-sm-2" />
-				<div className="col-lg-4 col-sm-8">
-					<div className="card m-3 p-3 formCard">
+				<div className="col-lg-3 col-md-1" />
+				<div className="col-lg-6 col-md-10">
+					<div className="tarjeta xcard m-3 p-3 xformCard">
 						<h4 className="mb-3 text-center naranja">FORMULARIO DE REGISTRO</h4>
 						<div className="row">
 							<div className="col-12">
@@ -108,7 +108,7 @@ export const Registro = () => {
 										<button
 											type="submit"
 											onClick={e => Registrar(e)}
-											className="btn btn-warning btn-lg center mb-4 mt-3 input">
+											className="btn boton-naranja xbtn-warning xbtn-lg xcenter xmb-4 xmt-3 xinput">
 											Crear cuenta &#62;
 										</button>
 									</div>
@@ -125,7 +125,7 @@ export const Registro = () => {
 						</div>
 					</div>
 				</div>
-				<div className="col-lg-4 col-sm-2" />
+				<div className="col-lg-3 col-md-1" />
 			</div>
 		</div>
 	);

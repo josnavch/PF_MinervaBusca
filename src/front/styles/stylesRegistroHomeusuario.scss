@@ -1,4 +1,6 @@
 /*estilos de pantalla de registro de usuarios*/
+@import "home.scss";
+
 .centrar{
     display: flex;
     justify-content: center;
@@ -8,7 +10,7 @@
     border: 1px solid #efedd7;
 }
 .naranja {
-    color: #ed8f21;
+    color: $naranja;
 }
 /*form{
     background:none !important;
@@ -19,36 +21,41 @@
     padding: 0 !important;
 }*/
 .input{
-    border-radius: 7px;
+    border-radius: 10px;
 }
-.a{
-    text-decoration: underline;
-}
+// .a{
+//     text-decoration: underline;
+// }
 // p, p a{
 //     color:black;
 // }
 .p, .p a{
-    font-size: medium;
-    color: #563356;
+    // font-size: medium;
+    color: $uva;
 }
-.form-group{
-    margin:3px;
-}
+// .form-group{
+//     margin:3px;
+// }
 .form-control{
-    height: 50px;
-    border: 1px solid #efedd7; 
+    // height: 50px;
+    border: 1px solid $borde-crema;
+    color:$cafe!important;
+    font-size: 1.05em;
+    font-weight: $regular;
+    margin: 10px 0;
+    padding: 35px;
 }
 .form-control::placeholder{
-    color: #704b43;
+    color: $cafe;
 }
 .btn-warning{
-    background-color: #ed8f21;
+    background-color: $naranja;
     border: none;
     color:white;
     font-weight: bold;
 }
 .btn-warning:hover{
-    background-color: #ed8f21;
+    background-color: $naranja;
      color: white;
      color: rgba(255, 255, 255, 1) !important;
      box-shadow: 0 4px 16px rgb(237, 143, 33);

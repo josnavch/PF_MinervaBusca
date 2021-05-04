@@ -11,20 +11,18 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="my-3 container">
+		<div className="m-auto container">
 			<div className="row crema-f-bg">
 				<div className="col-sm text-center">
 					<div className="d-flex flex-column align-items-center h-100">
 						<div className="m-auto">
-							<p className="bronce fs-7 extrabold">Bienvenido a MinervaBusca.com</p>
-							<p className="rosa fs-8 extrabold lh-1em">
+							<p className="bronce fs-7 extra-bold">Bienvenido a MinervaBusca.com</p>
+							<p className="rosa fs-8 extra-bold lh-1em">
 								Tu librería <br />
 								Virtual
 							</p>
 							<Link to="/login">
-								<button className="btn btnIngresarPrincipal btn-lg uva-bg bold btn-padding">
-									Ingresar &#62;
-								</button>
+								<button className="btn boton-uva">Ingresar &#62;</button>
 							</Link>
 						</div>
 					</div>
