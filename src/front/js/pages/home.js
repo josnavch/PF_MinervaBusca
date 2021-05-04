@@ -22,7 +22,7 @@ export const Home = () => {
 								Virtual
 							</p>
 							<Link to="/login">
-								<button className="btn boton-uva">Ingresar &#62;</button>
+								<button className="btn mb-3 mb-md-0 boton-uva">Ingresar &#62;</button>
 							</Link>
 						</div>
 					</div>

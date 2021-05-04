@@ -20,7 +20,7 @@ export const Footer = () => {
 						<div className="col-md-9 d-flex align-items-center">
 							<div>MinervaBusca.com &copy; Todos los Derechos Reservados</div>
 						</div>
-						<div className="col-md-3 mt-sm-3">
+						<div className="col-md-3 mt-2 mt-md-0">
 							<div className="float-md-right">
 								<i className="fab fa-facebook fa-2x mr-3" />
 								<i className="fab fa-instagram fa-2x mr-3" />

@@ -17,12 +17,12 @@ export const NavBarPublic = () => {
 									src={logo}
 									width="75%"
 									// height="100"
-									className="d-inline-block align-top"
+									className="d-inline-block align-top logo"
 									alt="MinervaBusca.com"
 								/>
 							</a>
 						</div>
-						<div className="my-auto p-2">
+						<div className="my-auto p-md-2">
 							<div className="d-flex flex-column">
 								<div className="p-0">
 									<Link to="/login">
