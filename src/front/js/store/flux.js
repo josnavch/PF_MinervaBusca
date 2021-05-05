@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 
 				if (tokenLocal) {
-					window.location.replace(process.env.FRONTEND_URL + "/demo");
+					window.location.replace(process.env.FRONTEND_URL + "/casa");
 				}
 			},
 
@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("refresh_token", data.refresh_token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							window.location.replace(process.env.FRONTEND_URL + "/demo");
+							window.location.replace(process.env.FRONTEND_URL + "/casa");
 						} else {
 							console.log("Error Login", data);
 							setStore({ user: data });
@@ -165,8 +165,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 					})
 					.catch(error => console.log("Error loading message from backend", error));
+<<<<<<< HEAD
 
 				return getStore().estadoEnviado;
+=======
+			},
+
+			crearUser: user => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify(user),
+					redirect: "follow"
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("error", error));
+>>>>>>> 54dfdf6a5edb16b1252f6dc25f9544aa8610ef01
 			}
 		}
 	};

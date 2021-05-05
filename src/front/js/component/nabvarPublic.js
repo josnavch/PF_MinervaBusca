@@ -10,27 +10,26 @@ export const NavBarPublic = () => {
 		<>
 			<div className="fila-Superio crema-bg">
 				<div className="container-fluid">
-					<div className="d-flex offset-md-1">
-						<div className="mr-auto p-2 ml-5">
+					<div className="d-flex offset-xs-0 offset-lg-1">
+						<div className="mr-auto p-2">
 							<a className="" href="/">
 								<img
-									// src="https://cdn.iconscout.com/icon/premium/png-512-thumb/webpage-not-found-1-484846.png"
 									src={logo}
-									width="129px"
+									width="75%"
 									// height="100"
-									className="d-inline-block align-top"
-									alt=""
+									className="d-inline-block align-top logo"
+									alt="MinervaBusca.com"
 								/>
 							</a>
 						</div>
-						<div className="my-auto">
+						<div className="my-auto p-md-2">
 							<div className="d-flex flex-column">
-								<div className="p-2">
+								<div className="p-0">
 									<Link to="/login">
-										<button className="btn btnIngresar">Ingresar</button>
+										<button className="btn boton-uva text-uppercase">Ingresar</button>
 									</Link>
 								</div>
-								<div className="p-2">
+								<div className="pt-1 text-center">
 									<Link to="/registro">
 										<a className="ahrefRegistrar">o Registrarse</a>
 									</Link>

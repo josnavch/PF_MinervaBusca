@@ -1,25 +1,65 @@
 /*estilos de pantalla de registro de usuarios*/
+@import "home.scss";
+
 .centrar{
     display: flex;
     justify-content: center;
 }
 .formCard{
-    background-color: lightblue;
+    background-color: #f5f5ef;
+    border: 1px solid #efedd7;
 }
+.naranja {
+    color: $naranja;
+}
+/*form{
+    background:none !important;
+    border:none !important;
+    margin:0 !important;
+    width:100% !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}*/
 .input{
-    border-radius: 7px;
+    border-radius: 10px;
 }
-.a{
-    text-decoration: underline;
-}
+// .a{
+//     text-decoration: underline;
+// }
 // p, p a{
 //     color:black;
 // }
-.form-group{
-    margin:3px;
+.p, .p a{
+    // font-size: medium;
+    color: $uva;
 }
+// .form-group{
+//     margin:3px;
+// }
 .form-control{
-    height: 50px;
+    // height: 50px;
+    border: 1px solid $borde-crema;
+    color:$cafe!important;
+    font-size: 1.05em;
+    font-weight: $regular;
+    margin: 10px 0;
+    padding: 35px;
+}
+.form-control::placeholder{
+    color: $cafe;
+}
+.btn-warning{
+    background-color: $naranja;
+    border: none;
+    color:white;
+    font-weight: bold;
+}
+.btn-warning:hover{
+    background-color: $naranja;
+     color: white;
+     color: rgba(255, 255, 255, 1) !important;
+     box-shadow: 0 4px 16px rgb(237, 143, 33);
+     transition: all 0.2s ease;
 }
  //estilos para pantalla home del usuario
  .uno{
