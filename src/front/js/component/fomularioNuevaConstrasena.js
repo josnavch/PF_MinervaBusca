@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
+import jwt from "jwt-decode"; // import dependency
+
 import "../../styles/demo.scss";
 
-export const NuevaContrasena = props => {
+export const NuevaContrasena = () => {
+	const { store, actions } = useContext(Context);
+	const [constraNueva, setConstraNueva] = useState("");
+	const [constraVerifica, setConstraVerifica] = useState("");
+	let param = useParams();
+	const windowUrl = window.location.search;
+	const token = windowUrl.slice(1);
+
+	const CambiarContrasena = async () => {
+		event.preventDefault();
+		const user = jwt(token);
+		console.log(user.sub);
+		//validar que se cumpla el formato y ademas de que sean iguales
+		let result = await actions.ChangePassword(user.sub, constraNueva);
+		alert(result);
+	};
+	const ValidarConstrasena = () => {};
+
 	return (
 		<div className="container m-auto col-lg-4 col-md-6 col-sm-12">
 			<div className="card login-form">
@@ -20,6 +40,7 @@ export const NuevaContrasena = props => {
 									type="password"
 									className="form-control form-control-sm font-weight-bolder"
 									placeholder="Ingrese la nueva contraseña"
+									onChange={e => setConstraNueva(e.target.value)}
 									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
@@ -28,6 +49,7 @@ export const NuevaContrasena = props => {
 									type="password"
 									className="form-control form-control-sm font-weight-bolder"
 									placeholder="Ingrese nuevamente la contraseña"
+									onChange={e => setConstraVerifica(e.target.value)}
 									style={{ fontSize: "1.0rem" }}
 								/>
 							</div>
@@ -35,7 +57,7 @@ export const NuevaContrasena = props => {
 							<button
 								type="submit"
 								className="btn btn-primary btn-block"
-								onClick={event => EnviarCorreo(event)}>
+								onClick={event => CambiarContrasena(event)}>
 								Establecer nueva contrase&ntilde;a
 							</button>
 						</form>

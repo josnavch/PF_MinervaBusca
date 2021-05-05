@@ -1,3 +1,5 @@
+import { NuevaContrasena } from "../component/fomularioNuevaConstrasena";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -33,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url: "",
 				flag: false
 			},
-			estadoEnviado: false
+			estadoEnviado: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -105,7 +107,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+			ChangePassword: (email, nuevaContrasena) => {
+				let userData = {
+					email: email,
+					nuevaContrasena: nuevaContrasena
+				};
+				fetch(process.env.BACKEND_URL + "/api/changePassword", {
+					method: "POST",
+					header: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(userData)
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						if (data.status == 200) {
+							setStore({
+								estadoEnviado: data.message
+							});
+						} else {
+							setStore({
+								estadoEnviado: data.message
+							});
+						}
 
+						console.log(data);
+					})
+					.catch(error => console.log("Error loading message from backend", error));
+
+				return getStore().estadoEnviado;
+			},
 			sendRestoreEmail: email => {
 				let userData = {
 					email: email,
@@ -114,12 +145,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", {
 					method: "POST",
-					body: JSON.stringify(userData),
-					headers: { "Content-type": "application/json; charset=UTF-8" }
+					header: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(userData)
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ estadoEnviado: true }))
+					.then(data => {
+						if (data.status == 200) {
+							setStore({
+								estadoEnviado: data.message
+							});
+						} else {
+							setStore({
+								estadoEnviado: data.message
+							});
+						}
+
+						console.log(data);
+					})
 					.catch(error => console.log("Error loading message from backend", error));
+
+				return getStore().estadoEnviado;
 			}
 		}
 	};

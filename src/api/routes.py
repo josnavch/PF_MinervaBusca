@@ -7,12 +7,18 @@ from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
 import datetime
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import smtplib
+
+import random
+import string
 
 api = Blueprint('api', __name__)
 
-
-
+# create message object instance
+msg = MIMEMultipart()
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -81,45 +87,86 @@ def handle_login():
     return jsonify(data), 200
 
 
+@api.route('/changePassword', methods=['POST'])
+def handle_changePassword():
+    request_body = request.get_json() 
+    #email = request.json.get("email", None)
+    #url = request.json.get("url", None)
+    email = request_body["email"]
+    nuevaContrasena = request_body["nuevaContrasena"]
+    if not email:
+        return jsonify ({"msg":"El correo es requerido."}), 400
+
+    if not nuevaContrasena:
+        return jsonify ({"msg":"La nueva contraseña es requerida."}), 400
+
+    user = User.query.filter_by(email=email).first()    
+    
+    if not user:
+        return jsonify({"msg": "El correo ingresado es incorrecto.", 
+        "status": 401
+        }), 401
+
+    #print ("User "+ user.email)
+    expiration = datetime.timedelta(minutes = 5)
+    access_token = create_access_token(identity=user.email, expires_delta=expiration)  
+
+    user.email = email
+    user.is_active = False
+    user.password = generate_password_hash(nuevaContrasena)
+    db.session.commit()
+
+    data = {
+        "status": True,
+        "message": "Se ha registrado correctamente su nueva contraseña.", 
+    }
+
+    return jsonify (data), 200 
 
 @api.route('/sendRestoreEmail', methods=['POST'])
-
 def handle_sendRestoreEmail():
-
-    email = request.json.get("email", None)
-    url = request.json.get("url", None)
-
+    request_body = request.get_json() 
+    #email = request.json.get("email", None)
+    #url = request.json.get("url", None)
+    email = request_body["email"]
+    url = request_body["url"]
     if not email:
         return jsonify ({"msg":"Email required"}), 400
 
     user = User.query.filter_by(email=email).first()    
-    print (user)
-
+    
     if not user:
         return jsonify({"msg": "The email is not correct", 
         "status": 401
         }), 401
 
-
-    expiration = datetime.timedelta(minutes = 10)
-    access_token = create_access_token(identity=user.email, expires_delta=expiration)
-    user = User.query.filter_by(email=email).first()    
+    #print ("User "+ user.email)
 
     user.email = email
     user.is_active = False
-    user.password = generate_password_hash(randompassword)
+    user.password = generate_password_hash(randompassword())
     db.session.commit()
 
-    #rule = request.url_root
-    message = "You have been restore your password, click in the link: " + url+"/"+access_token
+    #mail body
+    msg['From'] = "minervabuscamail@gmail.com"
+    msg['To'] = email
+    msg['Subject'] = "Restablecimiento de contraseña"
+
+    message = "Usted ha restablecido su costraseña, para ingresar una nueva contraseña ingrese en el siguiente link: \n" + url+"/restablecer/token?"+access_token
+    msg.attach(MIMEText(message, 'plain'))
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
-    server.login("minervabuscamail@gmail.com","4geeks2021")
-    server.sendmail("minervabuscamail@gmail.com",email,message)
-
+    #server.login("minervabuscamail@gmail.com","4geeks2021")
+    #server.sendmail("minervabuscamail@gmail.com",email,message)
+    server.login(msg['From'], "4geeks2021")
+ 
+    #send the message via the server.
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
+ 
+    server.quit()
     data = {
-        "user": user.serialize(),
-        "message": message, 
+        "status": True,
+        "message": "Se ha restablecido correctamente, revisar su correo.", 
     }
 
     return jsonify(data), 200
