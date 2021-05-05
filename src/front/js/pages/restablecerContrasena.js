@@ -10,7 +10,7 @@ export const RestablecerContrasena = () => {
 	const EnviarCorreo = async () => {
 		event.preventDefault();
 
-		let result = await actions.sendRestoreEmail(email);
+		let result = await actions.sendRestoreEmail({ email: email, url: process.env.FRONTEND_URL });
 		alert(result);
 	};
 
@@ -34,6 +34,7 @@ export const RestablecerContrasena = () => {
 									type="email"
 									className="form-control input text-center"
 									placeholder="Correo Electrónico"
+									required
 									onChange={e => setEmail(e.target.value)}
 								/>
 							</div>

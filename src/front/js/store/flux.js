@@ -114,9 +114,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				fetch(process.env.BACKEND_URL + "/api/changePassword", {
 					method: "POST",
-					header: {
-						"Content-Type": "application/json"
-					},
+					mode: "no-cors",
+					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify(userData)
 				})
 					.then(resp => resp.json())
@@ -137,38 +136,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				return getStore().estadoEnviado;
 			},
-			sendRestoreEmail: email => {
-				let userData = {
-					email: email,
-					url: process.env.FRONTEND_URL
+			sendRestoreEmail: userData => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify(userData),
+					redirect: "follow"
 				};
 
-				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", {
-					method: "POST",
-					header: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(userData)
-				})
+				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.status == 200) {
-							setStore({
-								estadoEnviado: data.message
-							});
+							return data.message;
 						} else {
-							setStore({
-								estadoEnviado: data.message
-							});
+							return data.message;
 						}
-
-						console.log(data);
 					})
-					.catch(error => console.log("Error loading message from backend", error));
-<<<<<<< HEAD
-
-				return getStore().estadoEnviado;
-=======
+					.catch(error => {
+						console.log("Error loading message from backend", error);
+						return error;
+					});
 			},
 
 			crearUser: user => {
@@ -186,7 +177,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("error", error));
->>>>>>> 54dfdf6a5edb16b1252f6dc25f9544aa8610ef01
 			}
 		}
 	};

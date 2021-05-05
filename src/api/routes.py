@@ -8,17 +8,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
 import datetime
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import smtplib
+from flask_mail import Mail, Message
 
 import random
 import string
 
+app = Flask(__name__)
+mail = Mail(app)
 api = Blueprint('api', __name__)
 
-# create message object instance
-msg = MIMEMultipart()
+#Config mail
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'minervabuscamail@gmail.com'
+app.config['MAIL_PASSWORD'] = '4geeks2021'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -89,9 +95,7 @@ def handle_login():
 
 @api.route('/changePassword', methods=['POST'])
 def handle_changePassword():
-    request_body = request.get_json() 
-    #email = request.json.get("email", None)
-    #url = request.json.get("url", None)
+
     email = request_body["email"]
     nuevaContrasena = request_body["nuevaContrasena"]
     if not email:
@@ -124,12 +128,9 @@ def handle_changePassword():
     return jsonify (data), 200 
 
 @api.route('/sendRestoreEmail', methods=['POST'])
-def handle_sendRestoreEmail():
-    request_body = request.get_json() 
-    #email = request.json.get("email", None)
-    #url = request.json.get("url", None)
-    email = request_body["email"]
-    url = request_body["url"]
+def handle_sendEmail():
+    email = request.json.get("email", None)
+    url = request.json.get("url", None)
     if not email:
         return jsonify ({"msg":"Email required"}), 400
 
@@ -147,26 +148,14 @@ def handle_sendRestoreEmail():
     user.password = generate_password_hash(randompassword())
     db.session.commit()
 
-    #mail body
-    msg['From'] = "minervabuscamail@gmail.com"
-    msg['To'] = email
-    msg['Subject'] = "Restablecimiento de contraseña"
+    msg = Message('Restablecimiento de contraseña', sender = 'minervabuscamail@gmail.com', recipients = email)
+    msg.body = "Usted ha restablecido su costraseña, para ingresar una nueva contraseña ingrese en el siguiente link: \n" + url+"/restablecer/token?"+access_token
+    mail.send(msg)
 
-    message = "Usted ha restablecido su costraseña, para ingresar una nueva contraseña ingrese en el siguiente link: \n" + url+"/restablecer/token?"+access_token
-    msg.attach(MIMEText(message, 'plain'))
-    server = smtplib.SMTP("smtp.gmail.com",587)
-    server.starttls()
-    #server.login("minervabuscamail@gmail.com","4geeks2021")
-    #server.sendmail("minervabuscamail@gmail.com",email,message)
-    server.login(msg['From'], "4geeks2021")
- 
-    #send the message via the server.
-    server.sendmail(msg['From'], msg['To'], msg.as_string())
- 
-    server.quit()
     data = {
-        "status": True,
+        "status": 200,
         "message": "Se ha restablecido correctamente, revisar su correo.", 
+
     }
 
     return jsonify(data), 200
