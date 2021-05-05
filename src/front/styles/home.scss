@@ -358,6 +358,8 @@ a:hover {
     margin-bottom:3px!important;
 }
 
+// media query para estilos en pantallas pequeñas
+
 @media only screen and(max-width: 575.98px) {
   .boton-uva {
     font-size: 0.9em;
@@ -404,4 +406,23 @@ a:hover {
     .fs-6 {
     font-size: 1.3em;
     }
+}
+
+// estilos para cartilla
+
+.portada {
+    background-color: LightSlateGray;
+    border-radius: 15px;
+    width: 277px;
+    height: 379px;
+}
+
+.portada-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-repeat: no-repeat!important;
+    background-position: center center!important;
+    background-size: cover!important;
 }
