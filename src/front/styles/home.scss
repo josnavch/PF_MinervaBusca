@@ -12,6 +12,7 @@ $crema-f-bg: #f5f5ef; // fondo de forms
 $gris-bg:#ebebeb; // fondo cards home user logged (casa)
 $crema-amarillo:#f5f5e1; // fondo de carruseles
 $borde-crema:#efedd7; // borde para forms
+$gris-azul:#3d3d4d;
 
 $light:100;
 $regular:400;
@@ -115,7 +116,12 @@ a:hover {
     margin: 15px 0px;
 }
 
-.boton-naranja2 {
+.boton-naranja:hover {
+    background-color: $uva;
+    color: white;
+}
+
+.caja-naranja {
     background-color: $naranja;
     color: white;
     font-size: 0.9em;
@@ -123,10 +129,10 @@ a:hover {
     border-radius: 10px;
     margin: 15px 0px;
 }
-
-.boton-naranja:hover {
-    background-color: $uva;
-    color: white;
+.caja-crema {
+    border-radius: 20px;
+    background-color: $crema-amarillo;
+    color: $cafe;
 }
 
 // colores
@@ -433,4 +439,9 @@ a:hover {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+.cartilla {
+    color: $gris-azul;
+    background: rgba(254, 255, 254, 0.7)
 }
