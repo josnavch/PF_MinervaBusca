@@ -8,7 +8,30 @@ const Cartilla = () => {
 				<div className="col-sm-12 p-0 col-md-4 border border-primary">
 					<div className="portada portada-img" style={{ backgroundImage: `url(${orwell})` }} />
 				</div>
-				<div className="col-sm-12 col-md-8 border border-danger">2</div>
+				<div className="col-sm-12 col-md-8 border border-danger">
+					<h4>Título:</h4>
+					<h5>Autor:</h5>
+					<h5>Año:</h5>
+					<p className="bold">Sinopsis:</p>
+					<p>
+						Now that we know who you are, I know who I am. Im not a mistake! It all makes sense! In a comic,
+						you know how you can tell who the arch-villains going to be? Hes the exact opposite of the hero.
+						And most times theyre friends, like you and me! I shouldve known way back when... You know why,
+						David? Because of the kids. They called me Mr Glass.
+					</p>
+					<div className="d-flex boton-naranja2">
+						<div className="bold">
+							<i className="far fa-heart fa-1x mr-1" />
+							Agregar a mis libros
+						</div>
+						<div className="form-check">
+							<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+							<label className="form-check-label">Público</label>
+							<input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+							<label className="form-check-label">Privado</label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
