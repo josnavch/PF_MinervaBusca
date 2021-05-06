@@ -1,11 +1,11 @@
 import React from "react";
-import Cartilla from "../component/cartilla";
+import Cartilla2 from "../component/cartilla2";
 
 const Catalogo = () => {
 	return (
 		<div className="m-auto container">
 			<div>
-				<Cartilla />
+				<Cartilla2 />
 			</div>
 		</div>
 	);

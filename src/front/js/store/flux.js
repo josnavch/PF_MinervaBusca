@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			
+
 			user: {
 				email: "",
 				expires: "",
@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				status: "",
 				msg: ""
 			},
+			catalogo: [],
+
 			userRestore: {
 				email: "",
 				expires: "",
@@ -126,6 +128,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("error", error));
+			},
+
+			fetchCatalogoLibros: async () => {
+				console.log("Haciendo fetch de Google Books");
+				let res = await fetch(
+					"https://www.googleapis.com/books/v1/volumes?q=Potter+inauthor:rowling&country=US&maxResults=10&callback=fetchCatalogoLibros"
+				);
+				const data = await res.json();
+				setStore({ catalogo: data.results });
 			}
 		}
 	};

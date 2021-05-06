@@ -17,7 +17,7 @@ export const Casa = () => {
 			<div className="row mb-2">
 				<div className="d-flex align-items-center col-sm p-0 gris-bg mt-2 mr-sm-0 mr-md-3">
 					<div className="col-md-5">
-						<Link to="/casa">
+						<Link to="/catalogo">
 							<p className="naranja fs-7 text-center extrabold p-0 m-0">
 								<img src={lupa} className="img-fluid" />
 							</p>
