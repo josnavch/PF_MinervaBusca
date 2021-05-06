@@ -14,7 +14,7 @@ export const Casa = () => {
 
 	return (
 		<div className="m-auto container">
-			<div className="row">
+			<div className="row mb-2">
 				<div className="d-flex align-items-center col-sm p-0 gris-bg mt-2 mr-sm-0 mr-md-3">
 					<div className="col-md-5">
 						<Link to="/casa">
