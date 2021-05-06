@@ -24,7 +24,6 @@ app.config["JWT_SECRET_KEY"] = "22Z#RFWa_B4_e&Qdh-g=quJPS$$R9AL=?"
 jwt = JWTManager(app)
 
 
-
 # database condiguration
 if os.getenv("DATABASE_URL") is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -40,6 +39,7 @@ CORS(app)
 
 # add the admin
 setup_admin(app)
+
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')

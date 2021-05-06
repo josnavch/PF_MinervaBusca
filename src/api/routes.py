@@ -6,25 +6,20 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
+import smtplib, ssl
+from email.message import EmailMessage
 import datetime
-
-from flask_mail import Mail, Message
-
 import random
 import string
 
-app = Flask(__name__)
-mail = Mail(app)
 api = Blueprint('api', __name__)
 
-#Config mail
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'minervabuscamail@gmail.com'
-app.config['MAIL_PASSWORD'] = '4geeks2021'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
+#configuraciones de correo
+port = 587  # For starttls
+smtp_server = "smtp.gmail.com"
+sender_email = "minervabuscamail@gmail.com"
+password = "4geeks2021"
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -132,33 +127,42 @@ def handle_sendEmail():
     email = request.json.get("email", None)
     url = request.json.get("url", None)
     if not email:
-        return jsonify ({"msg":"Email required"}), 400
+        return jsonify ({"msg":"El correo es requerido."}), 400
+
+    if not email:
+        return jsonify ({"msg":"El correo ingresado es incorrecto."}), 400
 
     user = User.query.filter_by(email=email).first()    
     
     if not user:
-        return jsonify({"msg": "The email is not correct", 
+        return jsonify({"msg": "El correo ingresado es incorrecto.", 
         "status": 401
         }), 401
 
-    #print ("User "+ user.email)
+    expiration = datetime.timedelta(minutes = 5)
+    access_token = create_access_token(identity=user.email, expires_delta=expiration)  
 
-    user.email = email
-    user.is_active = False
-    user.password = generate_password_hash(randompassword())
-    db.session.commit()
+    
+    bodyMessage = "Ha restablecido su costrasena, para ingresar una nueva, debe ingresar al siguiente link: \n" + url+"/restablecer/token?"+access_token
+    # message = """\
+    # Restablecimiento de contrasena
 
-    msg = Message('Restablecimiento de contraseña', sender = 'minervabuscamail@gmail.com', recipients = email)
-    msg.body = "Usted ha restablecido su costraseña, para ingresar una nueva contraseña ingrese en el siguiente link: \n" + url+"/restablecer/token?"+access_token
-    mail.send(msg)
+    # ."""+bodyMessage
+    msg = EmailMessage()
+    msg.set_content(bodyMessage)
 
-    data = {
-        "status": 200,
-        "message": "Se ha restablecido correctamente, revisar su correo.", 
-
-    }
-
-    return jsonify(data), 200
+    msg['Subject'] = 'Restablecimiento de contrasena'
+    msg['From'] = sender_email
+    msg['To'] = email
+    context = ssl.create_default_context()
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.ehlo()  # Can be omitted
+        server.starttls(context=context)
+        server.ehlo()  # Can be omitted
+        server.login(sender_email, password)
+        #server.sendmail(sender_email, receiver_email, message)
+        server.send_message(msg)
+    return "Hola"
 
 def randompassword():
   chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
@@ -177,3 +181,4 @@ def create_user():
         return jsonify({"msg:":"Registro realizado correctmente"}),200
     else:
         return jsonify({"msg:":"Este usurio ya esta registrado"}),400
+

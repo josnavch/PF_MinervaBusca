@@ -112,12 +112,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					email: email,
 					nuevaContrasena: nuevaContrasena
 				};
-				fetch(process.env.BACKEND_URL + "/api/changePassword", {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
 					method: "POST",
-					mode: "no-cors",
-					headers: { "Content-type": "application/json; charset=UTF-8" },
-					body: JSON.stringify(userData)
-				})
+					headers: myHeaders,
+					body: JSON.stringify(userData),
+					redirect: "follow"
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/changePassword", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.status == 200) {
