@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
 
 $uva:#563356;
 $naranja:#ed8f21;
@@ -14,7 +14,7 @@ $crema-amarillo:#f5f5e1; // fondo de carruseles
 $borde-crema:#efedd7; // borde para forms
 $gris-azul:#3d3d4d;
 
-$light:100;
+$light:200;
 $regular:400;
 $medium:500;
 $bold:700;
@@ -124,11 +124,16 @@ a:hover {
 .caja-naranja {
     background-color: $naranja;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 15px 40px;
     border-radius: 10px;
-    margin: 15px 0px;
+    // margin: 15px 0px;
 }
+
+.caja-naranja .form-check-input {
+    margin-left: -1.1em;
+}
+
 .caja-crema {
     border-radius: 20px;
     background-color: $crema-amarillo;
