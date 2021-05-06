@@ -12,6 +12,7 @@ $crema-f-bg: #f5f5ef; // fondo de forms
 $gris-bg:#ebebeb; // fondo cards home user logged (casa)
 $crema-amarillo:#f5f5e1; // fondo de carruseles
 $borde-crema:#efedd7; // borde para forms
+$gris-azul:#3d3d4d;
 
 $light:100;
 $regular:400;
@@ -22,7 +23,7 @@ $extra-bold: 800;
 
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-size: 1.2em!important;
+    font-size: 1.2em;
     color: $cafe;
 }
 
@@ -33,12 +34,16 @@ a:hover {
     color: $cafe;
 }
 
+.fs-6 {
+    font-size: 1.4em;
+}
+
 .fs-7 {
     font-size: 1.9em;
 }
 
 .fs-8 {
-    font-size: 2em;
+    font-size: 2.4em;
 }
 
 .fs-9 {
@@ -72,7 +77,7 @@ a:hover {
 }
 
 .lh-1em {
-    line-height: 1em;
+    line-height: 1.25em;
 }
 
 .flip-hor {
@@ -114,6 +119,20 @@ a:hover {
 .boton-naranja:hover {
     background-color: $uva;
     color: white;
+}
+
+.caja-naranja {
+    background-color: $naranja;
+    color: white;
+    font-size: 0.9em;
+    padding: 15px 40px;
+    border-radius: 10px;
+    margin: 15px 0px;
+}
+.caja-crema {
+    border-radius: 20px;
+    background-color: $crema-amarillo;
+    color: $cafe;
 }
 
 // colores
@@ -354,6 +373,8 @@ a:hover {
     margin-bottom:3px!important;
 }
 
+// media query para estilos en pantallas pequeñas
+
 @media only screen and(max-width: 575.98px) {
   .boton-uva {
     font-size: 0.9em;
@@ -366,9 +387,6 @@ a:hover {
   }
   .fs-7 {
     font-size: 1.3em;
-  }
-  .crema-f-bg {
-      background-color: #edefed;
   }
   .tarjeta{
       padding: 10px;
@@ -400,4 +418,30 @@ a:hover {
     padding: 10px;
     line-height: 1.25em;
     }
+    .fs-6 {
+    font-size: 1.3em;
+    }
+}
+
+// estilos para cartilla
+
+.portada {
+    background-color: LightSlateGray;
+    border-radius: 15px;
+    width: 277px!important;
+    height: 379px!important;
+}
+
+.portada-img {
+    //position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.cartilla {
+    color: $gris-azul;
+    background: rgba(254, 255, 254, 0.7)
 }

@@ -8,6 +8,7 @@ import { Home } from "./pages/home";
 import injectContext from "./store/appContext";
 import Nosotros from "./pages/nosotros";
 import Contacto from "./pages/contacto";
+import Catalogo from "./pages/catalogo";
 
 import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
@@ -66,6 +67,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/casa">
 							<Casa />
+						</Route>
+						<Route exact path="/catalogo">
+							<Catalogo />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
