@@ -58,13 +58,13 @@ export const NavBar = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="mr-auto">
-							<Nav.Link className="menuLinks mr-3" href="#">
+							<Nav.Link className="menuLinks mr-3" href="/">
 								Inicio
 							</Nav.Link>
-							<Nav.Link className="menuLinks mr-3" href="#">
-								Buscar y comprar
+							<Nav.Link className="menuLinks mr-3" href="/catalogo">
+								Buscar
 							</Nav.Link>
-							<Nav.Link className="menuLinks mr-3" href="#">
+							<Nav.Link className="menuLinks mr-3" href="/mislibros">
 								Mis libros
 							</Nav.Link>
 							<Nav.Link className="menuLinks mr-3" href="#" onClick={() => logout()}>
