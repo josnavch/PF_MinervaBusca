@@ -6,17 +6,14 @@ const Cartilla = () => {
 		<div className="m-auto container">
 			{/* empieza div para search */}
 			<div className="my-3">
-				<div className="row">
-					<div className="col-md-6 p-0 input-group">
-						<input
-							type="text"
-							className="form-control caja-crema"
-							id="exampleFormControlInput1"
-							placeholder="search"
-						/>
-						<span className="input-group-text caja-crema">
-							<i className="fas fa-search fa-3x" />
-						</span>
+				<div className="row mb-5">
+					<div className="caja-crema col-md-6">
+						<div className="input-group icon-input-group flex-nowrap">
+							<input type="text" className="icon-form-control input input-field" placeholder="buscar" />
+							<button type="button" className="input-group-text">
+								<i className="fas fa-search faa-lg icon" />
+							</button>
+						</div>
 					</div>
 				</div>
 				{/* empieza div para imagen de portada */}
@@ -42,23 +39,36 @@ const Cartilla = () => {
 						<p className="bold">Sinopsis:</p>
 						<p>
 							Now that we know who you are, I know who I am. Im not a mistake! It all makes sense! In a
-							comic, you know how you can tell who the arch-villains going to be? Hes the exact opposite
-							of the hero. And most times theyre friends, like you and me! I shouldve known way back
-							when... You know why, David? Because of the kids. They called me Mr Glass.
+							fever comic, you know how you can tell who the arch-villains going to be? Hes the exact
+							opposite of the hero. And most times theyre friends, like you and me! I shouldve known way
+							back when... You know why, David? Because of the kids. They called me Mr Glass.
 						</p>
-						{/* empieza favotito publico o Privado */}
+						{/* empieza favorito publico o Privado */}
 						<div className="d-flex caja-naranja">
-							<div className="bold mr-4">
-								<i className="far fa-heart fa-1x mr-1" />
-								Agregar a mis libros
-							</div>
-							<div className="form-check mr-3">
-								<input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-								<label className="form-check-label">Público</label>
-							</div>
-							<div className="form-check">
-								<input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-								<label className="form-check-label">Privado</label>
+							<div className="row">
+								<div className="bold mr-4">
+									<i className="far fa-heart fa-1x mr-1" />
+									Agregar a mis libros
+								</div>
+
+								<div className="form-check mr-3">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										value=""
+										id="flexCheckChecked"
+									/>
+									<label className="form-check-label">Público</label>
+								</div>
+								<div className="form-check">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										value=""
+										id="flexCheckChecked"
+									/>
+									<label className="form-check-label">Privado</label>
+								</div>
 							</div>
 						</div>
 					</div>

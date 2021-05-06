@@ -129,6 +129,12 @@ a:hover {
     border-radius: 10px;
     // margin: 15px 0px;
 }
+.caja-naranja a{
+    color: white;
+}
+.caja-naranja a:hover{
+    background-color: $carmesi;
+}
 
 .caja-naranja .form-check-input {
     margin-left: -1.1em;
@@ -138,6 +144,22 @@ a:hover {
     border-radius: 20px;
     background-color: $crema-amarillo;
     color: $cafe;
+}
+.caja-crema .icon-input-group {
+    background-color: transparent;
+    color: $cafe;
+    border:none!important;
+    padding-left: 20px;
+}
+
+.caja-crema .icon-form-control::placeholder {
+    color: $cafe;
+    font-size: 1.2em;
+    font-weight: $regular;
+}
+
+.caja-crema .fa-search {
+    font-size: 3em;
 }
 
 // colores
