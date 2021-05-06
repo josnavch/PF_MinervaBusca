@@ -468,6 +468,23 @@ a:hover {
     background-size: cover;
 }
 
+
+.portadilla {
+    background-color: LightSlateGray;
+    width: 205px!important;
+    height: 293px!important;
+}
+
+.portadilla-img {
+    //position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+
 .cartilla {
     color: $gris-azul;
     background: rgba(254, 255, 254, 0.7)
