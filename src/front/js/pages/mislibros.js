@@ -17,12 +17,39 @@ const Mislibros = () => {
 					</div>
 				</div>
 			</div>
-			<div>
-				<Portadilla />
+			<h2 className="uva bold">Mis Libros</h2>
+			<div className="carrusel">
+				<div className="horizontal-scroll-wrapper">
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+				</div>
 			</div>
-			<h3>Mis Libros</h3>
-			<h3>Libros Públicos</h3>
-			<h3>Libros Privados</h3>
+			<h2 className="uva bold">Libros Públicos</h2>
+			<div className="carrusel">
+				<div className="horizontal-scroll-wrapper">
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+				</div>
+			</div>
+			<h2 className="uva bold">Libros Privados</h2>
+			<div className="carrusel">
+				<div className="horizontal-scroll-wrapper">
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+					<Portadilla />
+				</div>
+			</div>
 		</div>
 	);
 };
