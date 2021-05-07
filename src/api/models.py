@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -83,4 +83,42 @@ class SessionID(db.Model):
             "user_id": self.user_id,
             "session_token": self.session_token,
             "duedate": self.duedate
+        }
+
+
+class Catalogo(db.Model):
+    cod_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column( db.String(200), nullable=True)
+    authors = db.Column( db.String(200), nullable=True)
+    publisher = db.Column( db.String(100), nullable=True)
+    publishedDate = db.Column( db.String(16), nullable=True)
+    pageCount = db.Column( db.String(10), nullable=True)
+    printType = db.Column( db.String(20), nullable=True)
+    categories = db.Column( db.String(100), nullable=True)
+    averageRating = db.Column( db.String(10), nullable=True)
+    description = db.Column( db.Text, nullable=True)
+    smallThumbnail = db.Column( db.String(200), nullable=True)
+    thumbnail = db.Column( db.String(200), nullable=True)
+    textSnippet = db.Column( db.String(300), nullable=True)
+    
+
+    def __repr__(self):
+        return '<cod_id %r>' % self.cod_id
+
+    def serialize(self):
+        return {
+            "cod_id": self.cod_id,
+            "title": self.title,
+            "authors": self.authors,
+            "publisher": self.publisher,
+            "publishedDate": self.publishedDate,
+            "pageCount": self.pageCount,
+            "printType": self.printType,
+            "categories": self.categories,
+            "averageRating": self.averageRating,
+            "description": self.description,
+            "smallThumbnail": self.smallThumbnail,
+            "thumbnail": self.thumbnail,
+            "textSnippet": self.textSnippet
+
         }

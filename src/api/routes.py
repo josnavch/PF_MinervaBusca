@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User
+from api.models import db, User, Catalogo, MyBooks
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
@@ -13,6 +13,17 @@ import random
 import string
 
 api = Blueprint('api', __name__)
+
+
+# Handle/serialize errors like a JSON object
+@api.errorhandler(APIException)
+def handle_invalid_usage(error):
+    return jsonify(error.to_dict()), error.status_code
+
+# generate sitemap with all your endpoints
+@api.route('/')
+def sitemap():
+    return generate_sitemap(app)
 
 #configuraciones de correo
 port = 587  # For starttls
@@ -182,4 +193,15 @@ def create_user():
         return jsonify({"msg:":"Registro realizado correctmente"}),200
     else:
         return jsonify({"msg:":"Este usurio ya esta registrado"}),400
+
+
+@api.route('/addMybooks', methods=['POST'])
+def handle_add_MyBooks():
+   
+    request_body = request.get_json()
+    
+    db.session.bulk_insert_mappings(Catalogo, request_body)
+    db.session.commit()
+
+    return jsonify("MyBooks added correctly."), 200
 

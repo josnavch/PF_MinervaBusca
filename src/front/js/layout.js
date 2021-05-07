@@ -6,8 +6,6 @@ import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import Nosotros from "./pages/nosotros";
 import Contacto from "./pages/contacto";
@@ -21,7 +19,7 @@ import { Registro } from "./pages/registro";
 import { RestablecerContrasena } from "./pages/restablecerContrasena";
 import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
-import { homeUsuario } from "./pages/homeUsuario";
+import { homeUsuario, HomeUsuario } from "./pages/homeUsuario";
 import { Casa } from "./pages/casa";
 
 //create your first component
@@ -46,13 +44,7 @@ const Layout = () => {
 					{esLogueado ? <NavBar /> : <NavBarPublic />}
 					<Switch>
 						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
+							{esLogueado ? <Casa /> : <Home />}
 						</Route>
 						<Route exact path="/registro">
 							<Registro />

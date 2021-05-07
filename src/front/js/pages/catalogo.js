@@ -1,4 +1,5 @@
 import React from "react";
+import Cartilla2 from "../component/cartilla2";
 import Cartilla from "../component/cartilla";
 
 const Catalogo = () => {
@@ -18,9 +19,6 @@ const Catalogo = () => {
 				</div>
 			</div>
 			<div>
-				<Cartilla />
-				<Cartilla />
-				<Cartilla />
 				<Cartilla />
 			</div>
 		</div>
