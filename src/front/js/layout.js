@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+//include js sweetAlert
+import { Alerta, AlertaConfirmacion } from "./component/alerta";
 import { Context } from "./store/appContext";
-
 import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 

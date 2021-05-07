@@ -1,43 +1,114 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import "../../styles/demo.scss";
+import { Link, useParams, useHistory } from "react-router-dom";
+import jwt from "jwt-decode"; // import dependency
+import "../../styles/stylesRegistroHomeusuario.scss";
 
-export const NuevaContrasena = props => {
+export const NuevaContrasena = () => {
+	const { store, actions } = useContext(Context);
+	const [constraNueva, setConstraNueva] = useState("");
+	const [constraVerifica, setConstraVerifica] = useState("");
+	const [estadoValida, setEstadoValida] = useState(true);
+	let param = useParams();
+	const windowUrl = window.location.search;
+	const token = windowUrl.slice(1);
+
+	const CambiarContrasena = async () => {
+		event.preventDefault();
+		if (token != "") {
+			const user = jwt(token);
+
+			if (
+				constraNueva.length >= 6 &&
+				constraNueva.length <= 12 &&
+				constraNueva == constraVerifica &&
+				estadoValida
+			) {
+				//validar que se cumpla el formato y ademas de que sean iguales
+				let result = await actions.ChangePassword(user.sub, constraNueva);
+				alert(result.message);
+				setConstraNueva("");
+				setConstraVerifica("");
+				setTimeout(function() {
+					window.location.replace(process.env.FRONTEND_URL + "/login");
+				}, 800);
+			} else {
+				console.log(constraNueva.length + " " + constraNueva + " " + constraVerifica + " " + estadoValida);
+				alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
+			}
+		} else {
+			window.location.replace(process.env.FRONTEND_URL + "/");
+		}
+	};
+	const validarContraNueva = () => {
+		console.log(constraNueva.length);
+		if (constraNueva.length < 6 || constraNueva.length > 12) {
+			alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
+			setEstadoValida(false);
+		} else {
+			setEstadoValida(true);
+			console.log(constraNueva.length);
+		}
+	};
+	const validarContraValidar = () => {
+		if (constraVerifica.length < 6 || constraVerifica.length > 12) {
+			alert("Revisar la  contraseña, ya que  no cumple con los requisitos.");
+			setEstadoValida(false);
+		} else if (constraVerifica != constraNueva) {
+			alert("Las contraseña no coinciden");
+			setEstadoValida(false);
+		} else {
+			setEstadoValida(true);
+		}
+	};
+	const escribirNuevaContrasena = eve => {
+		setConstraNueva(eve.target.value);
+		setConstraVerifica("");
+	};
+
 	return (
-		<div className="container m-auto col-lg-4 col-md-6 col-sm-12">
-			<div className="card login-form">
-				<div className="card-body col-12 m-auto">
-					<h3 className="card-title text-center">Restablecer su contrase&ntilde;a</h3>
-
-					<div className="card-text">
+		<div className="container m-auto">
+			<div className="row justify-content-center">
+				<div className="tarjeta col-lg-6">
+					<div className="xcard-text">
+						<h3 className="titulo-formulario xcard-title xtext-center">Restablecer su contrase&ntilde;a</h3>
 						<form>
-							<div className="alert alert-warning" role="alert">
-								La contrase&ntilde;a debe contener al menos 6 caracteres.
+							<div className="form-group text-center mt-2">
+								<label htmlFor="exampleInputEmail1">
+									La contrase&ntilde;a debe contener entre 6 a 12 caracteres.
+								</label>
 							</div>
 							<div className="form-group">
 								<input
 									type="password"
-									className="form-control form-control-sm font-weight-bolder"
+									className="form-control  input text-center"
+									value={constraNueva}
 									placeholder="Ingrese la nueva contraseña"
-									style={{ fontSize: "1.0rem" }}
+									onChange={e => escribirNuevaContrasena(e)}
+									onBlur={() => validarContraNueva()}
+									style={{ fontSize: "2.0rem!important" }}
 								/>
 							</div>
-							<div className="form-group my-3">
+							<div className="form-group">
 								<input
 									type="password"
-									className="form-control form-control-sm font-weight-bolder"
+									className="form-control input text-center"
+									value={constraVerifica}
 									placeholder="Ingrese nuevamente la contraseña"
-									style={{ fontSize: "1.0rem" }}
+									onChange={e => setConstraVerifica(e.target.value)}
+									onBlur={() => validarContraValidar()}
+									style={{ fontSize: "2.0rem!important" }}
 								/>
 							</div>
-
-							<button
-								type="submit"
-								className="btn btn-primary btn-block"
-								onClick={event => EnviarCorreo(event)}>
-								Establecer nueva contrase&ntilde;a
-							</button>
+							<div className="row justify-content-center">
+								<button
+									type="submit"
+									className="btn boton-naranja xbtn-primary xbtn-block"
+									onClick={event => CambiarContrasena(event)}>
+									Establecer nueva contrase&ntilde;a
+								</button>
+							</div>
 						</form>
 					</div>
 				</div>

@@ -18,7 +18,7 @@ pipenv run upgrade
 echo "*********** Insert data fake to init **************"
 psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('angie', '$pass', 'Angie Lopez', '111111', '11111', True);"
 psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('melissa', '$pass', 'Melissa Araya', '222222', '22222', True);"
-psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('yancarlos','$pass', 'Yancarlos Retana', '333333', '333333', True);"
+psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('yancarlosrq@gmail.com','$pass', 'Yancarlos Retana', '333333', '333333', True);"
 psql -d minerva -c "INSERT into public.user(email, password, name, id_number, phone, is_active) values('jose', '$pass', 'Jose Navarrete', '444444', '444444', True);"
 
 
