@@ -16,20 +16,35 @@ export const NuevaContrasena = () => {
 
 	const CambiarContrasena = async () => {
 		event.preventDefault();
-		const user = jwt(token);
+		if (token != "") {
+			const user = jwt(token);
 
-		if (constraNueva.length >= 6 && constraNueva.length <= 12 && constraNueva == constraVerifica && estadoValida) {
-			//validar que se cumpla el formato y ademas de que sean iguales
-			let result = await actions.ChangePassword(user.sub, constraNueva);
+			if (
+				constraNueva.length >= 6 &&
+				constraNueva.length <= 12 &&
+				constraNueva == constraVerifica &&
+				estadoValida
+			) {
+				//validar que se cumpla el formato y ademas de que sean iguales
+				let result = await actions.ChangePassword(user.sub, constraNueva);
+				alert(result.message);
+				setConstraNueva("");
+				setConstraVerifica("");
+				setTimeout(function() {
+					window.location.replace(process.env.FRONTEND_URL + "/login");
+				}, 800);
+			} else {
+				console.log(constraNueva.length + " " + constraNueva + " " + constraVerifica + " " + estadoValida);
+				alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
+			}
 		} else {
-			console.log(constraNueva.length + " " + constraNueva + " " + constraVerifica + " " + estadoValida);
-			alert("Revisar las contrasenas, ya que no cumple.");
+			window.location.replace(process.env.FRONTEND_URL + "/");
 		}
 	};
 	const validarContraNueva = () => {
 		console.log(constraNueva.length);
 		if (constraNueva.length < 6 || constraNueva.length > 12) {
-			alert("Revisar las contrasenas, ya que no cumple.");
+			alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
 			setEstadoValida(false);
 		} else {
 			setEstadoValida(true);
@@ -38,10 +53,10 @@ export const NuevaContrasena = () => {
 	};
 	const validarContraValidar = () => {
 		if (constraVerifica.length < 6 || constraVerifica.length > 12) {
-			alert("Revisar las contrasenas, ya que no cumple.");
+			alert("Revisar la  contraseña, ya que  no cumple con los requisitos.");
 			setEstadoValida(false);
 		} else if (constraVerifica != constraNueva) {
-			alert("La contrasena no coinciden");
+			alert("Las contraseña no coinciden");
 			setEstadoValida(false);
 		} else {
 			setEstadoValida(true);
@@ -68,6 +83,7 @@ export const NuevaContrasena = () => {
 								<input
 									type="password"
 									className="form-control  input text-center"
+									value={constraNueva}
 									placeholder="Ingrese la nueva contraseña"
 									onChange={e => escribirNuevaContrasena(e)}
 									onBlur={() => validarContraNueva()}
@@ -78,6 +94,7 @@ export const NuevaContrasena = () => {
 								<input
 									type="password"
 									className="form-control input text-center"
+									value={constraVerifica}
 									placeholder="Ingrese nuevamente la contraseña"
 									onChange={e => setConstraVerifica(e.target.value)}
 									onBlur={() => validarContraValidar()}

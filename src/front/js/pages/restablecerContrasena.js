@@ -9,9 +9,20 @@ export const RestablecerContrasena = () => {
 
 	const EnviarCorreo = async () => {
 		event.preventDefault();
-
-		let result = await actions.sendRestoreEmail({ email: email, url: process.env.FRONTEND_URL });
-		alert(result);
+		let result = {};
+		//validar correo con expresiones regulares
+		let pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+		if (!pattern.test(email)) {
+			alert("Debe ingresar un correo valido");
+			return false;
+		} else if (email.length < 1) {
+			alert("Debe ingresar un correo");
+			return false;
+		} else {
+			result = await actions.sendRestoreEmail({ email: email, url: process.env.FRONTEND_URL });
+		}
+		setEmail("");
+		alert(result.message);
 	};
 
 	return (
@@ -32,9 +43,10 @@ export const RestablecerContrasena = () => {
 							<div className="form-group">
 								<input
 									type="email"
+									value={email}
 									className="form-control input text-center"
 									placeholder="Correo Electrónico"
-									required
+									required="required"
 									onChange={e => setEmail(e.target.value)}
 								/>
 							</div>

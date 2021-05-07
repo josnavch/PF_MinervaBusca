@@ -90,33 +90,29 @@ def handle_login():
 
 @api.route('/changePassword', methods=['POST'])
 def handle_changePassword():
+    email = request.json.get("email", None)
+    nuevaContrasena = request.json.get("nuevaContrasena", None)
 
-    email = request_body["email"]
-    nuevaContrasena = request_body["nuevaContrasena"]
     if not email:
-        return jsonify ({"msg":"El correo es requerido."}), 400
+        return jsonify ({"message":"El correo es requerido.","status": 400}), 400
 
     if not nuevaContrasena:
-        return jsonify ({"msg":"La nueva contraseña es requerida."}), 400
+        return jsonify ({"message":"La nueva contraseña es requerida.","status": 400}), 400
 
     user = User.query.filter_by(email=email).first()    
     
     if not user:
-        return jsonify({"msg": "El correo ingresado es incorrecto.", 
+        return jsonify({"message": "El correo ingresado es incorrecto.", 
         "status": 401
         }), 401
 
-    #print ("User "+ user.email)
-    expiration = datetime.timedelta(minutes = 5)
-    access_token = create_access_token(identity=user.email, expires_delta=expiration)  
-
     user.email = email
-    user.is_active = False
+    user.is_active = True
     user.password = generate_password_hash(nuevaContrasena)
     db.session.commit()
 
     data = {
-        "status": True,
+        "status": 200,
         "message": "Se ha registrado correctamente su nueva contraseña.", 
     }
 
@@ -127,15 +123,15 @@ def handle_sendEmail():
     email = request.json.get("email", None)
     url = request.json.get("url", None)
     if not email:
-        return jsonify ({"msg":"El correo es requerido."}), 400
+        return jsonify ({"message":"No se logro obtener la identidad del correo.","status": 400}), 400
 
     if not email:
-        return jsonify ({"msg":"El correo ingresado es incorrecto."}), 400
+        return jsonify ({"message":"El correo ingresado es incorrecto.","status": 400}), 400
 
     user = User.query.filter_by(email=email).first()    
     
     if not user:
-        return jsonify({"msg": "El correo ingresado es incorrecto.", 
+        return jsonify({"message": "El correo ingresado es incorrecto.", 
         "status": 401
         }), 401
 
@@ -143,7 +139,7 @@ def handle_sendEmail():
     access_token = create_access_token(identity=user.email, expires_delta=expiration)  
 
     
-    bodyMessage = "Ha restablecido su costrasena, para ingresar una nueva, debe ingresar al siguiente link: \n" + url+"/restablecer/token?"+access_token
+    bodyMessage = "Ha restablecido su costrasena, para registrar una nueva debe ingresar al siguiente link: \n" + url+"/restablecer/token?"+access_token
     # message = """\
     # Restablecimiento de contrasena
 
@@ -162,7 +158,12 @@ def handle_sendEmail():
         server.login(sender_email, password)
         #server.sendmail(sender_email, receiver_email, message)
         server.send_message(msg)
-    return "Hola"
+    data = {
+        "status": 200,
+        "message": "Se ha enviado el correo correctamente.", 
+    }
+    return jsonify(data), 200 
+
 
 def randompassword():
   chars = string.ascii_uppercase + string.ascii_lowercase + string.digits

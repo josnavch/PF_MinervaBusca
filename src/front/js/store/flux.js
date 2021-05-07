@@ -107,7 +107,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
-			ChangePassword: (email, nuevaContrasena) => {
+			ChangePassword: async (email, nuevaContrasena) => {
+				let result = {};
 				let userData = {
 					email: email,
 					nuevaContrasena: nuevaContrasena
@@ -122,29 +123,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch(process.env.BACKEND_URL + "/api/changePassword", requestOptions)
+				let resp = await fetch(process.env.BACKEND_URL + "/api/changePassword", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.status == 200) {
-							setStore({
-								estadoEnviado: data.message
-							});
+							result = data;
 						} else {
-							setStore({
-								estadoEnviado: data.message
-							});
+							result = data;
 						}
-
-						console.log(data);
 					})
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => (result.message = "Se ha generado un error con el servidor"));
 
-				return getStore().estadoEnviado;
+				return result;
 			},
-			sendRestoreEmail: userData => {
+			sendRestoreEmail: async userData => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
-
+				let response = {};
 				var requestOptions = {
 					method: "POST",
 					headers: myHeaders,
@@ -152,19 +147,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", requestOptions)
+				let result = await fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.status == 200) {
-							return data.message;
+							response = data;
 						} else {
-							return data.message;
+							response = data;
 						}
 					})
 					.catch(error => {
-						console.log("Error loading message from backend", error);
-						return error;
+						response.message = "Se ha generado un eror con el servidor";
 					});
+				return response;
 			},
 
 			crearUser: user => {
