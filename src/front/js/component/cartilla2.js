@@ -10,18 +10,6 @@ const Cartilla2 = () => {
 	const [] = useState([]);
 	const { store, actions } = useContext(Context);
 
-	function get_url_image(url) {
-		if (url) {
-			return url;
-		} else {
-			if (item.volumeInfo.imageLinks.smallThumbnail) {
-				return item.volumeInfo.imageLinks.smallThumbnail;
-			} else {
-				return Errorimage;
-			}
-		}
-	}
-
 	return (
 		<div className="m-auto container">
 			<div className="row">

@@ -19,7 +19,7 @@ const Catalogo = () => {
 				</div>
 			</div>
 			<div>
-				<Cartilla2 />
+				<Cartilla />
 			</div>
 		</div>
 	);
