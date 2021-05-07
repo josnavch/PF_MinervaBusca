@@ -1,3 +1,5 @@
+import { NuevaContrasena } from "../component/fomularioNuevaConstrasena";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -24,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url: "",
 				flag: false
 			},
-			estadoEnviado: false
+			estadoEnviado: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -96,21 +98,59 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
-
-			sendRestoreEmail: email => {
+			ChangePassword: async (email, nuevaContrasena) => {
+				let result = {};
 				let userData = {
 					email: email,
-					url: process.env.FRONTEND_URL
+					nuevaContrasena: nuevaContrasena
+				};
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify(userData),
+					redirect: "follow"
 				};
 
-				fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", {
-					method: "POST",
-					body: JSON.stringify(userData),
-					headers: { "Content-type": "application/json; charset=UTF-8" }
-				})
+				let resp = await fetch(process.env.BACKEND_URL + "/api/changePassword", requestOptions)
 					.then(resp => resp.json())
-					.then(data => setStore({ estadoEnviado: true }))
-					.catch(error => console.log("Error loading message from backend", error));
+					.then(data => {
+						if (data.status == 200) {
+							result = data;
+						} else {
+							result = data;
+						}
+					})
+					.catch(error => (result.message = "Se ha generado un error con el servidor"));
+
+				return result;
+			},
+			sendRestoreEmail: async userData => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				let response = {};
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify(userData),
+					redirect: "follow"
+				};
+
+				let result = await fetch(process.env.BACKEND_URL + "/api/sendRestoreEmail", requestOptions)
+					.then(resp => resp.json())
+					.then(data => {
+						if (data.status == 200) {
+							response = data;
+						} else {
+							response = data;
+						}
+					})
+					.catch(error => {
+						response.message = "Se ha generado un eror con el servidor";
+					});
+				return response;
 			},
 
 			crearUser: user => {
