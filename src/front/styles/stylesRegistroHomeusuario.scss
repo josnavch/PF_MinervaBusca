@@ -46,7 +46,10 @@
     padding: 35px;
 }
 .form-control::placeholder{
-    color: $cafe;
+    color: $cafe!important;
+}
+.icon-form-control::placeholder{
+    color: $cafe!important;
 }
 .btn-warning{
     background-color: $naranja;
