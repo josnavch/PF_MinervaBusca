@@ -18,7 +18,7 @@ import { Registro } from "./pages/registro";
 import { RestablecerContrasena } from "./pages/restablecerContrasena";
 import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
-import { homeUsuario } from "./pages/homeUsuario";
+import { homeUsuario, HomeUsuario } from "./pages/homeUsuario";
 import { Casa } from "./pages/casa";
 
 //create your first component
@@ -43,7 +43,7 @@ const Layout = () => {
 					{esLogueado ? <NavBar /> : <NavBarPublic />}
 					<Switch>
 						<Route exact path="/">
-							<Home />
+							{esLogueado ? <Casa /> : <Home />}
 						</Route>
 						<Route exact path="/registro">
 							<Registro />

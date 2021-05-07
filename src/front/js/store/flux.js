@@ -133,10 +133,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchCatalogoLibros: async () => {
 				console.log("Haciendo fetch de Google Books");
 				let res = await fetch(
-					"https://www.googleapis.com/books/v1/volumes?q=Potter+inauthor:rowling&country=US&maxResults=10&callback=fetchCatalogoLibros"
+					"https://www.googleapis.com/books/v1/volumes?q=Potter+inauthor:rowling&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw"
 				);
 				const data = await res.json();
-				setStore({ catalogo: data.results });
+				console.log("Data-->", data.items);
+				setStore({ catalogo: data.items });
 			}
 		}
 	};
