@@ -9,6 +9,7 @@ import injectContext from "./store/appContext";
 import Nosotros from "./pages/nosotros";
 import Contacto from "./pages/contacto";
 import Catalogo from "./pages/catalogo";
+import Mislibros from "./pages/mislibros";
 
 import { NavBar } from "./component/navbar";
 import { NavBarPublic } from "./component/nabvarPublic";
@@ -70,6 +71,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/catalogo">
 							<Catalogo />
+						</Route>
+						<Route exact path="/mislibros">
+							<Mislibros />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

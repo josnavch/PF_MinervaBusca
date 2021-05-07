@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
 
 $uva:#563356;
 $naranja:#ed8f21;
@@ -6,6 +6,7 @@ $rosa:#d986b0;
 $carmesi:#9f3154;
 $bronce:#857462;
 $cafe:#704b43;
+$white: #ffffff;
 $crema-bg: #ffffee; // fondo del header
 $crema-l-bg: #efedd6; // líneas top y bottom de header y footer
 $crema-f-bg: #f5f5ef; // fondo de forms
@@ -14,7 +15,7 @@ $crema-amarillo:#f5f5e1; // fondo de carruseles
 $borde-crema:#efedd7; // borde para forms
 $gris-azul:#3d3d4d;
 
-$light:100;
+$light:200;
 $regular:400;
 $medium:500;
 $bold:700;
@@ -124,15 +125,42 @@ a:hover {
 .caja-naranja {
     background-color: $naranja;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 15px 40px;
     border-radius: 10px;
-    margin: 15px 0px;
+    // margin: 15px 0px;
 }
+.caja-naranja a{
+    color: white;
+}
+.caja-naranja a:hover{
+    background-color: $carmesi;
+}
+
+.caja-naranja .form-check-input {
+    margin-left: -1.1em;
+}
+
 .caja-crema {
     border-radius: 20px;
     background-color: $crema-amarillo;
     color: $cafe;
+}
+.caja-crema .icon-input-group {
+    background-color: transparent;
+    color: $cafe;
+    border:none!important;
+    padding-left: 20px;
+}
+
+.caja-crema .icon-form-control::placeholder {
+    color: $cafe;
+    font-size: 1.2em;
+    font-weight: $regular;
+}
+
+.caja-crema .fa-search {
+    font-size: 3em;
 }
 
 // colores
@@ -206,6 +234,10 @@ a:hover {
 
 .cafe-bg{
     background-color: $cafe;
+}
+
+.white {
+    color:white;
 }
 
 // -- termina colores -- //
@@ -441,7 +473,73 @@ a:hover {
     background-size: cover;
 }
 
+.portadilla-caja {
+    width: 205px!important;
+    margin:10px 0 15px 10px;
+}
+.portadilla {
+    background-color: LightSlateGray;
+    width: 205px!important;
+    height: 293px!important;
+}
+
+.portadilla-img {
+    //position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.portadilla-footer {
+    color: white;
+    font-size: 0.75em;
+    width: 205px!important;
+    max-width: 205px!important;
+    padding: 3px 5px;
+}
+
 .cartilla {
     color: $gris-azul;
     background: rgba(254, 255, 254, 0.7)
+}
+
+.cartilla-caja {
+    margin:100px 0;
+}
+
+.carrusel {
+    background: $crema-amarillo;
+    border:2px solid $borde-crema;
+    border-radius: 10px;
+    padding: 30px 35px;
+    margin:30px 0;
+}
+
+body ::-webkit-scrollbar{ 
+    background-color: $bronce;
+    border-radius: 10px;
+    width: 5px;
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar-thumb{
+    background-color: $uva;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+.horizontal-scroll-wrapper {
+    display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.horizontal-scroll-wrapper > div {
+  width: 400px;
+  height: auto;
 }
