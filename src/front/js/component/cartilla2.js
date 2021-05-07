@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import Errorimage from "../../img/orwell.jpg";
+import Errorimage from "../../img/no_cover_thumb.gif";
 
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -9,6 +9,18 @@ import { Context } from "../store/appContext";
 const Cartilla2 = () => {
 	const [] = useState([]);
 	const { store, actions } = useContext(Context);
+
+	function get_url_image(url) {
+		if (url) {
+			return url;
+		} else {
+			if (item.volumeInfo.imageLinks.smallThumbnail) {
+				return item.volumeInfo.imageLinks.smallThumbnail;
+			} else {
+				return Errorimage;
+			}
+		}
+	}
 
 	return (
 		<div className="m-auto container">
@@ -28,22 +40,28 @@ const Cartilla2 = () => {
 					{() => state.actions.fetchCatalogoLibros()}
 					{store.catalogo.map(item => {
 						{
-							console.log(item);
+							console.log("URL_Image:::", item);
 						}
 						return (
 							<div className="row my-2" key={item.id}>
 								<div className="col-sm-12 p-0 col-md-4 border">
-									<div
-										className="portada portada-img"
-										style={{ backgroundImage: `url(item.thumbnail)` }}
-									/>
+									<div className="portada portada-img">
+										<div
+											className="portada portada-img mx-auto mx-md-0 mb-2 mb-md-0"
+											style={{
+												backgroundImage: `url(http://books.google.com/books/content?id=${
+													item.id
+												}&printsec=frontcover&img=1&zoom=1&source=gbs_api})`
+											}}
+										/>
+									</div>
 								</div>
 								<div className="col-sm-12 col-md-8 border cartilla">
-									<h4>Título: {item.title}</h4>
-									<h5>Autor: {item.authors}</h5>
-									<h5>Año: {item.publishedDate}</h5>
+									<h4>Título: {item.volumeInfo.title}</h4>
+									<h5>Autor: {item.volumeInfo.authors}</h5>
+									<h5>Año: {item.volumeInfo.publishedDate}</h5>
 									<p className="bold">Sinopsis:</p>
-									<p>{item.description}</p>
+									<p>{item.searchInfo.textSnippet}</p>
 									<div className="d-flex caja-naranja">
 										<div className="bold">
 											<i className="far fa-heart fa-1x mr-1" />
