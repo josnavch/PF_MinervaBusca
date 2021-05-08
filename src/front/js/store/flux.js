@@ -191,9 +191,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await res.json();
 				console.log("Data fetchSearchLibros-->", data.items);
 				setStore({ catalogo: data.items });
-            }
-            
-            
+			},
+
+			addMybook: book => {
+				console.log("Guardando un Libro en mi Biblioteca");
+				console.log("Data ==> ", book);
+
+				fetch(process.env.BACKEND_URL + "/api/addMybooks", {
+					method: "POST",
+					mode: "no-cors",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(book)
+				})
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Error loading message from backend", error));
+			}
 		}
 	};
 };

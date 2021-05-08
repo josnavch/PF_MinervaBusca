@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, Boolean
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -28,6 +28,7 @@ class User(db.Model):
 
 class MyBooks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column( db.String(100), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     is_public = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -49,6 +50,7 @@ class MyBooks(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "book_id": self.book_id,
             "user_id": self.user_id,
             "is_public": self.is_public,
             "title": self.title,
@@ -83,7 +85,7 @@ class SessionID(db.Model):
 
 class PublicBooks(db.Model):
     cod_id = db.Column(db.Integer, primary_key=True)
-    book_id = db.Column( db.Integer, db.ForeignKey('mybooks.id'))
+    book_id = db.Column( db.Integer, nullable=True)
     publicdate = db.Column( db.String(100), nullable=True)
     
     def __repr__(self):

@@ -9,6 +9,7 @@ import Errorimage from "../../img/no_cover_thumb.gif";
 export const BookDetails = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	let usuario = JSON.parse(localStorage.getItem("user"));
 
 	let index = params.id;
 
@@ -37,6 +38,42 @@ export const BookDetails = props => {
 			str = str.concat(element.type, ":", element.identifier, " | ");
 		});
 		return str;
+	};
+
+	const Guardar = e => {
+		e.preventDefault();
+		actions.addMybook({
+			book_id: store.catalogo[index].id,
+			user_id: usuario.id,
+			is_public: false,
+			title: store.catalogo[index].volumeInfo.hasOwnProperty("title")
+				? store.catalogo[index].volumeInfo.title
+				: "No se encontro información",
+			authors: store.catalogo[index].volumeInfo.hasOwnProperty("authors")
+				? bookAuthors(store.catalogo[index].volumeInfo.authors)
+				: "No se encontro información",
+			publisher: store.catalogo[index].volumeInfo.hasOwnProperty("authors")
+				? bookAuthors(store.catalogo[index].volumeInfo.authors)
+				: "No se encontro información",
+			publishedDate: store.catalogo[index].volumeInfo.hasOwnProperty("publishedDate")
+				? store.catalogo[index].volumeInfo.publishedDate
+				: "No se encontro información",
+			pageCount: store.catalogo[index].volumeInfo.hasOwnProperty("pageCount")
+				? store.catalogo[index].volumeInfo.pageCount
+				: "No se encontro información",
+			isbn: store.catalogo[index].volumeInfo.hasOwnProperty("industryIdentifiers")
+				? bookISBN(store.catalogo[index].volumeInfo.industryIdentifiers)
+				: "No se encontro información",
+			categories: store.catalogo[index].volumeInfo.hasOwnProperty("categories")
+				? bookAuthors(store.catalogo[index].volumeInfo.categories)
+				: "No se encontro información",
+			description: store.catalogo[index].volumeInfo.hasOwnProperty("description")
+				? store.catalogo[index].volumeInfo.description
+				: "No se encontro información",
+			thumbnail: getURL(store.catalogo[index].id)
+		});
+		alert("Registro exitoso!!");
+		//window.location.replace(process.env.FRONTEND_URL + "/");
 	};
 
 	return (
@@ -93,6 +130,12 @@ export const BookDetails = props => {
 									: "No se encontro información"}
 							</li>
 							<li>
+								<b>Categorias: </b>
+								{store.catalogo[index].volumeInfo.hasOwnProperty("categories")
+									? bookAuthors(store.catalogo[index].volumeInfo.categories)
+									: "No se encontro información"}
+							</li>
+							<li>
 								<b>Descripción: </b>
 								{store.catalogo[index].volumeInfo.hasOwnProperty("description")
 									? store.catalogo[index].volumeInfo.description
@@ -106,7 +149,7 @@ export const BookDetails = props => {
 						<Link to="/catalogo" className="btn btn-outline-warning btn-lg">
 							<span>Regresar al Catálago</span>
 						</Link>{" "}
-						<button type="button" className="btn btn-outline-success btn-lg">
+						<button type="button" className="btn btn-outline-success btn-lg" onClick={e => Guardar(e)}>
 							Agregar a mis Libros
 						</button>
 					</div>
