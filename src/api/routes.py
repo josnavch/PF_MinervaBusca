@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, Catalogo, MyBooks
+from api.models import db, User, MyBooks, PublicBooks, SessionID
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
@@ -11,6 +11,7 @@ from email.message import EmailMessage
 import datetime
 import random
 import string
+from datetime import date
 
 api = Blueprint('api', __name__)
 
@@ -197,11 +198,28 @@ def create_user():
 
 @api.route('/addMybooks', methods=['POST'])
 def handle_add_MyBooks():
-   
     request_body = request.get_json()
-    
-    db.session.bulk_insert_mappings(Catalogo, request_body)
+    print (request_body)
+    today = date.today()
+    fecha = today.strftime("%Y-%b-%d")
+    data = MyBooks(
+        book_id = request_body["book_id"],
+        user_id = request_body["user_id"],
+        is_public = False,
+        title = request_body["title"],
+        authors = request_body["authors"],
+        publisher = request_body["publisher"],
+        publishedDate = request_body["publishedDate"],
+        pageCount = request_body["pageCount"],
+        isbn = request_body["isbn"],
+        categories = request_body["categories"],
+        description = request_body["description"],
+        thumbnail = request_body["thumbnail"],
+        fechacompra = fecha
+    )
+
+    db.session.add(data)
     db.session.commit()
 
-    return jsonify("MyBooks added correctly."), 200
+    return jsonify("Book added correctly."), 200
 

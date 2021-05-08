@@ -178,6 +178,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await res.json();
 				console.log("Data-->", data.items);
 				setStore({ catalogo: data.items });
+			},
+
+			fetchSearchLibros: async query => {
+				console.log("Haciendo fetch de Google Books");
+				console.log("Search Books: ", query);
+				const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
+				const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+				let url = api_url.concat(query, api_url_arg);
+				let res = await fetch(url);
+
+				const data = await res.json();
+				console.log("Data fetchSearchLibros-->", data.items);
+				setStore({ catalogo: data.items });
+			},
+
+			addMybook: book => {
+				console.log("Guardando un Libro en mi Biblioteca");
+				console.log("Data ==> ", book);
+
+				fetch(process.env.BACKEND_URL + "/api/addMybooks", {
+					method: "POST",
+					mode: "no-cors",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(book)
+				})
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}
 	};
