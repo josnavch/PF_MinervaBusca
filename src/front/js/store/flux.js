@@ -178,7 +178,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await res.json();
 				console.log("Data-->", data.items);
 				setStore({ catalogo: data.items });
-			}
+			},
+
+			fetchSearchLibros: async query => {
+				console.log("Haciendo fetch de Google Books");
+				console.log("Search Books: ", query);
+				const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
+				const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+				let url = api_url.concat(query, api_url_arg);
+				let res = await fetch(url);
+
+				const data = await res.json();
+				console.log("Data fetchSearchLibros-->", data.items);
+				setStore({ catalogo: data.items });
+            }
+            
+            
 		}
 	};
 };
