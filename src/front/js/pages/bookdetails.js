@@ -51,6 +51,15 @@ export const BookDetails = props => {
 		return yyyy + "-" + mm + "-" + dd;
 	}
 
+	function mensaje() {
+		console.log("Mensaje Backend");
+		console.log(store.mensaje.message);
+		if (store.mensaje.message) {
+			alert(store.mensaje.message);
+			actions.setMensaje();
+		}
+	}
+
 	const Guardar = e => {
 		e.preventDefault();
 		var today = getToday();
@@ -164,6 +173,7 @@ export const BookDetails = props => {
 						<button type="button" className="btn btn-outline-success btn-lg" onClick={e => Guardar(e)}>
 							Agregar a mis Libros
 						</button>
+						<div>{mensaje()}</div>
 					</div>
 				</div>
 			</div>

@@ -26,7 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url: "",
 				flag: false
 			},
-			estadoEnviado: ""
+			estadoEnviado: "",
+			mensaje: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -98,6 +99,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+
+			setMensaje: () => {
+				setStore({ mensaje: [] });
+			},
+
 			ChangePassword: async (email, nuevaContrasena) => {
 				let result = {};
 				let userData = {
@@ -200,13 +206,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				fetch(process.env.BACKEND_URL + "/api/addMybooks", {
 					method: "POST",
-					//mode: "no-cors",
 					Authorization: "Bearer" + tokenLocal,
 					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify(book)
 				})
 					.then(resp => resp.json())
-					.then(result => console.log(result))
+					//.then(result => console.log(result.message))
+					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}

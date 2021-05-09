@@ -217,9 +217,18 @@ def handle_add_MyBooks():
             description = data['description'],
             fechacompra = fecha
         )
-        db.session.add(Mydata)
-        db.session.commit()
-        return jsonify({"message": f"Book {Mydata.title} has been created successfully.",  "status": 200}), 200
+
+        query = MyBooks.query.filter_by(            
+            book_id=Mydata.book_id,
+            user_id=Mydata.user_id
+        ).first()
+
+        if not query:
+            db.session.add(Mydata)
+            db.session.commit()
+            return jsonify({"message": f"El libro {Mydata.title} se ha includio en mi librería.",  "status": 200}), 200
+        else:
+            return jsonify({"message": f"El libro {Mydata.title} ya se encuentra en mi librería.",  "status": 401}), 400
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
