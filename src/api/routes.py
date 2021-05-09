@@ -69,7 +69,7 @@ def handle_login():
         return jsonify ({"msg":"Password required"}), 400
     
     user = User.query.filter_by(email=email).first()    
-    print (user)
+
 
     if not user:
         return jsonify({"msg": "The email is not correct", 
@@ -198,28 +198,30 @@ def create_user():
 
 @api.route('/addMybooks', methods=['POST'])
 def handle_add_MyBooks():
-    request_body = request.get_json()
-    print (request_body)
-    today = date.today()
-    fecha = today.strftime("%Y-%b-%d")
-    data = MyBooks(
-        book_id = request_body["book_id"],
-        user_id = request_body["user_id"],
-        is_public = False,
-        title = request_body["title"],
-        authors = request_body["authors"],
-        publisher = request_body["publisher"],
-        publishedDate = request_body["publishedDate"],
-        pageCount = request_body["pageCount"],
-        isbn = request_body["isbn"],
-        categories = request_body["categories"],
-        description = request_body["description"],
-        thumbnail = request_body["thumbnail"],
-        fechacompra = fecha
-    )
+  
+    if request.is_json:
+        data = request.get_json()
+        today = date.today()
+        fecha = today.strftime("%Y-%b-%d")
+        Mydata = MyBooks(
+            book_id = data['book_id'],
+            user_id = data['user_id'],
+            is_public = False,
+            title = data['title'],
+            authors = data['authors'],
+            publisher = data['publisher'],
+            publishedDate = data['publishedDate'],
+            pageCount = data['pageCount'],
+            isbn = data['isbn'],
+            categories = data['categories'],
+            description = data['description'],
+            fechacompra = fecha
+        )
+        db.session.add(Mydata)
+        db.session.commit()
+        return jsonify({"message": f"Book {Mydata.title} has been created successfully.",  "status": 200}), 200
+    else:
+        return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
-    db.session.add(data)
-    db.session.commit()
-
-    return jsonify("Book added correctly."), 200
+    
 
