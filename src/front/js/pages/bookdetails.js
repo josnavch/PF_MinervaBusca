@@ -40,8 +40,30 @@ export const BookDetails = props => {
 		return str;
 	};
 
+	function getToday() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //As January is 0.
+		var yyyy = today.getFullYear();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+		return yyyy + "-" + mm + "-" + dd;
+	}
+
+	function mensaje() {
+		console.log("Mensaje Backend");
+		console.log(store.mensaje.message);
+		if (store.mensaje.message) {
+			alert(store.mensaje.message);
+			actions.setMensaje();
+		}
+	}
+
 	const Guardar = e => {
 		e.preventDefault();
+		var today = getToday();
+
 		actions.addMybook({
 			book_id: store.catalogo[index].id,
 			user_id: usuario.id,
@@ -70,9 +92,8 @@ export const BookDetails = props => {
 			description: store.catalogo[index].volumeInfo.hasOwnProperty("description")
 				? store.catalogo[index].volumeInfo.description
 				: "No se encontro información",
-			thumbnail: getURL(store.catalogo[index].id)
+			fechacompra: today
 		});
-		alert("Registro exitoso!!");
 		//window.location.replace(process.env.FRONTEND_URL + "/");
 	};
 
@@ -152,6 +173,7 @@ export const BookDetails = props => {
 						<button type="button" className="btn btn-outline-success btn-lg" onClick={e => Guardar(e)}>
 							Agregar a mis Libros
 						</button>
+						<div>{mensaje()}</div>
 					</div>
 				</div>
 			</div>

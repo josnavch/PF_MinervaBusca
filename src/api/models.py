@@ -27,6 +27,7 @@ class User(db.Model):
         }
 
 class MyBooks(db.Model):
+    __tablename__ = 'mybooks'
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column( db.String(100), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -35,12 +36,11 @@ class MyBooks(db.Model):
     title = db.Column( db.String(100), nullable=True)
     authors = db.Column( db.String(200), nullable=False)
     publisher = db.Column( db.String(100), nullable=False)
-    publishedDate = db.Column( db.String(20), nullable=False)
-    pageCount = db.Column( db.String(10), nullable=False)
+    publishedDate = db.Column( db.String(50), nullable=False)
+    pageCount = db.Column( db.String(50), nullable=False)
     isbn = db.Column( db.String(200), nullable=False)
     categories = db.Column( db.String(200), nullable=False)
     description = db.Column( db.Text, nullable=False)
-    thumbnail = db.Column( db.String(200), nullable=False)
     fechacompra = db.Column( db.String(20), nullable=False)
     
 
@@ -84,6 +84,7 @@ class SessionID(db.Model):
 
 
 class PublicBooks(db.Model):
+    __tablename__ = 'publicbooks'
     cod_id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column( db.Integer, nullable=True)
     publicdate = db.Column( db.String(100), nullable=True)
