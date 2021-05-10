@@ -26,7 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				url: "",
 				flag: false
 			},
-			estadoEnviado: ""
+			estadoEnviado: "",
+			mensaje: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -98,6 +99,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+
+			setMensaje: () => {
+				setStore({ mensaje: [] });
+			},
+
 			ChangePassword: async (email, nuevaContrasena) => {
 				let result = {};
 				let userData = {
@@ -178,6 +184,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await res.json();
 				console.log("Data-->", data.items);
 				setStore({ catalogo: data.items });
+			},
+
+			fetchSearchLibros: async query => {
+				console.log("Haciendo fetch de Google Books");
+				console.log("Search Books: ", query);
+				const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
+				const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+				let url = api_url.concat(query, api_url_arg);
+				let res = await fetch(url);
+
+				const data = await res.json();
+				console.log("Data fetchSearchLibros-->", data.items);
+				setStore({ catalogo: data.items });
+			},
+
+			addMybook: book => {
+				const tokenLocal = localStorage.getItem("token");
+				console.log("Guardando un Libro en mi Biblioteca");
+				console.log("Data ==> ", JSON.stringify(book));
+
+				fetch(process.env.BACKEND_URL + "/api/addMybooks", {
+					method: "POST",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(book)
+				})
+					.then(resp => resp.json())
+					//.then(result => console.log(result.message))
+					.then(result => setStore({ mensaje: result }))
+					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}
 	};

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { Context } from "../store/appContext";
 
-const Cartilla = () => {
+export const Cartilla = () => {
 	const [] = useState([]);
 	const { store, actions } = useContext(Context);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -14,22 +14,13 @@ const Cartilla = () => {
 	const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
 	const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
 
-	const fetchSearchLibros = async () => {
-		console.log("Search Books: ", searchTerm);
-		let url = api_url.concat(searchTerm, api_url_arg);
-		let res = await fetch(url);
-		const data = await res.json();
-		console.log("Data Search Books -->", data.items);
-		setBooks(data);
-	};
-
 	const onInputChange = e => {
 		setSearchTerm(e.target.value);
 	};
 
 	const onSubmitHandler = e => {
 		e.preventDefault();
-		fetchSearchLibros();
+		actions.fetchSearchLibros(searchTerm);
 	};
 
 	const bookAuthors = authors => {
@@ -50,6 +41,13 @@ const Cartilla = () => {
 		let url = imgURL1.concat(id, imgURL2);
 		return url;
 	}
+
+	const addMybook = (data, text) => {
+		return;
+	};
+	useEffect(() => {
+		actions.fetchSearchLibros("hardcover-fiction");
+	}, []);
 
 	return (
 		<div className="m-auto container">
@@ -76,15 +74,12 @@ const Cartilla = () => {
 			</div>
 			<div className="cartilla-caja">
 				{/* empieza div para imagen de portada */}
-				{/*() => state.actions.fetchSearchLibros("Harry+Potter")*/}
-				{books.items.map((item, index) => {
+				{store.catalogo.map((item, index) => {
 					{
 						let url_img =
 							"http://books.google.com/books/content?id=" +
 							item.id +
 							"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
-						console.log("URL_Image:::", item);
-						console.log(item.hasOwnProperty("searchInfo"));
 					}
 					return (
 						<div className="row my-2" key={index}>
@@ -97,14 +92,28 @@ const Cartilla = () => {
 							{/* empieza texto de la cartilla */}
 							<div className="col-sm-12 col-md-8 xborder cartilla">
 								<h4 className="bold">
-									Título: <span className="light">{item.volumeInfo.title}</span>
+									Título:{" "}
+									<span className="light">
+										{item.volumeInfo.hasOwnProperty("title")
+											? item.volumeInfo.title
+											: "No se encontro información"}
+									</span>
 								</h4>
 								<h5 className="medium">
 									Autor:
-									<span className="light">{bookAuthors(item.volumeInfo.authors)}</span>
+									<span className="light">
+										{item.volumeInfo.hasOwnProperty("authors")
+											? bookAuthors(item.volumeInfo.authors)
+											: "No se encontro información"}
+									</span>
 								</h5>
 								<h6>
-									Año: <span className="light">{item.volumeInfo.publishedDate}</span>
+									Año:{" "}
+									<span className="light">
+										{item.volumeInfo.hasOwnProperty("publishedDate")
+											? item.volumeInfo.publishedDate
+											: "No se encontro información"}
+									</span>
 								</h6>
 								<p className="bold">Sinopsis:</p>
 								<p>
@@ -116,27 +125,18 @@ const Cartilla = () => {
 								<div className="d-flex caja-naranja">
 									<div className="row">
 										<div className="bold mr-4">
-											<i className="far fa-heart fa-1x mr-1" />
-											Agregar a mis libros
-										</div>
-
-										<div className="form-check mr-3">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="flexCheckChecked"
-											/>
-											<label className="form-check-label">Público</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="flexCheckChecked"
-											/>
-											<label className="form-check-label">Privado</label>
+											<nav className="nav">
+												<Link className="btn float-left" to={"/bookdetails/" + index}>
+													Ver Detalle.
+												</Link>
+												{"   "}
+												<button
+													className="btn far fa-heart"
+													onClick={() => addMybook(item.name, "book")}>
+													{"   "}
+													Agregar a mis libros.
+												</button>
+											</nav>
 										</div>
 									</div>
 								</div>
@@ -147,6 +147,10 @@ const Cartilla = () => {
 			</div>
 		</div>
 	);
+};
+
+Cartilla.propTypes = {
+	data: PropTypes.node.isRequired
 };
 
 export default Cartilla;

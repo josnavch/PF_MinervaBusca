@@ -21,6 +21,7 @@ import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
 import { homeUsuario, HomeUsuario } from "./pages/homeUsuario";
 import { Casa } from "./pages/casa";
+import { BookDetails } from "./pages/bookdetails";
 
 //create your first component
 const Layout = () => {
@@ -34,7 +35,7 @@ const Layout = () => {
 	if (istoken) esLogueado = true;
 	else esLogueado = false;
 
-	console.log("Token Storage: ", store.user.token);
+	console.log("Token Storage: ", istoken);
 	console.log("Logeado: ", esLogueado);
 
 	return (
@@ -76,6 +77,11 @@ const Layout = () => {
 						<Route exact path="/mislibros">
 							<Mislibros />
 						</Route>
+
+						<Route path="/bookdetails/:id">
+							<BookDetails />
+						</Route>
+
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

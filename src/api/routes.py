@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, Catalogo, MyBooks
+from api.models import db, User, MyBooks, PublicBooks, SessionID
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
@@ -11,6 +11,7 @@ from email.message import EmailMessage
 import datetime
 import random
 import string
+from datetime import date
 
 api = Blueprint('api', __name__)
 
@@ -68,7 +69,7 @@ def handle_login():
         return jsonify ({"msg":"Password required"}), 400
     
     user = User.query.filter_by(email=email).first()    
-    print (user)
+
 
     if not user:
         return jsonify({"msg": "The email is not correct", 
@@ -197,11 +198,39 @@ def create_user():
 
 @api.route('/addMybooks', methods=['POST'])
 def handle_add_MyBooks():
-   
-    request_body = request.get_json()
-    
-    db.session.bulk_insert_mappings(Catalogo, request_body)
-    db.session.commit()
+  
+    if request.is_json:
+        data = request.get_json()
+        today = date.today()
+        fecha = today.strftime("%Y-%b-%d")
+        Mydata = MyBooks(
+            book_id = data['book_id'],
+            user_id = data['user_id'],
+            is_public = False,
+            title = data['title'],
+            authors = data['authors'],
+            publisher = data['publisher'],
+            publishedDate = data['publishedDate'],
+            pageCount = data['pageCount'],
+            isbn = data['isbn'],
+            categories = data['categories'],
+            description = data['description'],
+            fechacompra = fecha
+        )
 
-    return jsonify("MyBooks added correctly."), 200
+        query = MyBooks.query.filter_by(            
+            book_id=Mydata.book_id,
+            user_id=Mydata.user_id
+        ).first()
+
+        if not query:
+            db.session.add(Mydata)
+            db.session.commit()
+            return jsonify({"message": f"El libro {Mydata.title} se ha includio en mi librería.",  "status": 200}), 200
+        else:
+            return jsonify({"message": f"El libro {Mydata.title} ya se encuentra en mi librería.",  "status": 401}), 400
+    else:
+        return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
+
+    
 
