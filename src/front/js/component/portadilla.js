@@ -1,11 +1,12 @@
 import React from "react";
 import orwell from "../../img/orwell.jpg";
+import Props from "prop-types";
 
 const Portadilla = () => {
 	return (
 		<div className="portadilla-caja">
 			<div className="p-0">
-				<div className="portadilla portadilla-img m-0" style={{ backgroundImage: `url(${orwell})` }} />
+				<div className="portadilla portadilla-img m-0" style={{ backgroundImage: props.img }} />
 			</div>
 			<div className="carmesi-bg">
 				<div className="d-flex portadilla-footer">
@@ -20,6 +21,10 @@ const Portadilla = () => {
 			</div>
 		</div>
 	);
+};
+
+Portadilla.propTypes = {
+	img: Props.string
 };
 
 export default Portadilla;

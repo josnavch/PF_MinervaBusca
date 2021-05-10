@@ -233,4 +233,12 @@ def handle_add_MyBooks():
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
     
-
+@api.route('/getMybooks/<int:id>', methods=['GET'])
+def getAllMyBooks(id):
+    query= User.query.get(id)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
