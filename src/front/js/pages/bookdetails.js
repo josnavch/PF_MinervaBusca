@@ -167,10 +167,13 @@ export const BookDetails = props => {
 				</div>
 				<div className="row">
 					<div className="col-md-12 align-self-center pt-4">
-						<Link to="/catalogo" className="btn btn-outline-warning btn-lg">
+						<Link to="/catalogo" className="boton-naranja xbtn xbtn-outline-warning bxtn-lg">
 							<span>Regresar al Catálago</span>
 						</Link>{" "}
-						<button type="button" className="btn btn-outline-success btn-lg" onClick={e => Guardar(e)}>
+						<button
+							type="button"
+							className="boton-naranja xbtn xbtn-outline-success xbtn-lg"
+							onClick={e => Guardar(e)}>
 							Agregar a mis Libros
 						</button>
 						<div>{mensaje()}</div>
