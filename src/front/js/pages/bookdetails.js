@@ -52,8 +52,6 @@ export const BookDetails = props => {
 	}
 
 	function mensaje() {
-		console.log("Mensaje Backend");
-		console.log(store.mensaje.message);
 		if (store.mensaje.message) {
 			alert(store.mensaje.message);
 			actions.setMensaje();

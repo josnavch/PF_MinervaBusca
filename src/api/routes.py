@@ -233,4 +233,28 @@ def handle_add_MyBooks():
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
     
+@api.route('/publicbook', methods=['POST'])
+def handle_publicbook():
 
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        bookid= request.json.get("bookid", None)
+        query = MyBooks.query.filter_by( 
+                user_id = userid, 
+                id = bookid 
+                
+            ).first()
+        
+        #return jsonify(query.is_public)
+        if query.is_public:
+            query.is_public = False
+            db.session.commit()
+            return jsonify({"message": f"El Libro {query.title} se ha hecho privado {query.is_public}",  "status": 200}), 200
+        
+        else:
+            query.is_public = True
+            db.session.commit()
+            return jsonify({"message": f"El Libro {query.title} se ha hecho público {query.is_public}",  "status": 200}), 200
+
+    else:
+        return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
