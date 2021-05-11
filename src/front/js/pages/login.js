@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import iconImageUrl from "../../img/rigo-baby.jpg";
 import { Redirect, Route } from "react-router";
 import { Link } from "react-router-dom";
-
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 import "../../styles/login.scss";
 import "../../styles/home.scss";
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />;
@@ -20,6 +20,10 @@ export const Login = () => {
 			email: email,
 			password: password
 		});
+
+		if (store.user.token == null || store.user.token !== "") {
+			Alerta("", store.user.msg, "error");
+		}
 	};
 
 	function handlerLogout() {
@@ -81,7 +85,7 @@ export const Login = () => {
 						{console.log("Status: ", JSON.stringify(store.user.status))}
 						{console.log("Token: ", JSON.stringify(store.user.token))}
 						{store.user.token ? (
-							alert("Login Successfully!")
+							Alerta("Ha ingresado correctamente.", "", "success")
 						) : (
 							<div className="alert label-form" role="alert">
 								{JSON.stringify(store.user.msg)}
