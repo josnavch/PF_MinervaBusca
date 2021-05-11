@@ -232,13 +232,35 @@ def handle_add_MyBooks():
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
-    
-@api.route('/getMybooks/<int:id>', methods=['GET'])
-def getAllMyBooks(id):
-    query= User.query.get(id)
+
+@api.route('/getMybooks/<int:paramid>', methods=['GET'])
+def getAllMyBooks(paramid):
+    query= User.query.get(paramid)
     if query is None:
         return("El usuario no se encontró"),400
     else:
         result= MyBooks.query.filter_by(user_id= query.id)
         lista = list(map(lambda x: x.serialize(), result))
         return jsonify(lista),200
+
+@api.route('/getMyPrivateBooks/<int:paramid>', methods=['GET'])
+def getMyPrivateBooks(paramid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, is_public = False)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
+
+@api.route('/getMyPublicBooks/<int:paramid>', methods=['GET'])
+def getMyPublicBooks(paramid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, is_public =True)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
+
+    
