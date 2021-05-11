@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import orwell from "../../img/orwell.jpg";
 import Props from "prop-types";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 const Portadilla = props => {
 	let [imagen, setImagen] = useState("");

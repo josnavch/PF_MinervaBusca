@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import Portadilla from "../component/portadilla";
 import { Context } from "../store/appContext";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import ModalHeader from "react-bootstrap/ModalHeader";
+import ModalBody from "react-bootstrap/ModalBody";
+import ModalFooter from "react-bootstrap/ModalFooter";
 
 const Mislibros = () => {
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	const { store, actions } = useContext(Context);
 	let usuario = JSON.parse(localStorage.getItem("user"));
 	useEffect(() => {
@@ -29,7 +38,11 @@ const Mislibros = () => {
 			<div className="carrusel">
 				<div className="horizontal-scroll-wrapper">
 					{store.book.map((item, index) => {
-						return <Portadilla key={index} img={item.book_id} />;
+						return (
+							<Button variant="primary" onClick={handleShow} key={index}>
+								<Portadilla img={item.book_id} />
+							</Button>
+						);
 					})}
 				</div>
 			</div>
@@ -49,6 +62,18 @@ const Mislibros = () => {
 					})}
 				</div>
 			</div>
+
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Información</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>Woohoo, youre reading this text in a modal!</Modal.Body>
+				<Modal.Footer>
+					<Button variant="primary" onClick={handleClose}>
+						Cerrar
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 };
