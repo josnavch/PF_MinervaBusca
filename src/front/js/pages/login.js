@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import iconImageUrl from "../../img/rigo-baby.jpg";
 import { Redirect, Route } from "react-router";
 import { Link } from "react-router-dom";
-
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 import "../../styles/login.scss";
 import "../../styles/home.scss";
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />;
@@ -12,14 +12,23 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [esClick, setEsClick] = useState(false);
 
-	const handlerClick = e => {
+	const handlerClick = async e => {
 		e.preventDefault();
-
-		actions.setLogin({
+		let result = await actions.setLogin({
 			email: email,
 			password: password
 		});
+
+		if (store.user.token) {
+			Alerta("", "Ha ingresado correctamente.", "success");
+		} else if (store.user.msg && store.user.status >= 400) {
+			Alerta("", store.user.msg, "warning", setEsClick(false));
+			console.log("Mensaje111: ", JSON.stringify(store.user.msg));
+		} else {
+			ValidarCampos();
+		}
 	};
 
 	function handlerLogout() {
@@ -31,6 +40,15 @@ export const Login = () => {
 	useEffect(() => {
 		actions.getToken();
 	}, []);
+
+	const ValidarCampos = () => {
+		if (email.length < 1 || email == "") {
+			Alerta("", "Debe ingresar un correo electrónico", "warning");
+		} else if (email.length < 1 || email == "") {
+			Alerta("", "Debe ingresar una contraseña", "warning");
+		}
+		return false;
+	};
 
 	return (
 		<div className="container m-auto text-center">
@@ -76,17 +94,6 @@ export const Login = () => {
 								Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
 							</button>
 						</div>
-
-						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
-						{console.log("Status: ", JSON.stringify(store.user.status))}
-						{console.log("Token: ", JSON.stringify(store.user.token))}
-						{store.user.token ? (
-							alert("Login Successfully!")
-						) : (
-							<div className="alert label-form" role="alert">
-								{JSON.stringify(store.user.msg)}
-							</div>
-						)}
 						<div>
 							<label className="xlabel-form uva">¿No tiene cuenta?</label>{" "}
 							<Link to="/registro">

@@ -63,21 +63,23 @@ def handle_login():
     password = request.json.get("password", None)
 
     if not email:
-        return jsonify ({"msg":"Email required"}), 400
+        return jsonify ({"msg":"Debe ingresar el correo electrónico.",
+        "status": 400}), 400
 
     if not password:
-        return jsonify ({"msg":"Password required"}), 400
+        return jsonify ({"msg":"Debe ingresar la contraseña.",
+        "status": 400}), 400
     
     user = User.query.filter_by(email=email).first()    
 
 
     if not user:
-        return jsonify({"msg": "The email is not correct", 
+        return jsonify({"msg": "El correo ingresado no ha sido registrado", 
         "status": 401
         }), 401
 
     if not check_password_hash(user.password, password):
-        return jsonify({"msg": "The password is not correct",
+        return jsonify({"msg": "La contraseña ingresa es incorrecta.",
         "status": 401
         }), 400
 
@@ -264,3 +266,29 @@ def getMyPublicBooks(paramid):
         return jsonify(lista),200
 
     
+    
+@api.route('/publicbook', methods=['POST'])
+def handle_publicbook():
+
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        bookid= request.json.get("bookid", None)
+        query = MyBooks.query.filter_by( 
+                user_id = userid, 
+                id = bookid 
+                
+            ).first()
+        
+        #return jsonify(query.is_public)
+        if query.is_public:
+            query.is_public = False
+            db.session.commit()
+            return jsonify({"message": f"El Libro {query.title} se ha hecho privado {query.is_public}",  "status": 200}), 200
+        
+        else:
+            query.is_public = True
+            db.session.commit()
+            return jsonify({"message": f"El Libro {query.title} se ha hecho público {query.is_public}",  "status": 200}), 200
+
+    else:
+        return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400

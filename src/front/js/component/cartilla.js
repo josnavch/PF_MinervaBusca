@@ -13,6 +13,7 @@ export const Cartilla = () => {
 	const [books, setBooks] = useState({ items: [] });
 	const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
 	const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+	let usuario = JSON.parse(localStorage.getItem("user"));
 
 	const onInputChange = e => {
 		setSearchTerm(e.target.value);
@@ -42,9 +43,73 @@ export const Cartilla = () => {
 		return url;
 	}
 
-	const addMybook = (data, text) => {
-		return;
+	function mensaje() {
+		if (store.mensaje.message) {
+			alert(store.mensaje.message);
+			actions.setMensaje();
+		}
+	}
+
+	function getToday() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //As January is 0.
+		var yyyy = today.getFullYear();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+		return yyyy + "-" + mm + "-" + dd;
+	}
+
+	const bookISBN = isbn => {
+		let str = "";
+		isbn.forEach(element => {
+			str = str.concat(element.type, ":", element.identifier, " | ");
+		});
+		return str;
 	};
+
+	const Guardar = (e, libro) => {
+		e.preventDefault();
+		var today = getToday();
+		let index = libro;
+		{
+			console.log("Index: ", libro);
+			console.log("Catalogo: ", store.catalogo);
+		}
+		actions.addMybook({
+			book_id: store.catalogo[index].id,
+			user_id: usuario.id,
+			is_public: false,
+			title: store.catalogo[index].volumeInfo.hasOwnProperty("title")
+				? store.catalogo[index].volumeInfo.title
+				: "No se encontro información",
+			authors: store.catalogo[index].volumeInfo.hasOwnProperty("authors")
+				? bookAuthors(store.catalogo[index].volumeInfo.authors)
+				: "No se encontro información",
+			publisher: store.catalogo[index].volumeInfo.hasOwnProperty("authors")
+				? bookAuthors(store.catalogo[index].volumeInfo.authors)
+				: "No se encontro información",
+			publishedDate: store.catalogo[index].volumeInfo.hasOwnProperty("publishedDate")
+				? store.catalogo[index].volumeInfo.publishedDate
+				: "No se encontro información",
+			pageCount: store.catalogo[index].volumeInfo.hasOwnProperty("pageCount")
+				? store.catalogo[index].volumeInfo.pageCount
+				: "No se encontro información",
+			isbn: store.catalogo[index].volumeInfo.hasOwnProperty("industryIdentifiers")
+				? bookISBN(store.catalogo[index].volumeInfo.industryIdentifiers)
+				: "No se encontro información",
+			categories: store.catalogo[index].volumeInfo.hasOwnProperty("categories")
+				? bookAuthors(store.catalogo[index].volumeInfo.categories)
+				: "No se encontro información",
+			description: store.catalogo[index].volumeInfo.hasOwnProperty("description")
+				? store.catalogo[index].volumeInfo.description
+				: "No se encontro información",
+			fechacompra: today
+		});
+		//window.location.replace(process.env.FRONTEND_URL + "/");
+	};
+
 	useEffect(() => {
 		actions.fetchSearchLibros("hardcover-fiction");
 	}, []);
@@ -82,7 +147,7 @@ export const Cartilla = () => {
 							"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
 					}
 					return (
-						<div className="row my-2" key={index}>
+						<div className="row cartilla-ind my-5" key={index}>
 							<div className="col-sm-12 p-0 col-md-4 xborder">
 								<div
 									className="portada portada-img mx-auto mx-md-0 mb-2 mb-md-0"
@@ -100,7 +165,7 @@ export const Cartilla = () => {
 									</span>
 								</h4>
 								<h5 className="medium">
-									Autor:
+									Autor:{" "}
 									<span className="light">
 										{item.volumeInfo.hasOwnProperty("authors")
 											? bookAuthors(item.volumeInfo.authors)
@@ -124,18 +189,17 @@ export const Cartilla = () => {
 								{/* empieza favorito publico o Privado */}
 								<div className="d-flex caja-naranja">
 									<div className="row">
-										<div className="bold mr-4">
+										<div className="mr-4">
 											<nav className="nav">
 												<Link className="btn float-left" to={"/bookdetails/" + index}>
-													Ver Detalle.
+													Ver Detalle
 												</Link>
 												{"   "}
-												<button
-													className="btn far fa-heart"
-													onClick={() => addMybook(item.name, "book")}>
+												<Link className="btn" onClick={e => Guardar(e, index)}>
 													{"   "}
-													Agregar a mis libros.
-												</button>
+													<i className="far fa-heart fa-1x mr-1" /> Agregar a mis libros
+												</Link>
+												<div>{mensaje()}</div>
 											</nav>
 										</div>
 									</div>

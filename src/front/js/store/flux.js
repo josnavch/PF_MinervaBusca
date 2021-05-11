@@ -51,11 +51,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 
 				if (tokenLocal) {
-					window.location.replace(process.env.FRONTEND_URL + "/casa");
+					setTimeout(function() {
+						//espera 8milisegundo para redireccionar
+						window.location.replace(process.env.FRONTEND_URL + "/casa");
+					}, 800);
 				}
 			},
 
-			setLogin: user => {
+			setLogin: async user => {
 				const additionalSettings = {
 					method: "POST",
 					header: {
@@ -63,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(user)
 				};
-				fetch(process.env.BACKEND_URL + "/api/login", {
+				let result = await fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -214,7 +217,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(book)
 				})
 					.then(resp => resp.json())
-					//.then(result => console.log(result.message))
 					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
@@ -256,6 +258,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ Publicbook: result });
 					})
 					.catch(error => console.log("error", error));
+
+			publicbook: book => {
+				const tokenLocal = localStorage.getItem("token");
+				console.log("Colocando un libro publico de mi Biblioteca");
+				console.log("Data ==> ", JSON.stringify(book));
+				libro = MyBooks.query.get_or_404(book.id);
+
+				fetch(process.env.BACKEND_URL + "/api/publicbook", {
+					method: "POST",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(book)
+				})
+					.then(data => {
+						console.log("--data--", data);
+						if (data.user_id) {
+							console.log("Colocando un libro publico de mi Biblioteca");
+						} else {
+							console.log("Colocando un libro privado de mi Biblioteca");
+						}
+					})
+					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}
 	};
