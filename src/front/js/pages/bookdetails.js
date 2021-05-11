@@ -99,26 +99,22 @@ export const BookDetails = props => {
 
 	return (
 		<div>
-			<div className="container">
-				<div className="row">
-					<div className="col-md-12 align-self-center pb-4 title">
-						<h2>
-							Título:{" "}
-							{store.catalogo[index].volumeInfo.hasOwnProperty("title")
-								? store.catalogo[index].volumeInfo.title
-								: "No se encontro información"}
-						</h2>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-ms align-self-center pb-2">
+			<div className="m-auto container">
+				<div className="row d-flex my-5">
+					<div className="col-md-3 xalign-self-center pb-2">
 						<img
 							src={getURL(store.catalogo[index].id)}
 							className="card-img-top"
 							onError={e => ((e.target.onerror = null), (e.target.src = Errorimage))}
 						/>
 					</div>
-					<div className="col-ms align-self-center pb-2 title">
+					<div className="col xalign-self-center pb-2 title">
+						<h2>
+							Título:{" "}
+							{store.catalogo[index].volumeInfo.hasOwnProperty("title")
+								? store.catalogo[index].volumeInfo.title
+								: "No se encontro información"}
+						</h2>
 						<ul>
 							<li>
 								<b>Author(s): </b>
@@ -163,17 +159,15 @@ export const BookDetails = props => {
 									: "No se encontro información"}
 							</li>
 						</ul>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 align-self-center pt-4">
-						<Link to="/catalogo" className="btn btn-outline-warning btn-lg">
-							<span>Regresar al Catálago</span>
-						</Link>{" "}
-						<button type="button" className="btn btn-outline-success btn-lg" onClick={e => Guardar(e)}>
-							Agregar a mis Libros
-						</button>
-						<div>{mensaje()}</div>
+						<div className="row">
+							<Link to="/catalogo" className="boton-naranja mr-1 xbtn xbtn-outline-warning bxtn-lg">
+								<span>Regresar al Catálago</span>
+							</Link>{" "}
+							<Link className="boton-naranja xbtn xbtn-outline-success xbtn-lg" onClick={e => Guardar(e)}>
+								Agregar a mis Libros
+							</Link>
+							<div>{mensaje()}</div>
+						</div>
 					</div>
 				</div>
 			</div>
