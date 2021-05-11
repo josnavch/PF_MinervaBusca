@@ -13,13 +13,22 @@ export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [esClick, setEsClick] = useState(false);
-	const handlerClick = e => {
+
+	const handlerClick = async e => {
 		e.preventDefault();
-		setEsClick(true);
-		actions.setLogin({
+		let result = await actions.setLogin({
 			email: email,
 			password: password
 		});
+
+		if (store.user.token) {
+			Alerta("", "Ha ingresado correctamente.", "success");
+		} else if (store.user.msg && store.user.status >= 400) {
+			Alerta("", store.user.msg, "warning", setEsClick(false));
+			console.log("Mensaje111: ", JSON.stringify(store.user.msg));
+		} else {
+			ValidarCampos();
+		}
 	};
 
 	function handlerLogout() {
@@ -31,6 +40,15 @@ export const Login = () => {
 	useEffect(() => {
 		actions.getToken();
 	}, []);
+
+	const ValidarCampos = () => {
+		if (email.length < 1 || email == "") {
+			Alerta("", "Debe ingresar un correo electrónico", "warning");
+		} else if (email.length < 1 || email == "") {
+			Alerta("", "Debe ingresar una contraseña", "warning");
+		}
+		return false;
+	};
 
 	return (
 		<div className="container m-auto text-center">
@@ -76,15 +94,6 @@ export const Login = () => {
 								Ingresar <i className="fa fa-arrow-right" aria-hidden="true" />
 							</button>
 						</div>
-
-						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
-						{console.log("Status: ", JSON.stringify(store.user.status))}
-						{console.log("Token: ", JSON.stringify(store.user.token))}
-						{store.user.token
-							? (Alerta("Ha ingresado correctamente.", "", "success"), setEsClick(false))
-							: store.user.msg && esClick && store.user.status >= 400
-								? (Alerta("", store.user.msg, "warning"), setEsClick(false))
-								: ""}
 						<div>
 							<label className="xlabel-form uva">¿No tiene cuenta?</label>{" "}
 							<Link to="/registro">
