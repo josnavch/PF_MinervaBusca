@@ -61,7 +61,6 @@ class MyBooks(db.Model):
             "isbn": self.isbn,
             "categories": self.categories,
             "description": self.description,
-            "thumbnail": self.thumbnail,
             "fechacompra": self.fechacompra
         }
 
