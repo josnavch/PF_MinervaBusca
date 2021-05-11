@@ -38,7 +38,7 @@ export const NavBar = () => {
 									</p>
 								</div>
 								<div>
-									<Nav.Link className="menuLinks mr-3" href="#">
+									<Nav.Link className="menuLinks mr-3" href="/mislibros">
 										Mis libros
 									</Nav.Link>
 								</div>

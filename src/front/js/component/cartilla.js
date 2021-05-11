@@ -147,7 +147,7 @@ export const Cartilla = () => {
 							"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
 					}
 					return (
-						<div className="row my-2" key={index}>
+						<div className="row cartilla-ind my-5" key={index}>
 							<div className="col-sm-12 p-0 col-md-4 xborder">
 								<div
 									className="portada portada-img mx-auto mx-md-0 mb-2 mb-md-0"
@@ -165,7 +165,7 @@ export const Cartilla = () => {
 									</span>
 								</h4>
 								<h5 className="medium">
-									Autor:
+									Autor:{" "}
 									<span className="light">
 										{item.volumeInfo.hasOwnProperty("authors")
 											? bookAuthors(item.volumeInfo.authors)
@@ -189,16 +189,16 @@ export const Cartilla = () => {
 								{/* empieza favorito publico o Privado */}
 								<div className="d-flex caja-naranja">
 									<div className="row">
-										<div className="bold mr-4">
+										<div className="mr-4">
 											<nav className="nav">
 												<Link className="btn float-left" to={"/bookdetails/" + index}>
-													Ver Detalle.
+													Ver Detalle
 												</Link>
 												{"   "}
-												<button className="btn far fa-heart" onClick={e => Guardar(e, index)}>
+												<Link className="btn" onClick={e => Guardar(e, index)}>
 													{"   "}
-													Agregar a mis libros.
-												</button>
+													<i className="far fa-heart fa-1x mr-1" /> Agregar a mis libros
+												</Link>
 												<div>{mensaje()}</div>
 											</nav>
 										</div>
