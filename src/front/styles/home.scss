@@ -35,6 +35,12 @@ a:hover {
     color: $cafe;
 }
 
+ul {
+    list-style-type:none;
+    padding: 0;
+    line-height: 1.8em;
+}
+
 .fs-6 {
     font-size: 1.4em;
 }
@@ -107,15 +113,14 @@ a:hover {
     color:white;
     text-decoration: none;
 }
-.boton-naranja, .boton-naranja > button {
+.boton-naranja {
     background-color: $naranja;
     color: white;
     font-size: 1.1em;
     font-weight: $semi-bold;
-    padding: 15px 40px!important;
+    padding: 15px 40px;
     border-radius: 10px;
-    margin: 15px 0px!important;
-    border: none!important;
+    margin: 15px 0px;
 }
 
 .boton-naranja:hover {
