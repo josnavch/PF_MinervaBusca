@@ -48,11 +48,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 
 				if (tokenLocal) {
-					window.location.replace(process.env.FRONTEND_URL + "/casa");
+					setTimeout(function() {
+						//espera 8milisegundo para redireccionar
+						window.location.replace(process.env.FRONTEND_URL + "/casa");
+					}, 800);
 				}
 			},
 
-			setLogin: user => {
+			setLogin: async user => {
 				const additionalSettings = {
 					method: "POST",
 					header: {
@@ -60,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(user)
 				};
-				fetch(process.env.BACKEND_URL + "/api/login", {
+				let result = await fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: { "Content-type": "application/json; charset=UTF-8" }

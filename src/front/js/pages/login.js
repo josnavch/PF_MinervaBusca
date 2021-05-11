@@ -12,18 +12,14 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
+	const [esClick, setEsClick] = useState(false);
 	const handlerClick = e => {
 		e.preventDefault();
-
+		setEsClick(true);
 		actions.setLogin({
 			email: email,
 			password: password
 		});
-
-		if (store.user.token == null || store.user.token !== "") {
-			Alerta("", store.user.msg, "error");
-		}
 	};
 
 	function handlerLogout() {
@@ -84,13 +80,11 @@ export const Login = () => {
 						{console.log("Mensaje: ", JSON.stringify(store.user.msg))}
 						{console.log("Status: ", JSON.stringify(store.user.status))}
 						{console.log("Token: ", JSON.stringify(store.user.token))}
-						{store.user.token ? (
-							Alerta("Ha ingresado correctamente.", "", "success")
-						) : (
-							<div className="alert label-form" role="alert">
-								{JSON.stringify(store.user.msg)}
-							</div>
-						)}
+						{store.user.token
+							? (Alerta("Ha ingresado correctamente.", "", "success"), setEsClick(false))
+							: store.user.msg && esClick && store.user.status >= 400
+								? (Alerta("", store.user.msg, "warning"), setEsClick(false))
+								: ""}
 						<div>
 							<label className="xlabel-form uva">¿No tiene cuenta?</label>{" "}
 							<Link to="/registro">
