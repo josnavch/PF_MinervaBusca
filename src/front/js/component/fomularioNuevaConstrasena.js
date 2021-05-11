@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 import jwt from "jwt-decode"; // import dependency
 import "../../styles/stylesRegistroHomeusuario.scss";
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 
 export const NuevaContrasena = () => {
 	const { store, actions } = useContext(Context);
@@ -27,15 +28,19 @@ export const NuevaContrasena = () => {
 			) {
 				//validar que se cumpla el formato y ademas de que sean iguales
 				let result = await actions.ChangePassword(user.sub, constraNueva);
-				alert(result.message);
-				setConstraNueva("");
-				setConstraVerifica("");
-				setTimeout(function() {
-					window.location.replace(process.env.FRONTEND_URL + "/login");
-				}, 800);
+				if (result.status == 200) {
+					Alerta("", "Se ha registrado correctamente la nueva contraseña ", "success");
+					setConstraNueva("");
+					setConstraVerifica("");
+					setTimeout(function() {
+						window.location.replace(process.env.FRONTEND_URL + "/login");
+					}, 800);
+				} else {
+					Alerta("", result.message, "error");
+				}
 			} else {
 				console.log(constraNueva.length + " " + constraNueva + " " + constraVerifica + " " + estadoValida);
-				alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
+				Alerta("", "La contraseña  no cumple con los requisitos.", "warning");
 			}
 		} else {
 			window.location.replace(process.env.FRONTEND_URL + "/");
@@ -44,7 +49,7 @@ export const NuevaContrasena = () => {
 	const validarContraNueva = () => {
 		console.log(constraNueva.length);
 		if (constraNueva.length < 6 || constraNueva.length > 12) {
-			alert("Revisar la contraseña, ya que  no cumple con los requisitos.");
+			Alerta("", "La contraseña  no cumple con los requisitos.", "warning");
 			setEstadoValida(false);
 		} else {
 			setEstadoValida(true);
@@ -53,10 +58,10 @@ export const NuevaContrasena = () => {
 	};
 	const validarContraValidar = () => {
 		if (constraVerifica.length < 6 || constraVerifica.length > 12) {
-			alert("Revisar la  contraseña, ya que  no cumple con los requisitos.");
+			Alerta("", "La contraseña  no cumple con los requisitos.", "warning");
 			setEstadoValida(false);
 		} else if (constraVerifica != constraNueva) {
-			alert("Las contraseña no coinciden");
+			Alerta("", "Las contraseñas no son iguales.", "warning");
 			setEstadoValida(false);
 		} else {
 			setEstadoValida(true);

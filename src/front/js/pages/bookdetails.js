@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 
 import { Context } from "../store/appContext";
 
@@ -53,7 +54,7 @@ export const BookDetails = props => {
 
 	function mensaje() {
 		if (store.mensaje.message) {
-			alert(store.mensaje.message);
+			Alerta("", store.mensaje.message, "info");
 			actions.setMensaje();
 		}
 	}

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/stylesRegistroHomeusuario.scss";
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 
 export const RestablecerContrasena = () => {
 	const { store, actions } = useContext(Context);
@@ -13,16 +14,20 @@ export const RestablecerContrasena = () => {
 		//validar correo con expresiones regulares
 		let pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
 		if (!pattern.test(email)) {
-			alert("Debe ingresar un correo valido");
+			Alerta("", "Debe ingresar un correo electronico valido.", "warning");
 			return false;
 		} else if (email.length < 1) {
-			alert("Debe ingresar un correo");
+			Alerta("", "Debe ingresar un correo electronico.", "warning");
 			return false;
 		} else {
 			result = await actions.sendRestoreEmail({ email: email, url: process.env.FRONTEND_URL });
 		}
 		setEmail("");
-		alert(result.message);
+		if (result.status == 200) {
+			Alerta("", result.message, "success");
+		} else {
+			Alerta("", result.message, "error");
+		}
 	};
 
 	return (
