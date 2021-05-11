@@ -193,9 +193,9 @@ def create_user():
     if getemail is None:
         db.session.add(user)
         db.session.commit()
-        return jsonify({"msg:":"Registro realizado correctmente"}),200
+        return jsonify({"msg":"El usuario ha sido registrado de manera satisfactoria","status": 200}),200
     else:
-        return jsonify({"msg:":"Este usurio ya esta registrado"}),400
+        return jsonify({"msg":"Parece que este usurio ya esta registrado", "status": 400}),400
 
 
 @api.route('/addMybooks', methods=['POST'])

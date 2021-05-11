@@ -30,7 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			mensaje: [],
 			book: [],
 			privatebook: [],
-			Publicbook: []
+			Publicbook: [],
+			estado: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -165,7 +166,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return response;
 			},
 
-			crearUser: user => {
+			crearUser: async user => {
+				let valor = {};
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
@@ -175,11 +177,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(user),
 					redirect: "follow"
 				};
-
-				fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
-					.then(response => response.text())
-					.then(result => console.log(result))
+				let resultado = await fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log(result.status);
+						setStore({ mensaje: result });
+						valor = result.status;
+					})
 					.catch(error => console.log("error", error));
+				return valor;
 			},
 
 			fetchCatalogoLibros: async () => {
@@ -258,7 +264,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ Publicbook: result });
 					})
 					.catch(error => console.log("error", error));
-
+			},
 			publicbook: book => {
 				const tokenLocal = localStorage.getItem("token");
 				console.log("Colocando un libro publico de mi Biblioteca");
