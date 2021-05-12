@@ -7,6 +7,7 @@ const Mislibros = () => {
 	let usuario = JSON.parse(localStorage.getItem("user"));
 	const [show, setShow] = useState(false);
 	let [imagen, setImagen] = useState("");
+	const [searchTerm, setSearchTerm] = useState("");
 
 	const handleClose = () => setShow(false);
 
@@ -17,6 +18,15 @@ const Mislibros = () => {
 		setImagen(resul);
 		console.log("datos del store ", store.Infobook);
 		setShow(true);
+	};
+
+	const onInputChange = e => {
+		setSearchTerm(e.target.value);
+	};
+
+	const onSubmitHandler = e => {
+		e.preventDefault();
+		actions.fetchSearchMisLibros(searchTerm);
 	};
 
 	useEffect(() => {
@@ -31,8 +41,14 @@ const Mislibros = () => {
 				<div className="row mb-5">
 					<div className="caja-crema col-md-6">
 						<div className="input-group icon-input-group flex-nowrap">
-							<input type="text" className="icon-form-control input input-field" placeholder="buscar" />
-							<button type="button" className="input-group-text">
+							<input
+								type="search"
+								className="icon-form-control input input-field"
+								placeholder="buscar"
+								value={searchTerm}
+								onChange={onInputChange}
+							/>
+							<button type="submit" className="input-group-text">
 								<i className="fas fa-search faa-lg icon" />
 							</button>
 						</div>

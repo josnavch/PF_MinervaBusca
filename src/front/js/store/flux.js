@@ -315,6 +315,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			fetchSearchMisLibros: async query => {
+				console.log("Haciendo Search en mis libros");
+				console.log("Search Books: ", query);
+				fetch(process.env.BACKEND_URL + "/api/searchbook", {
+					method: "DELETE",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(book)
+				})
+					.then(resp => resp.json())
+					.then(result => setStore({ mensaje: result }))
+					.catch(error => console.log("Error loading message from backend", error));
+
+				const data = await res.json();
+				console.log("Data fetchSearchLibros-->", data.items);
+				setStore({ catalogo: data.items });
 			}
 		}
 	};
