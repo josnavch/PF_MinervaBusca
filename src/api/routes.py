@@ -12,6 +12,7 @@ import datetime
 import random
 import string
 from datetime import date
+from sqlalchemy import text
 
 api = Blueprint('api', __name__)
 
@@ -324,12 +325,16 @@ def handle_deletebook():
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
-@api.route('/getMybooks/<int:paramid>/<string:bookid>', methods=['GET'])
-def handle_deletebook():
-    query= User.query.get(paramid)
-    if query is None:
-        return("El usuario no se encontró"),400
-    else:
-        result= MyBooks.query.filter_by(user_id = query.id)
-        lista = list(map(lambda x: x.serialize(), result))
+@api.route('/searchmybook', methods=['GET'])
+def handle_searchmybook():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter(MyBooks.user_id == userid).filter(MyBooks.title.like('%'+searchbook+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
         return jsonify(lista),200
+    else:
+        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+        
