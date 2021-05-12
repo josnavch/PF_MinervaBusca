@@ -321,7 +321,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Haciendo Search en mis libros");
 				console.log("Search Books: ", query);
 				fetch(process.env.BACKEND_URL + "/api/searchbook", {
-					method: "DELETE",
+					method: "GET",
 					Authorization: "Bearer" + tokenLocal,
 					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify(book)

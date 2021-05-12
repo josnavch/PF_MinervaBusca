@@ -323,3 +323,13 @@ def handle_deletebook():
 
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
+
+@api.route('/getMybooks/<int:paramid>/<string:bookid>', methods=['GET'])
+def handle_deletebook():
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id = query.id)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
