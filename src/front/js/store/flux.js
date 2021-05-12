@@ -31,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			book: [],
 			privatebook: [],
 			Publicbook: [],
+			Infobook: [],
 			estado: ""
 		},
 		actions: {
@@ -262,6 +263,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => {
 						console.log("lista de libros publicos", result);
 						setStore({ Publicbook: result });
+					})
+					.catch(error => console.log("error", error));
+			},
+			getInfoMyBook: async (id, bookid) => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+
+				let valor = await fetch(
+					process.env.BACKEND_URL + "/api/getInfoMyBook/" + id + "/" + bookid,
+					requestOptions
+				)
+					.then(response => response.json())
+					.then(result => {
+						console.log("info del libro buscado ", result);
+						setStore({ Infobook: result });
 					})
 					.catch(error => console.log("error", error));
 			},

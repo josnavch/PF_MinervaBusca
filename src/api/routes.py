@@ -265,6 +265,16 @@ def getMyPublicBooks(paramid):
         lista = list(map(lambda x: x.serialize(), result))
         return jsonify(lista),200
 
+@api.route('/getInfoMyBook/<int:paramid>/<string:bookid>', methods=['GET'])
+def getInfoMyBook(paramid, bookid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, book_id= bookid).first()
+        lista= result.serialize()
+        return jsonify(lista),200
+
     
     
 @api.route('/publicbook', methods=['POST'])

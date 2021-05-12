@@ -22,7 +22,6 @@ import { Login } from "./pages/login";
 import { homeUsuario, HomeUsuario } from "./pages/homeUsuario";
 import { Casa } from "./pages/casa";
 import { BookDetails } from "./pages/bookdetails";
-import { ModalBookInfo } from "./component/modalBookInfo";
 
 //create your first component
 const Layout = () => {
@@ -81,9 +80,6 @@ const Layout = () => {
 
 						<Route path="/bookdetails/:id">
 							<BookDetails />
-						</Route>
-						<Route path="/modalbookinfo">
-							<ModalBookInfo />
 						</Route>
 
 						<Route>
