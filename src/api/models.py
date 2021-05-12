@@ -64,36 +64,3 @@ class MyBooks(db.Model):
             "fechacompra": self.fechacompra
         }
 
-class SessionID(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    session_token = db.Column(db.String(150), unique=True, nullable=True)
-    duedate = db.Column(db.String(18), nullable=False)
-
-    def __repr__(self):
-        return '<id %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "session_token": self.session_token,
-            "duedate": self.duedate
-        }
-
-
-class PublicBooks(db.Model):
-    __tablename__ = 'publicbooks'
-    cod_id = db.Column(db.Integer, primary_key=True)
-    book_id = db.Column( db.Integer, nullable=True)
-    publicdate = db.Column( db.String(100), nullable=True)
-    
-    def __repr__(self):
-        return '<cod_id %r>' % self.cod_id
-
-    def serialize(self):
-        return {
-            "cod_id": self.cod_id,
-            "book_id": self.book_id,
-            "publicdate": self.publicdate
-        }

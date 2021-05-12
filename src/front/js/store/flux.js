@@ -227,6 +227,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+
 			getMybooks: id => {
 				var requestOptions = {
 					method: "GET",
@@ -283,11 +284,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log("error", error));
 			},
+
 			publicbook: book => {
 				const tokenLocal = localStorage.getItem("token");
 				console.log("Colocando un libro publico de mi Biblioteca");
 				console.log("Data ==> ", JSON.stringify(book));
-				libro = MyBooks.query.get_or_404(book.id);
 
 				fetch(process.env.BACKEND_URL + "/api/publicbook", {
 					method: "POST",
@@ -295,14 +296,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify(book)
 				})
-					.then(data => {
-						console.log("--data--", data);
-						if (data.user_id) {
-							console.log("Colocando un libro publico de mi Biblioteca");
-						} else {
-							console.log("Colocando un libro privado de mi Biblioteca");
-						}
-					})
+					.then(resp => resp.json())
+					.then(result => setStore({ mensaje: result }))
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			deletebook: book => {
+				const tokenLocal = localStorage.getItem("token");
+				console.log("Eliminando un libro de mi Biblioteca");
+				console.log("Data ==> ", JSON.stringify(book));
+
+				fetch(process.env.BACKEND_URL + "/api/deletebook", {
+					method: "DELETE",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(book)
+				})
+					.then(resp => resp.json())
+					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}
