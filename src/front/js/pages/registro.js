@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { Alerta, AlertaConfirmacion } from "../component/alerta";
 import "../../styles/stylesRegistroHomeusuario.scss";
+import jwt from "jwt-decode"; // import dependency
 
 export const Registro = () => {
 	const { store, actions } = useContext(Context);
@@ -15,7 +17,7 @@ export const Registro = () => {
 	let [feedback, setFeedback] = useState("");
 	let [dato, setDato] = useState("");
 
-	const Registrar = e => {
+	const Registrar = async e => {
 		e.preventDefault();
 		if (password != password2) {
 			setValid("is-invalid");
@@ -23,17 +25,27 @@ export const Registro = () => {
 			setDato("Las contraseñas no coinciden");
 		} else {
 			if (email != "" && password != "" && nombre != "" && ced != "" && tel != "") {
-				actions.crearUser({
+				let valor = await actions.crearUser({
 					email: email,
 					password: password,
 					name: nombre,
 					id_number: ced,
 					phone: tel
 				});
-				alert("Registro exitoso!!");
-				window.location.replace(process.env.FRONTEND_URL + "/");
+				if (store.mensaje.status == 400) {
+					Alerta("¡Ups!", store.mensaje.msg, "error");
+				}
+
+				if (store.mensaje.status == 200) {
+					Alerta("¡Registro exitoso!", store.mensaje.msg, "success");
+					window.location.replace(process.env.FRONTEND_URL + "/");
+				}
 			} else {
-				alert("Algunos campos están en blanco, por favor complete todos los espacios");
+				Alerta(
+					"El formulario está incompleto!",
+					"Algunos campos están en blanco, por favor complete todos los espacios",
+					"warning"
+				);
 			}
 		}
 	};

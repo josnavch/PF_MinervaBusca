@@ -27,7 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				flag: false
 			},
 			estadoEnviado: "",
-			mensaje: []
+			mensaje: [],
+			book: [],
+			privatebook: [],
+			Publicbook: [],
+			Infobook: [],
+			estado: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -162,7 +167,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return response;
 			},
 
-			crearUser: user => {
+			crearUser: async user => {
+				let valor = {};
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
@@ -172,11 +178,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(user),
 					redirect: "follow"
 				};
-
-				fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
-					.then(response => response.text())
-					.then(result => console.log(result))
+				let resultado = await fetch(process.env.BACKEND_URL + "/api/registro", requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log(result.status);
+						setStore({ mensaje: result });
+						valor = result.status;
+					})
 					.catch(error => console.log("error", error));
+				return valor;
 			},
 
 			fetchCatalogoLibros: async () => {
@@ -217,7 +227,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+			getMybooks: id => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				fetch(process.env.BACKEND_URL + "/api/getMybooks/" + id, requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log("libros del usuario", result);
+						setStore({ book: result });
+					})
+					.catch(error => console.log("error", error));
+			},
+			getMyPrivatebooks: id => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				fetch(process.env.BACKEND_URL + "/api/getMyPrivateBooks/" + id, requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log("lista de libros privados", result);
+						setStore({ privatebook: result });
+					})
+					.catch(error => console.log("error", error));
+			},
+			getMyPublicbooks: id => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				fetch(process.env.BACKEND_URL + "/api/getMyPublicBooks/" + id, requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						console.log("lista de libros publicos", result);
+						setStore({ Publicbook: result });
+					})
+					.catch(error => console.log("error", error));
+			},
+			getInfoMyBook: async (id, bookid) => {
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
 
+				let valor = await fetch(
+					process.env.BACKEND_URL + "/api/getInfoMyBook/" + id + "/" + bookid,
+					requestOptions
+				)
+					.then(response => response.json())
+					.then(result => {
+						console.log("info del libro buscado ", result);
+						setStore({ Infobook: result });
+					})
+					.catch(error => console.log("error", error));
+			},
 			publicbook: book => {
 				const tokenLocal = localStorage.getItem("token");
 				console.log("Colocando un libro publico de mi Biblioteca");

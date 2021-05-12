@@ -193,9 +193,9 @@ def create_user():
     if getemail is None:
         db.session.add(user)
         db.session.commit()
-        return jsonify({"msg:":"Registro realizado correctmente"}),200
+        return jsonify({"msg":"El usuario ha sido registrado de manera satisfactoria","status": 200}),200
     else:
-        return jsonify({"msg:":"Este usurio ya esta registrado"}),400
+        return jsonify({"msg":"Parece que este usurio ya esta registrado", "status": 400}),400
 
 
 @api.route('/addMybooks', methods=['POST'])
@@ -234,6 +234,48 @@ def handle_add_MyBooks():
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
+
+@api.route('/getMybooks/<int:paramid>', methods=['GET'])
+def getAllMyBooks(paramid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
+
+@api.route('/getMyPrivateBooks/<int:paramid>', methods=['GET'])
+def getMyPrivateBooks(paramid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, is_public = False)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
+
+@api.route('/getMyPublicBooks/<int:paramid>', methods=['GET'])
+def getMyPublicBooks(paramid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, is_public =True)
+        lista = list(map(lambda x: x.serialize(), result))
+        return jsonify(lista),200
+
+@api.route('/getInfoMyBook/<int:paramid>/<string:bookid>', methods=['GET'])
+def getInfoMyBook(paramid, bookid):
+    query= User.query.get(paramid)
+    if query is None:
+        return("El usuario no se encontró"),400
+    else:
+        result= MyBooks.query.filter_by(user_id= query.id, book_id= bookid).first()
+        lista= result.serialize()
+        return jsonify(lista),200
+
+    
     
 @api.route('/publicbook', methods=['POST'])
 def handle_publicbook():
