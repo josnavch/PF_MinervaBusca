@@ -84,20 +84,20 @@ export const Portadilla = props => {
 			</div>
 			<div className="carmesi-bg">
 				<div className="d-flex portadilla-footer">
-					<div className="mr-4">
-						<nav className="nav">
-							<Link className="btn float-left" onClick={e => Public(e, props.book)}>
-								{console.log("Label is Public: ", props.public)}
-								{props.public ? "Privado" : "Público"}
-							</Link>
-							{"   "}
-							<Link className="btn" onClick={e => Borrar(e, props.book)}>
-								{"   "}
-								<i className="fas fa-trash" />
-							</Link>
-							<div>{mensaje()}</div>
-						</nav>
+					<div>
+						<Link className="xbtn xfloat-left" onClick={e => Public(e, props.book)}>
+							{console.log("Label is Public: ", props.public)}
+							{props.public ? "Privado" : "Público"}
+						</Link>
+						{"   "}
 					</div>
+					<div className="ml-auto">
+						<Link className="xbtn" onClick={e => Borrar(e, props.book)}>
+							{"   "}
+							<i className="fas fa-trash" />
+						</Link>
+					</div>
+					<div>{mensaje()}</div>
 				</div>
 			</div>
 
