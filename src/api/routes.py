@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, MyBooks, PublicBooks, SessionID
+from api.models import db, User, MyBooks
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, create_refresh_token
@@ -241,7 +241,7 @@ def getAllMyBooks(paramid):
     if query is None:
         return("El usuario no se encontró"),400
     else:
-        result= MyBooks.query.filter_by(user_id= query.id)
+        result= MyBooks.query.filter_by(user_id = query.id)
         lista = list(map(lambda x: x.serialize(), result))
         return jsonify(lista),200
 
@@ -261,7 +261,7 @@ def getMyPublicBooks(paramid):
     if query is None:
         return("El usuario no se encontró"),400
     else:
-        result= MyBooks.query.filter_by(user_id= query.id, is_public =True)
+        result= MyBooks.query.filter_by(user_id= query.id, is_public = True)
         lista = list(map(lambda x: x.serialize(), result))
         return jsonify(lista),200
 
@@ -274,9 +274,7 @@ def getInfoMyBook(paramid, bookid):
         result= MyBooks.query.filter_by(user_id= query.id, book_id= bookid).first()
         lista= result.serialize()
         return jsonify(lista),200
-
-    
-    
+   
 @api.route('/publicbook', methods=['POST'])
 def handle_publicbook():
 
@@ -293,12 +291,35 @@ def handle_publicbook():
         if query.is_public:
             query.is_public = False
             db.session.commit()
-            return jsonify({"message": f"El Libro {query.title} se ha hecho privado {query.is_public}",  "status": 200}), 200
+            return jsonify({"message": f"El Libro {query.title} se ha hecho privado.",  "status": 200}), 200
         
         else:
             query.is_public = True
             db.session.commit()
-            return jsonify({"message": f"El Libro {query.title} se ha hecho público {query.is_public}",  "status": 200}), 200
+            return jsonify({"message": f"El Libro {query.title} se ha hecho público.",  "status": 200}), 200
+
+    else:
+        return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
+
+@api.route('/deletebook', methods=['DELETE'])
+def handle_deletebook():
+
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        bookid= request.json.get("bookid", None)
+        query = MyBooks.query.filter_by( 
+                user_id = userid, 
+                id = bookid 
+                
+            ).first()
+        
+        if query:
+            db.session.delete(query)
+            db.session.commit()
+            return jsonify({"message": f"El Libro {query.title} se ha eliminado de la biblioteca",  "status": 200}), 200
+        
+        else:
+            return jsonify({"message": f"El Libro {query.title} no se ha encontrado en la biblioteca",  "status": 201}), 200
 
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400

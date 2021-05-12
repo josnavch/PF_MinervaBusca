@@ -19,7 +19,6 @@ import { Registro } from "./pages/registro";
 import { RestablecerContrasena } from "./pages/restablecerContrasena";
 import { NuevaContrasena } from "./component/fomularioNuevaConstrasena";
 import { Login } from "./pages/login";
-import { homeUsuario, HomeUsuario } from "./pages/homeUsuario";
 import { Casa } from "./pages/casa";
 import { BookDetails } from "./pages/bookdetails";
 
@@ -58,9 +57,6 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
-						</Route>
-						<Route exact path="/homeUsuario">
-							<homeUsuario />
 						</Route>
 						<Route exact path="/nosotros">
 							<Nosotros />

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Registro } from "../pages/registro";
-import { HomeUsuario } from "../pages/homeUsuario";
 import { Link } from "react-router-dom";
 import homebooks3 from "../../img/homebooks3.jpg";
 import homebooks2 from "../../img/homebooks2.jpg";

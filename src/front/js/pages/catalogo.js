@@ -1,5 +1,4 @@
 import React from "react";
-import Cartilla2 from "../component/cartilla2";
 import Cartilla from "../component/cartilla";
 
 const Catalogo = () => {

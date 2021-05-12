@@ -1,0 +1,227 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: gitpod
+--
+
+CREATE TABLE public.alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.alembic_version OWNER TO gitpod;
+
+--
+-- Name: mybooks; Type: TABLE; Schema: public; Owner: gitpod
+--
+
+CREATE TABLE public.mybooks (
+    id integer NOT NULL,
+    book_id character varying(100),
+    user_id integer,
+    is_public boolean NOT NULL,
+    title character varying(100),
+    authors character varying(200) NOT NULL,
+    publisher character varying(100) NOT NULL,
+    "publishedDate" character varying(50) NOT NULL,
+    "pageCount" character varying(50) NOT NULL,
+    isbn character varying(200) NOT NULL,
+    categories character varying(200) NOT NULL,
+    description text NOT NULL,
+    fechacompra character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.mybooks OWNER TO gitpod;
+
+--
+-- Name: mybooks_id_seq; Type: SEQUENCE; Schema: public; Owner: gitpod
+--
+
+CREATE SEQUENCE public.mybooks_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mybooks_id_seq OWNER TO gitpod;
+
+--
+-- Name: mybooks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gitpod
+--
+
+ALTER SEQUENCE public.mybooks_id_seq OWNED BY public.mybooks.id;
+
+
+--
+-- Name: user; Type: TABLE; Schema: public; Owner: gitpod
+--
+
+CREATE TABLE public."user" (
+    id integer NOT NULL,
+    email character varying(120) NOT NULL,
+    password character varying(256) NOT NULL,
+    name character varying(120) NOT NULL,
+    id_number character varying(20) NOT NULL,
+    phone character varying(80) NOT NULL,
+    is_active boolean NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO gitpod;
+
+--
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: gitpod
+--
+
+CREATE SEQUENCE public.user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_id_seq OWNER TO gitpod;
+
+--
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gitpod
+--
+
+ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
+
+
+--
+-- Name: mybooks id; Type: DEFAULT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public.mybooks ALTER COLUMN id SET DEFAULT nextval('public.mybooks_id_seq'::regclass);
+
+
+--
+-- Name: user id; Type: DEFAULT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: gitpod
+--
+
+COPY public.alembic_version (version_num) FROM stdin;
+8327f7b8485d
+\.
+
+
+--
+-- Data for Name: mybooks; Type: TABLE DATA; Schema: public; Owner: gitpod
+--
+
+COPY public.mybooks (id, book_id, user_id, is_public, title, authors, publisher, "publishedDate", "pageCount", isbn, categories, description, fechacompra) FROM stdin;
+1	qRID-2-D_kwC	4	f	El hogar de Miss Peregrine para niños peculiares	Ransom Riggs	Ransom Riggs	2012-10-09	412	ISBN_13:9788427900745 | ISBN_10:8427900740 | 	Juvenile Fiction	El hogar de Miss Peregrine para niños peculiares es una enigmática historia sobre niños extraordinarios y monstruos oscuros; una fantasía escalofriante ilustrada con inquietantes fotografías vintage que deleitará a jóvenes y adultos. De niño, Jacob creó un vinculo muy especial con su abuelo, que le contaba extrañas historias y le enseñaba fotografías de niñas levitando y niños invisibles. Ahora, siguiendo la pista de una misteriosa carta, emprende un viaje hacia la isla remota de Gales en la que su abuelo se crió. Allí, encuentra vivos a los niños y niñas de las fotografías aunque los lugareños afi rmen que murieron hace muchos años.	2021-May-12
+2	vr7PDwAAQBAJ	4	f	La chica nueva	Daniel Silva	Daniel Silva	2020-03-04	448	ISBN_13:9788491394877 | ISBN_10:8491394877 | 	Fiction	LO QUE ESTÁ HECHO NO PUEDE DESHACERSE... En un exclusivo colegio privado suizo, el misterio envuelve la identidad de una niña de cabello negro que llega cada mañana acompañada por una escolta digna de un jefe de estado. Dicen que es hija de un empresario muy rico. En realidad su padre es el todopoderoso Jalid bin Mohamed, el ahora denostado príncipe heredero de Arabia Saudí y otrora aclamado por la comunidad internacional por su promesa de emprender reformas religiosas y sociales. Jalid es ahora objeto de duras críticas por parte de todos los gobiernos debido a su implicación en el asesinato de un periodista disidente. Y cuando su única hija es secuestrada, recurre al único hombre capaz de encontrarla antes de que sea demasiado tarde. Gabriel Allon, el legendario jefe del servicio de inteligencia israelí, ha pasado gran parte de su vida persiguiendo a terroristas. Entre ellos, a numerosos yihadistas financiados por Arabia Saudí. El príncipe Jalid se ha comprometido a romper al fin el estrecho vínculo que une a su reino con el Islam radical. Solo por ese motivo, Gabriel le considera un colaborador valioso, pese a que no se fíe de él. Juntos forjarán una alianza precaria en una guerra secreta por el control de Oriente Próximo. La vida de una niña y el trono de Arabia Saudí están en juego. Tanto Allon como Jalid se han creado numerosos enemigos. Y tienen mucho que perder. EN EL MUNDO DE LOS ESPÍAS LAS VENGANZAS TAMBIÉN PUEDEN SER PERSONALES. De Daniel Silva han dicho: "En las novelas de Silva está la realidad del mundo convulso en el que vivimos. Y mucho espectáculo, que de vez en cuando no está mal". Juan Carlos Galindo, El País "Silva deja claro que los fantasmas de la Guerra Fría y de Kim Philby, el mayor agente doble del KGB en el MI6, siguen vivos, a pesar del cambio de siglo y de virus informáticos capaces de acabar con el programa nuclear iraní. Eso sí, en lugar de un control militar en una frontera o un puente atiborrado de espías, el escenario del momento decisivo de La otra mujer es un Starbucks. Un espresso macchiato con doble de polonio, por favor". Ismael Marinero, El Mundo, sobre La otra mujer "Una novela interesante, bien trabada, con atmósferas inquietantes y escrita con pulso, y que, cimentándose y homenajeando el clásico género de la literatura de espías, aporta nuevos elementos para seguir seduciendo lectores". Juan Bolea , El Periódico de Aragón sobre La otra mujer "Perfectas las descripciones del califato del ISIS, la amenaza del terrorismo y Marruecos como exportador de hachís y yihadistas". La Razón sobre Casa de Espías	2021-May-12
+3	krMjEAAAQBAJ	4	f	Las aventuras de Sherlock Holmes	Arthur Conan Doyle	Arthur Conan Doyle	2021-02-08	No se encontro información	ISBN_13:9786078786299 | ISBN_10:6078786296 | 	Literary Criticism	Sherlock Holmes es un detective inglés de finales del siglo XIX que sobresale por su hábil uso de la observación, su inteligencia y el razonamiento deductivo para resolver los casos más difíciles. Creado en 1887 por el escritor escocés sir Arthur Conan Doyle, Holmes sigue siendo el detective de ficción más popular de la historia. En este libro se presentan siete historias que combinan la intriga, el misterio y la sospecha con los escenarios londinenses, las pipas y las deducciones entre el audaz detective y su leal colaborador Watson. Adéntrate en la lectura de Las aventuras de Sherlock Holmes para que descubras el misterio que encierra la peculiar Liga de los Pelirrojos o resuelvas la misteriosa desaparición de una novia durante su plena boda. Al final, deducirás que todo es más elemental de lo que aparenta.	2021-May-12
+5	KjvFMAEACAAJ	4	f	El hobbit	J. R. R. Tolkien	J. R. R. Tolkien	2012	309	ISBN_10:6070712714 | ISBN_13:9786070712715 | 	Fiction	Smaug parecIa profundamente dormido cuando Bilbo espiO una vez mas desde la entrada. Pero fingia estar dormido! Estaba vigilando la entrada del tunel!... Sacado de su comodo agujero-hobbit por Gandalf y una banda de enanos, Bilbo se encuentra de pronto en medio de una conspiracion que pretende apoderarse del tesoro de Smaug el Magnfico, un enorme y muy peligroso dragon... Todos los que aman esos libros para ninos que pueden ser leidos y releidos por adultos han de tomar buena nota de que una nueva estrella ha aparecido en esa constelacion.	2021-May-12
+6	geAU_jMC7UUC	4	f	The Lord of the Rings	John Ronald Reuel Tolkien	John Ronald Reuel Tolkien	2003	1137	ISBN_10:0618343997 | ISBN_13:9780618343997 | 	Fiction	Presents the epic depicting the Great War of the Ring, a struggle between good and evil in Middle Earth.	2021-May-12
+7	HN1dzQEACAAJ	4	f	Harry Potter y el Cáliz de Fuego / Harry Potter and the Goblet of Fire	J. K. Rowling	J. K. Rowling	2020-08-18	672	ISBN_10:8498389267 | ISBN_13:9788498389265 | 	Juvenile Fiction	"Harry Potter y el cáliz de fuego es la cuarta entrega de la serie fantástica de la autora británica J.K. Rowling. «Habrá tres pruebas, espaciadas en el curso escolar, que medirán a los campeones en muchos aspectos diferentes: sus habilidades mágicas, su osadía, sus dotes de deducción y, por supuesto, su capacidad para sortear el peligro.» Se va a celebrar en Hogwarts el Torneo de los Tres Magos. Solo los alumnos mayores de diecisiete años pueden participar en esta competición, pero, aun así, Harry sueña con ganarla. En Halloween, cuando el cáliz de fuego elige a los campeones, Harry se lleva una sorpresa al ver que su nombre es uno de los escogidos por el cáliz mágico. Durante el torneo deberá enfrentarse a desafíos mortales, dragones y magos tenebrosos, pero con la ayuda de Ron y Hermione, sus mejores amigos, ¡quizá logre salir con vida!" ENGLISH DESCRIPTION Harry Potter and the Goblet of Fire is the fourth volume of British author J.K. Rowling's now classic series of fantasy novels. "There will be three tests, spaced throughout the school year, that will test the champions in many different ways: their magical abilities, their daring, their deduction skills, and of course, their ability to overcome danger." The Triwizard Tournament is going to be held at Hogwarts. Only students over the age of seventeen are allowed to enter the competition, but even so, Harry dreams of winning it. On Halloween, when the Goblet of Fire chooses the champions, Harry is shocked to see that his name is one of those chosen by the Magic Goblet. During the tournament he will have to face deadly challenges, dragons, and dark wizards, but with the help of his best friends Ron and Hermione, he may just be able to get out alive!	2021-May-12
+8	Qo5vvgEACAAJ	4	f	Harry Potter 5 y la orden del Fénix	J. K. Rowling	J. K. Rowling	2011-06	896	ISBN_10:8498383625 | ISBN_13:9788498383621 | 	Children's stories	Las tediosas vacaciones de verano en casa de sus tíos todavía no han acabado y Harry se encuentra más inquieto que nunca. Apenas ha tenido noticias de Ron y Hermione, y presiente que algo extraño está sucediendo en Hogwarts. En efecto, cuando por fin comienza otro curso en el famoso colegio de magia y hechicería, sus temores se vuelven realidad. El Ministerio de Magia niega que Voldemort haya regresado y ha iniciado una campaña de desprestigio contra Harry y Dumbledore, para lo cual ha asignado a la horrible profesora Dolores Umbridge la tarea de vigilar todos sus movimientos. Así pues, además de sentirse solo e incomprendido, Harry sospecha que Voldemort puede adivinar sus pensamientos, e intuye que el temible mago trata de apoderarse de un objeto secreto que le permitiría recuperar su poder destructivo.	2021-May-12
+4	VoPXDwAAQBAJ	4	t	Sherlock Holmes	Arthur Conan Doyle	Arthur Conan Doyle	2021-02-16	500	ISBN_13:9788726338027 | ISBN_10:8726338025 | 	Fiction	El aristócrata solterón Tras una majestuosa boda, la novia desaparece durante la recepción. El adinerado Lord Simon, su nuevo esposo, no tiene la más mínima idea si su nueva esposa se encuentra viva, secuestrada o si a escapado con otro hombre a sus espaldas. La ansiedad y los nervios de perderla influirán para que Simon, desesperadamente y con el corazón en la mano, solicite la ayuda de Sherlock Holmes y su fiel compañero Watson. Se supone que una boda es un momento sumamente importante de la vida. ¿Qué habrá salido mal? ¿Qué afectó en la ceremonia para que la novia desapareciera? ¿Sigue la novia viva? Aventúrate a investigar junto con Holmes y Watson, este misterioso caso policial en donde se cuestionará el amor. Las mentiras saldrán a la luz y con la ayuda de Holmes y Watson, un esposo descubrirá una oscura verdad. Escándalo en bohemia Wilhelm Gottsreich es el rey hereditario de Bohemia, su reputación y su futura coronación peligra tras las acciones de la mujer que ama. Irene Adler es su amante, una bella cantante de Nueva jersey amenaza con hacer pública su relación e interferir con su próximo matrimonio. Wilhelm se encuentra a pocos días de contraer matrimonio con nada más y nada menos que con la joven princesa de Escandinavia y si esta información llega a ser revelada, Wilhelm podría perderlo todo. Atrévete a escuchar el sufrimiento del rey de Bohemia y como Sherlock Holmes junto con el Dr. Watson lograrán encubrir este problema real. Un caso de identidad ¿Que prefieres? ¿vivir una mentira o enfrentar una triste realidad? Mary Sutherland es una mujer Inglesa quien a perdido a su prometido, Hosmer Ángel. Ángel desaparece el día de su boda, dejando a Mary con el corazón roto y sin explicación alguna tras su desafortunada ausencia. ¿Que tan volátil pueden llegar a ser los sentimientos de un hombre, cuando existe dinero de por medio? Mary busca respuestas tras lo ocurrido, por lo que contactará a Sherlock Holmes y el Dr. Watson. La pareja de investigadores se incursará en un drama que cambiara su perspectiva ética sobre la verdad. La liga de los pelirrojos Jabez Wilson tiene el cabello mas rojizo y brillante de toda Inglaterra, o por lo menos por esto fue contratado en la liga de los pelirrojos. Una extraña fijación por la roja cabellera atrae a este prestamista pelirrojo a aplicar a una oferta de trabajo en el periódico. Una gran línea de trabajadores colorados aplican para este trabajo, sorpresivamente Wilson es el único pelirrojo escogido para este puesto. Su sueldo es considerablemente bueno y lo que se le requiere hacer es muy básico. Wilson acudirá a donde Sherlock Holmes y el Dr. Watson tras enterarse que la liga de los pelirrojos a sido disuelta sin explicación alguna. Atrévete a escuchar que ocurre en este misterioso caso, en el que Sherlock Holmes una vez mas deducirá lo inimaginable. Sir Arthur Conan Doyle fue un famoso escritor y físico escocés nacido en 1859. Sus obras de crimen y ficción catapultaron su fama a nivel global, sus textos se encuentran traducidos en una inmensa variedad de idiomas y gracias a su trabajo, una variedad de películas y series han sido producidas al público. Entre sus mayores obras se encuentran la gran variedad de cuentos policiales sobre Sherlock Holmes y cuentos de ciencia ficción sobre el profesor Challenger.	2021-May-12
+9	xeDisgEACAAJ	4	t	Harry Potter y las reliquias de la muerte	J. K. Rowling	J. K. Rowling	2015	638	ISBN_10:8498387000 | ISBN_13:9788498387001 | 	Bildungsromans, English	"La fecha crucial se acerca. Cuando cumpla los diecisiete aänos, Harry perderâa el encantamiento protector que lo mantiene a salvo. El anunciado enfrentamiento a muerte con lord Voldemort es inminente, y la casi imposible misiâon de encontrar y destruir los restantes Horrocruxes es mâas urgente que nunca. Ha llegado el momento de tomar las decisiones mâas difâiciles. Harry debe abandonar la calidez y seguridad de La Madriguera para seguir sin miedo ni vacilaciones el inexorable sendero trazado para âel. Consciente de lo mucho que estâa en juego, sâolo dentro de sâi mismo encontrarâa la fuerza que lo impulsarâa en la vertiginosa carrera hacia en destino desconocido" -- Page 4 of cover.	2021-May-12
+\.
+
+
+--
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: gitpod
+--
+
+COPY public."user" (id, email, password, name, id_number, phone, is_active) FROM stdin;
+1	angie	pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268	Angie Lopez	111111	11111	t
+2	melissa	pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268	Melissa Araya	222222	22222	t
+3	yancarlosrq@gmail.com	pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268	Yancarlos Retana	333333	333333	t
+4	jose	pbkdf2:sha256:150000$CfcFR8q8$e066d59b302092afc936a5a2e2836aefc8a255a48a699b6900c769a451bb5268	Jose Navarrete	444444	444444	t
+\.
+
+
+--
+-- Name: mybooks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gitpod
+--
+
+SELECT pg_catalog.setval('public.mybooks_id_seq', 9, true);
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gitpod
+--
+
+SELECT pg_catalog.setval('public.user_id_seq', 4, true);
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public.alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: mybooks mybooks_pkey; Type: CONSTRAINT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public.mybooks
+    ADD CONSTRAINT mybooks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user user_email_key; Type: CONSTRAINT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_email_key UNIQUE (email);
+
+
+--
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mybooks mybooks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gitpod
+--
+
+ALTER TABLE ONLY public.mybooks
+    ADD CONSTRAINT mybooks_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
