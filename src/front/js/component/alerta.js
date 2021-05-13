@@ -27,6 +27,17 @@ export const AlertaConfirmacion = (titulo, texto, tipoAlerta) => {
 	});
 };
 
+export const msgAlerta = (titulo, texto, tipoAlerta, redirectURL) => {
+	return swal({
+		title: titulo,
+		text: texto,
+		icon: tipoAlerta,
+		buttons: "Aceptar"
+	}).then(function() {
+		window.location = redirectURL;
+	});
+};
+
 /** Ejemplo donde queremos crear el elemento o llamandolos.
  * *-----------------------------------------------------
  * tipo alerta

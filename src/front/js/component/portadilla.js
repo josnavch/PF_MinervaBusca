@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalFooter from "react-bootstrap/ModalFooter";
+import { Alerta, AlertaConfirmacion, msgAlerta } from "../component/alerta";
 
 export const Portadilla = props => {
 	const { store, actions } = useContext(Context);
@@ -41,18 +42,14 @@ export const Portadilla = props => {
 
 	function mensaje() {
 		if (store.mensaje.message) {
-			alert(store.mensaje.message);
+			msgAlerta("Minervabusca", store.mensaje.message, "success", "/mislibros");
 			actions.setMensaje();
-			window.location.replace(process.env.FRONTEND_URL + "/mislibros");
 		}
 	}
 	const Public = (e, libro) => {
 		e.preventDefault();
 		let index = libro;
-		{
-			console.log("Index: ", libro);
-			console.log("Catalogo: ", store.catalogo);
-		}
+
 		actions.publicbook({
 			bookid: index,
 			userid: usuario.id
@@ -62,10 +59,7 @@ export const Portadilla = props => {
 	const Borrar = (e, libro) => {
 		e.preventDefault();
 		let index = libro;
-		{
-			console.log("Index: ", libro);
-			console.log("Catalogo: ", store.catalogo);
-		}
+
 		actions.deletebook({
 			bookid: index,
 			userid: usuario.id
@@ -86,7 +80,6 @@ export const Portadilla = props => {
 				<div className="d-flex portadilla-footer">
 					<div>
 						<Link className="xbtn xfloat-left" onClick={e => Public(e, props.book)}>
-							{console.log("Label is Public: ", props.public)}
 							{props.public ? "Privado" : "Público"}
 						</Link>
 						{"   "}

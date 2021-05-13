@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Errorimage from "../../img/no_cover_thumb.gif";
+import { Alerta, AlertaConfirmacion, msgAlerta } from "../component/alerta";
 
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -45,7 +46,7 @@ export const Cartilla = () => {
 
 	function mensaje() {
 		if (store.mensaje.message) {
-			alert(store.mensaje.message);
+			Alerta("", store.mensaje.message, "info");
 			actions.setMensaje();
 		}
 	}

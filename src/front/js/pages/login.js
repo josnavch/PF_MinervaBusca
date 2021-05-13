@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import iconImageUrl from "../../img/rigo-baby.jpg";
 import { Redirect, Route } from "react-router";
 import { Link } from "react-router-dom";
-import { Alerta, AlertaConfirmacion } from "../component/alerta";
+import { Alerta, AlertaConfirmacion, msgAlerta } from "../component/alerta";
 import "../../styles/login.scss";
 import "../../styles/home.scss";
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />;
@@ -22,10 +22,11 @@ export const Login = () => {
 		});
 
 		if (store.user.token) {
-			Alerta("", "Ha ingresado correctamente.", "success");
+			console.log(store.mensaje);
+			msgAlerta("Minervabusca", store.user.msg, "success", "/casa");
+			actions.setMensaje();
 		} else if (store.user.msg && store.user.status >= 400) {
 			Alerta("", store.user.msg, "warning", setEsClick(false));
-			console.log("Mensaje111: ", JSON.stringify(store.user.msg));
 		} else {
 			ValidarCampos();
 		}
@@ -52,8 +53,6 @@ export const Login = () => {
 
 	return (
 		<div className="container m-auto text-center">
-			{console.log(store.user.token)}
-
 			<div className="row justify-content-center xborder">
 				<div className="col-lg-6">
 					<form className="tarjeta">

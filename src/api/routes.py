@@ -12,6 +12,7 @@ import datetime
 import random
 import string
 from datetime import date
+from sqlalchemy import func
 
 api = Blueprint('api', __name__)
 
@@ -79,7 +80,7 @@ def handle_login():
         }), 401
 
     if not check_password_hash(user.password, password):
-        return jsonify({"msg": "La contraseña ingresa es incorrecta.",
+        return jsonify({"msg": "La contraseña ingresada es incorrecta.",
         "status": 401
         }), 400
 
@@ -96,7 +97,7 @@ def handle_login():
     #    "pass": generate_password_hash(password),
         "email": user.email,
         "status": 200,
-        "msg": "Login successfully"   
+        "msg": "Ha ingresado correctamente."   
         }
 
     return jsonify(data), 200
@@ -228,7 +229,7 @@ def handle_add_MyBooks():
         if not query:
             db.session.add(Mydata)
             db.session.commit()
-            return jsonify({"message": f"El libro {Mydata.title} se ha includio en mi librería.",  "status": 200}), 200
+            return jsonify({"message": f"El libro {Mydata.title} se ha incluido en mi librería.",  "status": 200}), 200
         else:
             return jsonify({"message": f"El libro {Mydata.title} ya se encuentra en mi librería.",  "status": 401}), 400
     else:
@@ -323,3 +324,45 @@ def handle_deletebook():
 
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
+
+@api.route('/searchmybook', methods=['POST'])
+def handle_searchmybook():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter(MyBooks.user_id == userid).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
+        return jsonify(lista),200
+    else:
+        return jsonify(lista),201
+       # return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+
+@api.route('/searchmybook_public', methods=['POST'])
+def handle_searchmybook_public():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter_by(user_id = userid, is_public = True ).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
+        return jsonify(lista),200
+    else:
+        return jsonify(lista),201
+        #return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+
+@api.route('/searchmybook_private', methods=['POST'])
+def handle_searchmybook_private():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter_by(user_id = userid, is_public = False ).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
+        return jsonify(lista),200
+    else:
+        return jsonify(lista),201
+        #return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200

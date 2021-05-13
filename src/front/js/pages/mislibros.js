@@ -7,6 +7,7 @@ const Mislibros = () => {
 	let usuario = JSON.parse(localStorage.getItem("user"));
 	const [show, setShow] = useState(false);
 	let [imagen, setImagen] = useState("");
+	const [searchTerm, setSearchTerm] = useState("");
 
 	const handleClose = () => setShow(false);
 
@@ -19,23 +20,52 @@ const Mislibros = () => {
 		setShow(true);
 	};
 
+	const onInputChange = e => {
+		setSearchTerm(e.target.value);
+	};
+
+	const onSubmitHandler = e => {
+		e.preventDefault();
+		actions.SearchMisLibros({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
+		actions.SearchMisLibros_public({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
+		actions.SearchMisLibros_private({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
+	};
+
 	useEffect(() => {
 		actions.getMybooks(usuario.id);
 		actions.getMyPrivatebooks(usuario.id);
 		actions.getMyPublicbooks(usuario.id);
 	}, []);
+
 	return (
 		<div className="m-auto container">
 			{/* empieza div para search */}
 			<div className="my-3">
 				<div className="row mb-5">
 					<div className="caja-crema col-md-6">
-						<div className="input-group icon-input-group flex-nowrap">
-							<input type="text" className="icon-form-control input input-field" placeholder="buscar" />
-							<button type="button" className="input-group-text">
-								<i className="fas fa-search faa-lg icon" />
-							</button>
-						</div>
+						<form onSubmit={onSubmitHandler}>
+							<div className="input-group icon-input-group flex-nowrap">
+								<input
+									type="search"
+									className="icon-form-control input input-field"
+									placeholder="buscar"
+									value={searchTerm}
+									onChange={onInputChange}
+								/>
+								<button type="submit" className="input-group-text">
+									<i className="fas fa-search faa-lg icon" />
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
