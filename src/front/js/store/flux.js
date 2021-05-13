@@ -267,6 +267,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log("error", error));
 			},
+
 			getInfoMyBook: async (id, bookid) => {
 				var requestOptions = {
 					method: "GET",
@@ -317,22 +318,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			fetchSearchMisLibros: async query => {
+			SearchMisLibros: mysearch => {
+				const tokenLocal = localStorage.getItem("token");
 				console.log("Haciendo Search en mis libros");
-				console.log("Search Books: ", query);
-				fetch(process.env.BACKEND_URL + "/api/searchbook", {
+				console.log("Search Books: ", JSON.stringify(mysearch));
+				console.log("URL: ", process.env.BACKEND_URL);
+
+				fetch(process.env.BACKEND_URL + "/api/searchmybook", {
 					method: "GET",
 					Authorization: "Bearer" + tokenLocal,
 					headers: { "Content-type": "application/json; charset=UTF-8" },
-					body: JSON.stringify(book)
+					body: JSON.stringify(mysearch)
 				})
 					.then(resp => resp.json())
 					.then(result => setStore({ mensaje: result }))
 					.catch(error => console.log("Error loading message from backend", error));
-
-				const data = await res.json();
-				console.log("Data fetchSearchLibros-->", data.items);
-				setStore({ catalogo: data.items });
 			}
 		}
 	};

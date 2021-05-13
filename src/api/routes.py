@@ -12,7 +12,7 @@ import datetime
 import random
 import string
 from datetime import date
-from sqlalchemy import text
+from sqlalchemy import func
 
 api = Blueprint('api', __name__)
 
@@ -330,11 +330,36 @@ def handle_searchmybook():
     if request.is_json:
         userid= request.json.get("userid", None)
         searchbook= request.json.get("booksearch", None)
-        query = MyBooks.query.filter(MyBooks.user_id == userid).filter(MyBooks.title.like('%'+searchbook+'%')).all()
+        query = MyBooks.query.filter(MyBooks.user_id == userid).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
 
     if query:
         lista = list(map(lambda x: x.serialize(), query))
         return jsonify(lista),200
     else:
         return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
-        
+
+@api.route('/searchmybook_public', methods=['GET'])
+def handle_searchmybook_public():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter_by(user_id = userid, is_public = True ).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
+        return jsonify(lista),200
+    else:
+        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+
+@api.route('/searchmybook_private', methods=['GET'])
+def handle_searchmybook_private():
+    if request.is_json:
+        userid= request.json.get("userid", None)
+        searchbook= request.json.get("booksearch", None)
+        query = MyBooks.query.filter_by(user_id = userid, is_public = False ).filter(func.upper(MyBooks.title).like('%'+func.upper(searchbook)+'%')).all()
+
+    if query:
+        lista = list(map(lambda x: x.serialize(), query))
+        return jsonify(lista),200
+    else:
+        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200

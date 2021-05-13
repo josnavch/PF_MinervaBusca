@@ -26,7 +26,10 @@ const Mislibros = () => {
 
 	const onSubmitHandler = e => {
 		e.preventDefault();
-		actions.fetchSearchMisLibros(searchTerm);
+		actions.SearchMisLibros({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
 	};
 
 	useEffect(() => {
@@ -40,18 +43,20 @@ const Mislibros = () => {
 			<div className="my-3">
 				<div className="row mb-5">
 					<div className="caja-crema col-md-6">
-						<div className="input-group icon-input-group flex-nowrap">
-							<input
-								type="search"
-								className="icon-form-control input input-field"
-								placeholder="buscar"
-								value={searchTerm}
-								onChange={onInputChange}
-							/>
-							<button type="submit" className="input-group-text">
-								<i className="fas fa-search faa-lg icon" />
-							</button>
-						</div>
+						<form onSubmit={onSubmitHandler}>
+							<div className="input-group icon-input-group flex-nowrap">
+								<input
+									type="search"
+									className="icon-form-control input input-field"
+									placeholder="buscar"
+									value={searchTerm}
+									onChange={onInputChange}
+								/>
+								<button type="submit" className="input-group-text">
+									<i className="fas fa-search faa-lg icon" />
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
