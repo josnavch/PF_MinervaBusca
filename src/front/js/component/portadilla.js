@@ -86,7 +86,6 @@ export const Portadilla = props => {
 				<div className="d-flex portadilla-footer">
 					<div>
 						<Link className="xbtn xfloat-left" onClick={e => Public(e, props.book)}>
-							{console.log("Label is Public: ", props.public)}
 							{props.public ? "Privado" : "Público"}
 						</Link>
 						{"   "}

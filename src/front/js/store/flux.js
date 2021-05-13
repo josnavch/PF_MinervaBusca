@@ -322,16 +322,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const tokenLocal = localStorage.getItem("token");
 				console.log("Haciendo Search en mis libros");
 				console.log("Search Books: ", JSON.stringify(mysearch));
-				console.log("URL: ", process.env.BACKEND_URL);
-
+				setStore({ book: [] });
 				fetch(process.env.BACKEND_URL + "/api/searchmybook", {
-					method: "GET",
+					method: "POST",
 					Authorization: "Bearer" + tokenLocal,
 					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify(mysearch)
 				})
 					.then(resp => resp.json())
-					.then(result => setStore({ mensaje: result }))
+					.then(result => setStore({ book: result }))
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			SearchMisLibros_public: mysearch => {
+				const tokenLocal = localStorage.getItem("token");
+				console.log("Haciendo Search en mis libros Publicos");
+				console.log("Search Books: ", JSON.stringify(mysearch));
+				setStore({ Publicbook: [] });
+				fetch(process.env.BACKEND_URL + "/api/searchmybook_public", {
+					method: "POST",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(mysearch)
+				})
+					.then(resp => resp.json())
+					.then(result => setStore({ Publicbook: result }))
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			SearchMisLibros_private: mysearch => {
+				const tokenLocal = localStorage.getItem("token");
+				console.log("Haciendo Search en mis libros Privados");
+				console.log("Search Books: ", JSON.stringify(mysearch));
+				setStore({ privatebook: [] });
+				fetch(process.env.BACKEND_URL + "/api/searchmybook_private", {
+					method: "POST",
+					Authorization: "Bearer" + tokenLocal,
+					headers: { "Content-type": "application/json; charset=UTF-8" },
+					body: JSON.stringify(mysearch)
+				})
+					.then(resp => resp.json())
+					.then(result => setStore({ privatebook: result }))
 					.catch(error => console.log("Error loading message from backend", error));
 			}
 		}

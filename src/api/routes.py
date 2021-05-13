@@ -325,7 +325,7 @@ def handle_deletebook():
     else:
         return jsonify({"error": "The request payload is not in JSON format",  "status": 401}), 400
 
-@api.route('/searchmybook', methods=['GET'])
+@api.route('/searchmybook', methods=['POST'])
 def handle_searchmybook():
     if request.is_json:
         userid= request.json.get("userid", None)
@@ -336,9 +336,10 @@ def handle_searchmybook():
         lista = list(map(lambda x: x.serialize(), query))
         return jsonify(lista),200
     else:
-        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+        return jsonify(lista),201
+       # return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
 
-@api.route('/searchmybook_public', methods=['GET'])
+@api.route('/searchmybook_public', methods=['POST'])
 def handle_searchmybook_public():
     if request.is_json:
         userid= request.json.get("userid", None)
@@ -349,9 +350,10 @@ def handle_searchmybook_public():
         lista = list(map(lambda x: x.serialize(), query))
         return jsonify(lista),200
     else:
-        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+        return jsonify(lista),201
+        #return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
 
-@api.route('/searchmybook_private', methods=['GET'])
+@api.route('/searchmybook_private', methods=['POST'])
 def handle_searchmybook_private():
     if request.is_json:
         userid= request.json.get("userid", None)
@@ -362,4 +364,5 @@ def handle_searchmybook_private():
         lista = list(map(lambda x: x.serialize(), query))
         return jsonify(lista),200
     else:
-        return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200
+        return jsonify(lista),201
+        #return jsonify({"message": f" No se encontraron libros en su biblioteca con esos criterios: {searchbook}",  "status": 201}), 200

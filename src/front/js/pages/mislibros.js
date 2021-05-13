@@ -30,6 +30,14 @@ const Mislibros = () => {
 			userid: usuario.id,
 			booksearch: searchTerm
 		});
+		actions.SearchMisLibros_public({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
+		actions.SearchMisLibros_private({
+			userid: usuario.id,
+			booksearch: searchTerm
+		});
 	};
 
 	useEffect(() => {
@@ -37,6 +45,7 @@ const Mislibros = () => {
 		actions.getMyPrivatebooks(usuario.id);
 		actions.getMyPublicbooks(usuario.id);
 	}, []);
+
 	return (
 		<div className="m-auto container">
 			{/* empieza div para search */}
