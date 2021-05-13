@@ -80,7 +80,7 @@ def handle_login():
         }), 401
 
     if not check_password_hash(user.password, password):
-        return jsonify({"msg": "La contraseña ingresa es incorrecta.",
+        return jsonify({"msg": "La contraseña ingresada es incorrecta.",
         "status": 401
         }), 400
 
@@ -97,7 +97,7 @@ def handle_login():
     #    "pass": generate_password_hash(password),
         "email": user.email,
         "status": 200,
-        "msg": "Login successfully"   
+        "msg": "Ha ingresado correctamente."   
         }
 
     return jsonify(data), 200
@@ -229,7 +229,7 @@ def handle_add_MyBooks():
         if not query:
             db.session.add(Mydata)
             db.session.commit()
-            return jsonify({"message": f"El libro {Mydata.title} se ha includio en mi librería.",  "status": 200}), 200
+            return jsonify({"message": f"El libro {Mydata.title} se ha incluido en mi librería.",  "status": 200}), 200
         else:
             return jsonify({"message": f"El libro {Mydata.title} ya se encuentra en mi librería.",  "status": 401}), 400
     else:

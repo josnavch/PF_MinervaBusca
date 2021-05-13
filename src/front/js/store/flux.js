@@ -82,7 +82,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("refresh_token", data.refresh_token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							window.location.replace(process.env.FRONTEND_URL + "/casa");
+							setStore({ mensaje: data.msg });
+							//							window.location.replace(process.env.FRONTEND_URL + "/casa");
 						} else {
 							console.log("Error Login", data);
 							setStore({ user: data });
