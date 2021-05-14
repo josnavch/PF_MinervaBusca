@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { Alerta, AlertaConfirmacion } from "../component/alerta";
+import { Alerta, AlertaConfirmacion, msgAlerta } from "../component/alerta";
 import "../../styles/stylesRegistroHomeusuario.scss";
 import jwt from "jwt-decode"; // import dependency
 
@@ -37,8 +37,8 @@ export const Registro = () => {
 				}
 
 				if (store.mensaje.status == 200) {
-					Alerta("¡Registro exitoso!", store.mensaje.msg, "success");
-					window.location.replace(process.env.FRONTEND_URL + "/");
+					msgAlerta("¡Registro exitoso!", store.mensaje.msg, "success", "/");
+					//window.location.replace(process.env.FRONTEND_URL + "/");
 				}
 			} else {
 				Alerta(
