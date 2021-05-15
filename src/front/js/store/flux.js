@@ -193,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchCatalogoLibros: async () => {
 				console.log("Haciendo fetch de Google Books");
 				let res = await fetch(
-					"https://www.googleapis.com/books/v1/volumes?q=Potter+inauthor:rowling&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw"
+					"https://www.googleapis.com/books/v1/volumes?q=Potter+inauthor:rowling&country=US&maxResults=10"
 				);
 				const data = await res.json();
 				console.log("Data-->", data.items);
@@ -204,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Haciendo fetch de Google Books");
 				console.log("Search Books: ", query);
 				const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
-				const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+				const api_url_arg = "&country=US&maxResults=10";
 				let url = api_url.concat(query, api_url_arg);
 				let res = await fetch(url);
 
