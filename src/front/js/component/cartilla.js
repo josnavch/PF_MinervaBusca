@@ -13,7 +13,7 @@ export const Cartilla = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [books, setBooks] = useState({ items: [] });
 	const api_url = "https://www.googleapis.com/books/v1/volumes?q=";
-	const api_url_arg = "&country=US&maxResults=10&key=AIzaSyC0VQjxrMlkS7_NqWYG60sV3IF_JVe12Mw";
+	const api_url_arg = "&country=US&maxResults=10";
 	let usuario = JSON.parse(localStorage.getItem("user"));
 
 	const onInputChange = e => {
